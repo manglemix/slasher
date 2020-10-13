@@ -2,7 +2,7 @@ class_name LinkedNode2D
 extends Node2D
 
 
-export(Array, NodePath) var link_paths: Array
+export var link_paths: Dictionary
 
 var links: Array
 var id: int

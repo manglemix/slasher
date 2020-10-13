@@ -2,7 +2,7 @@ class_name Slashed
 extends Node2D
 
 
-const slice_shader: Shader = preload("res://slicer.shader")
+const slice_shader: Shader = preload("slicer.shader")
 
 var half1 := Sprite.new()
 var half2 := Sprite.new()

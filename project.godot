@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
+"base": "Node",
 "class": "AStarNavigation",
 "language": "GDScript",
 "path": "res://AStarNavigation/astar_navigation.gd"
@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://effects/basic_faller.gd"
 }, {
-"base": "Reference",
+"base": "KinematicBody2D",
 "class": "Character2D",
 "language": "GDScript",
 "path": "res://TrokaraScripts/character2d.gd"
@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://TrokaraScripts/character_movement_2d.gd"
 }, {
-"base": "Reference",
+"base": "Character2D",
 "class": "ClassicCharacter2D",
 "language": "GDScript",
 "path": "res://TrokaraScripts/classic_character_2d.gd"
@@ -59,7 +59,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AStarNavigation/goto.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "LinkedNode2D",
 "language": "GDScript",
 "path": "res://AStarNavigation/linked_node_2d.gd"
@@ -74,7 +74,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://TrokaraScripts/multi_jump.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "Slashed",
 "language": "GDScript",
 "path": "res://effects/slashed.gd"
