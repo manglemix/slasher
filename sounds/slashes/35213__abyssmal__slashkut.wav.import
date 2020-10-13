@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/35213__abyssmal__slashkut.wav-1c9b461fdb782962f6b34665bdc802d3.sample"
+
+[deps]
+
+source_file="res://sounds/slashes/35213__abyssmal__slashkut.wav"
+dest_files=[ "res://.import/35213__abyssmal__slashkut.wav-1c9b461fdb782962f6b34665bdc802d3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

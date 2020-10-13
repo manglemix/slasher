@@ -1,0 +1,178 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "AStarNavigation",
+"language": "GDScript",
+"path": "res://AStarNavigation/astar_navigation.gd"
+}, {
+"base": "Reference",
+"class": "BasicFaller",
+"language": "GDScript",
+"path": "res://effects/basic_faller.gd"
+}, {
+"base": "Reference",
+"class": "Character2D",
+"language": "GDScript",
+"path": "res://TrokaraScripts/character2d.gd"
+}, {
+"base": "Reference",
+"class": "CharacterAnimator",
+"language": "GDScript",
+"path": "res://animations/character_animator.gd"
+}, {
+"base": "Reference",
+"class": "CharacterJump",
+"language": "GDScript",
+"path": "res://TrokaraScripts/character_jump.gd"
+}, {
+"base": "Reference",
+"class": "CharacterMovement2D",
+"language": "GDScript",
+"path": "res://TrokaraScripts/character_movement_2d.gd"
+}, {
+"base": "Reference",
+"class": "ClassicCharacter2D",
+"language": "GDScript",
+"path": "res://TrokaraScripts/classic_character_2d.gd"
+}, {
+"base": "Reference",
+"class": "ControllableCharacterJump",
+"language": "GDScript",
+"path": "res://TrokaraScripts/controllable_character_jump.gd"
+}, {
+"base": "Reference",
+"class": "ControllableCharacterMovement2D",
+"language": "GDScript",
+"path": "res://TrokaraScripts/controllable_character_movement_2d.gd"
+}, {
+"base": "Reference",
+"class": "Goto",
+"language": "GDScript",
+"path": "res://AStarNavigation/goto.gd"
+}, {
+"base": "Reference",
+"class": "LinkedNode2D",
+"language": "GDScript",
+"path": "res://AStarNavigation/linked_node_2d.gd"
+}, {
+"base": "Reference",
+"class": "MobileCamera",
+"language": "GDScript",
+"path": "res://cinematics/mobile_camera.gd"
+}, {
+"base": "Reference",
+"class": "MultiJump",
+"language": "GDScript",
+"path": "res://TrokaraScripts/multi_jump.gd"
+}, {
+"base": "Reference",
+"class": "Slashed",
+"language": "GDScript",
+"path": "res://effects/slashed.gd"
+}, {
+"base": "Label",
+"class": "Speedometer",
+"language": "GDScript",
+"path": "res://speedometer.gd"
+}, {
+"base": "Reference",
+"class": "State",
+"language": "GDScript",
+"path": "res://AI/state.gd"
+}, {
+"base": "Reference",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://AI/state_machine.gd"
+}, {
+"base": "Reference",
+"class": "ZoomableCamera2D",
+"language": "GDScript",
+"path": "res://cinematics/zoomable_camera2D.gd"
+} ]
+_global_script_class_icons={
+"AStarNavigation": "",
+"BasicFaller": "",
+"Character2D": "",
+"CharacterAnimator": "",
+"CharacterJump": "",
+"CharacterMovement2D": "",
+"ClassicCharacter2D": "",
+"ControllableCharacterJump": "",
+"ControllableCharacterMovement2D": "",
+"Goto": "",
+"LinkedNode2D": "",
+"MobileCamera": "",
+"MultiJump": "",
+"Slashed": "",
+"Speedometer": "",
+"State": "",
+"StateMachine": "",
+"ZoomableCamera2D": ""
+}
+
+[application]
+
+config/name="slasher"
+run/main_scene="res://scenes/levels/testing.tscn"
+config/icon="res://icon.png"
+
+[input]
+
+attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+"move left"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+"move right"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+"move up"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+"move down"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+sprint={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
+walk={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"unicode":0,"echo":false,"script":null)
+ ]
+}
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[physics]
+
+2d/default_gravity=980
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
