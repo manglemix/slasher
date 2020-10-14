@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/levels/testing.gd" type="Script" id=4]
 [ext_resource path="res://scenes/soldiers/dummy_king.tscn" type="PackedScene" id=8]
 [ext_resource path="res://cinematics/zoomable_camera2D.gd" type="Script" id=11]
-[ext_resource path="res://AStarNavigation/linked_node_2d.gd" type="Script" id=12]
+[ext_resource path="res://AStarNavigation/linked_node.gd" type="Script" id=12]
 
 [sub_resource type="QuadMesh" id=1]
 size = Vector2( 2000, 100 )
@@ -65,7 +65,16 @@ script = ExtResource( 12 )
 [node name="LinkedNode2D2" type="Node2D" parent="Navigation"]
 position = Vector2( 0, 155.985 )
 script = ExtResource( 12 )
+link_paths = [ NodePath("../LinkedNode2D"), NodePath("../LinkedNode2D3") ]
 
 [node name="LinkedNode2D3" type="Node2D" parent="Navigation"]
-position = Vector2( 602.283, 138.361 )
+position = Vector2( 627.51, 138.361 )
 script = ExtResource( 12 )
+link_paths = [ NodePath("../LinkedNode2D4") ]
+_link_flags = [ "jump" ]
+_flag_distance = [ 80.0 ]
+
+[node name="LinkedNode2D4" type="Node2D" parent="Navigation"]
+position = Vector2( 762.611, 0.256989 )
+script = ExtResource( 12 )
+_flag_distance = [ 0.0 ]

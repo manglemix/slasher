@@ -30,10 +30,8 @@ func update_nodes() -> void:
 			a_star.connect_points(node.id, link.id)
 
 
-func get_simple_path(start, end):
+func get_id_path(start, end) -> PoolIntArray:
 	var id_path: PoolIntArray = a_star.get_id_path(a_star.get_closest_point(start), a_star.get_closest_point(end))
-	var path = PoolVector2Array() if dimension == Dimensions.TWO_DIMENSIONAL else PoolVector3Array()
-	path.append(start)
 	
 	var start_segment := get_closest_segment(start)
 	if id_path.size() > 1 and not start_segment.empty() and start_segment[1] == id_path[1]:
@@ -50,11 +48,27 @@ func get_simple_path(start, end):
 		(id_path.size() > 1 and (id_path[-1] == end_segment[0] and id_path[-2] == end_segment[1])):
 			id_path.remove(id_path.size() - 1)
 	
+	return id_path
+
+
+func id_path_to_vector_path(id_path: PoolIntArray):
+	var path = PoolVector2Array() if dimension == Dimensions.TWO_DIMENSIONAL else PoolVector3Array()
+	
 	for id in id_path:
 		path.append(a_star.get_point_position(id))
 	
+	return path
+
+
+func get_simple_path(start, end):
+	var path = id_path_to_vector_path(get_id_path(start, end))
+	path.insert(0, start)
 	path.append(end)
 	return path
+
+
+func get_actual_node(idx: int) -> LinkedNode:
+	return nodes[idx]
 
 
 func get_closest_point(to_point):
@@ -83,7 +97,7 @@ func _get_nodes(node=self) -> Array:
 	var children: Array
 	
 	for child in node.get_children():
-		if "id" in child and "links" in child and child.has_method("add_link"):
+		if LinkedNode.is_linked_node(child):
 			children.append(child)
 			children += _get_nodes(child)
 	

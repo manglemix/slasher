@@ -6,12 +6,13 @@ extends Node
 
 
 enum RotationStyles {FACE_MOUSE, FACE_NODE, FACE_MOVEMENT}
-enum {DEFAULT, SLOW, FAST}
+enum MovementStates {DEFAULT, SLOW, FAST}
 
-export var sprint_speed := 10.0
+export var fast_speed := 10.0
 export var default_speed := 5.0
-export var walk_speed := 2.5
+export var slow_speed := 2.5
 export var air_speed := 5.0				# The speed when air strafing
+export(MovementStates) var movement_state := MovementStates.DEFAULT	# Corresponds to the speed that the character will move at
 export var auto_rotate := true			# If true, the body_node will be flipped to according to rotation_style
 
 # The direction the body_node will face when moving
@@ -24,7 +25,6 @@ export var basis_node_path: NodePath = ".."							# The node which the movement 
 export var body_node_path: NodePath									# The node which will be flipped to follow the movement_vector (modifying after _ready has no effect)
 export var target_node_path: NodePath
 
-var movement_state := DEFAULT		# Corresponds to the speed that the character will move at
 var movement_vector: Vector2
 var target_node: Node2D
 
@@ -44,11 +44,11 @@ func _process(_delta):
 	
 	if character.is_on_floor():
 		match movement_state:
-			FAST:
-				tmp_vector *= sprint_speed
+			MovementStates.FAST:
+				tmp_vector *= fast_speed
 			
-			SLOW:
-				tmp_vector *= walk_speed
+			MovementStates.SLOW:
+				tmp_vector *= slow_speed
 			
 			_:
 				tmp_vector *= default_speed

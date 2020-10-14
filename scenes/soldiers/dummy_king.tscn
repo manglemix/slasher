@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://animations/king_frames.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://AStarNavigation/goto.gd" type="Script" id=2]
+[ext_resource path="res://AStarNavigation/astar_goto.gd" type="Script" id=2]
 [ext_resource path="res://TrokaraScripts/character2d.gd" type="Script" id=3]
 [ext_resource path="res://TrokaraScripts/character_movement_2d.gd" type="Script" id=4]
+[ext_resource path="res://scenes/soldiers/terrestrial_traversing.gd" type="Script" id=5]
+[ext_resource path="res://TrokaraScripts/character_jump.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 33.67, 41.821 )
@@ -20,17 +22,24 @@ shape = SubResource( 1 )
 position = Vector2( 0, -38.97 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 5
+frame = 1
 playing = true
 
 [node name="CharacterMovement2D" type="Node" parent="."]
 script = ExtResource( 4 )
-sprint_speed = 200.0
 default_speed = 100.0
-walk_speed = 50.0
 air_speed = 50.0
+movement_state = 2
 body_node_path = NodePath("../AnimatedSprite")
 
 [node name="Goto" type="Node" parent="."]
 script = ExtResource( 2 )
 character_movement_path = NodePath("../CharacterMovement2D")
+
+[node name="TerrestrialTraversing" type="Node" parent="Goto"]
+script = ExtResource( 5 )
+
+[node name="CharacterJump" type="Node" parent="."]
+script = ExtResource( 6 )
+initial_jump_height = 100.0
+full_jump_height = 200.0

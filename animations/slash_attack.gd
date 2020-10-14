@@ -51,14 +51,16 @@ func slash() -> void:
 		var texture: Texture
 		var origin: Vector2
 		var full_size: Vector2
+		var sprite
 		
 		if body.has_node("Sprite"):
-			texture = body.get_node("Sprite").texture
+			sprite = body.get_node("Sprite")
+			texture = sprite.texture
 			full_size = texture.get_size()
 			origin = Vector2(0.5, 0.5)
 		
 		elif body.has_node("AnimatedSprite"):
-			var sprite: AnimatedSprite = body.get_node("AnimatedSprite")
+			sprite = body.get_node("AnimatedSprite")
 			texture = sprite.frames.get_frame(sprite.animation, sprite.frame)
 			origin = texture.region.position + texture.region.size / 2
 			full_size = texture.atlas.get_size()
@@ -70,7 +72,7 @@ func slash() -> void:
 		var slashed := Slashed.new(texture, tan(deg2rad(rand_range(- 89.99, 89.99))) * full_size.aspect(), origin)
 		slashed.parent_children_to_fallers(300)
 		get_tree().current_scene.add_child(slashed)
-		slashed.global_transform = body.global_transform
+		slashed.global_transform = sprite.global_transform
 		body.queue_free()
 		
 	yield(animated_sprite, "animation_finished")
