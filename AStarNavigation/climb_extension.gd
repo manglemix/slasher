@@ -1,4 +1,4 @@
-class_name TerrestrialTraversing
+class_name ClimbExtension
 extends AStarTravelExtensions
 
 

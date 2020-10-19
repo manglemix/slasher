@@ -24,9 +24,11 @@ export var counter_rotate_basis := true								# Counter rotates the basis_node 
 export var basis_node_path: NodePath = ".."							# The node which the movement vector will be relative to (modifying after _ready has no effect)
 export var body_node_path: NodePath									# The node which will be flipped to follow the movement_vector (modifying after _ready has no effect)
 export var target_node_path: NodePath
+export var enabled := true setget set_enabled
 
 var movement_vector: Vector2
 var target_node: Node2D
+var _is_ready := false
 
 # Modify these after _ready if need be, instead of basis_node_path
 onready var basis_node: Node2D = get_node(basis_node_path)
@@ -34,9 +36,22 @@ onready var body_node: Node2D = get_node(body_node_path)
 onready var character: Character2D = get_parent()
 
 
+func set_enabled(value: bool) -> void:
+	if not _is_ready:
+		yield(self, "ready")
+	
+	enabled = value
+	set_process(value)
+	
+	if not enabled:
+		character.movement_vector = Vector2.ZERO
+
+
 func _ready():
 	if not target_node_path.is_empty():
 		target_node = get_node(target_node_path)
+	
+	_is_ready = true
 
 
 func _process(_delta):

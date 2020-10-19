@@ -3,6 +3,8 @@ extends Area2D
 
 signal attacked
 
+export var max_damage := 5.0
+export var min_damage := 1.0
 export var animated_sprite_path: NodePath = "../AnimatedSprite"
 export var anim_name := "slash"
 export var frame_number := 3
@@ -25,7 +27,8 @@ func _ready():
 		attack_delay = frame_number / frames.get_animation_speed(anim_name)
 
 
-func slash() -> void:
+func attack() -> void:
+	var damage_points: float = lerp(min_damage, max_damage, _current_charge / max_charge_time)
 	_current_charge = 0
 	set_process(false)
 	
@@ -48,32 +51,8 @@ func slash() -> void:
 		get_node(audio_paths[int(rand_range(0, audio_paths.size()))]).play()
 	
 	for body in get_overlapping_bodies():
-		var texture: Texture
-		var origin: Vector2
-		var full_size: Vector2
-		var sprite
-		
-		if body.has_node("Sprite"):
-			sprite = body.get_node("Sprite")
-			texture = sprite.texture
-			full_size = texture.get_size()
-			origin = Vector2(0.5, 0.5)
-		
-		elif body.has_node("AnimatedSprite"):
-			sprite = body.get_node("AnimatedSprite")
-			texture = sprite.frames.get_frame(sprite.animation, sprite.frame)
-			origin = texture.region.position + texture.region.size / 2
-			full_size = texture.atlas.get_size()
-			origin = Vector2(origin.x / full_size.x, origin.y / full_size.y)
-		
-		else:
-			continue
-		
-		var slashed := Slashed.new(texture, tan(deg2rad(rand_range(- 89.99, 89.99))) * full_size.aspect(), origin)
-		slashed.parent_children_to_fallers(300)
-		get_tree().current_scene.add_child(slashed)
-		slashed.global_transform = sprite.global_transform
-		body.queue_free()
+		if body.has_node("Damageable"):
+			body.get_node("Damageable").damage(damage_points)
 		
 	yield(animated_sprite, "animation_finished")
 	_attacking = false
@@ -82,7 +61,7 @@ func slash() -> void:
 func _input(event):
 	if _current_charge > 0:
 		if event.is_action_released("attack"):
-			slash()
+			attack()
 	
 	else:
 		if event.is_action_pressed("attack"):
@@ -93,4 +72,4 @@ func _process(delta):
 	_current_charge += delta
 	
 	if _current_charge > max_charge_time:
-		slash()
+		attack()

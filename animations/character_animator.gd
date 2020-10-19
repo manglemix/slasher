@@ -3,11 +3,9 @@ extends AnimatedSprite
 
 
 export var character_jump_path: NodePath
-export var character_attack_path: NodePath
 
 onready var character: Character2D = get_parent()
 onready var character_jump: CharacterJump = get_node(character_jump_path)
-onready var character_attack := get_node(character_attack_path)
 
 
 func _ready():

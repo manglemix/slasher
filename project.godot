@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AStarNavigation/astar_navigation.gd"
 }, {
-"base": "Node",
-"class": "AStarTravelExtensions",
-"language": "GDScript",
-"path": "res://AStarNavigation/travel_extensions.gd"
-}, {
 "base": "Node2D",
 "class": "BasicFaller",
 "language": "GDScript",
@@ -34,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://TrokaraScripts/character2d.gd"
 }, {
-"base": "Reference",
+"base": "AnimatedSprite",
 "class": "CharacterAnimator",
 "language": "GDScript",
 "path": "res://animations/character_animator.gd"
@@ -54,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://TrokaraScripts/classic_character_2d.gd"
 }, {
+"base": "AStarTravelExtensions",
+"class": "ClimbExtension",
+"language": "GDScript",
+"path": "res://AStarNavigation/climb_extension.gd"
+}, {
 "base": "Reference",
 "class": "ControllableCharacterJump",
 "language": "GDScript",
@@ -63,6 +63,21 @@ _global_script_classes=[ {
 "class": "ControllableCharacterMovement2D",
 "language": "GDScript",
 "path": "res://TrokaraScripts/controllable_character_movement_2d.gd"
+}, {
+"base": "Node",
+"class": "Damageable",
+"language": "GDScript",
+"path": "res://combat/damageable.gd"
+}, {
+"base": "AStarGoto",
+"class": "FlaggedGoto",
+"language": "GDScript",
+"path": "res://AStarNavigation/flagged_goto.gd"
+}, {
+"base": "Node",
+"class": "Health",
+"language": "GDScript",
+"path": "res://AI/health.gd"
 }, {
 "base": "Node",
 "class": "LinkedNode",
@@ -99,10 +114,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AI/state_machine.gd"
 }, {
-"base": "AStarTravelExtensions",
+"base": "TravelExtension",
 "class": "TerrestrialTraversing",
 "language": "GDScript",
-"path": "res://scenes/soldiers/terrestrial_traversing.gd"
+"path": "res://AStarNavigation/terrestrial_traversing.gd"
+}, {
+"base": "Node",
+"class": "TravelExtension",
+"language": "GDScript",
+"path": "res://AStarNavigation/travel_extension.gd"
 }, {
 "base": "MobileCamera",
 "class": "ZoomableCamera2D",
@@ -112,15 +132,18 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AStarGoto": "",
 "AStarNavigation": "",
-"AStarTravelExtensions": "",
 "BasicFaller": "",
 "Character2D": "",
 "CharacterAnimator": "",
 "CharacterJump": "",
 "CharacterMovement2D": "",
 "ClassicCharacter2D": "",
+"ClimbExtension": "",
 "ControllableCharacterJump": "",
 "ControllableCharacterMovement2D": "",
+"Damageable": "",
+"FlaggedGoto": "",
+"Health": "",
 "LinkedNode": "",
 "MobileCamera": "",
 "MultiJump": "",
@@ -129,6 +152,7 @@ _global_script_class_icons={
 "State": "",
 "StateMachine": "",
 "TerrestrialTraversing": "",
+"TravelExtension": "",
 "ZoomableCamera2D": ""
 }
 

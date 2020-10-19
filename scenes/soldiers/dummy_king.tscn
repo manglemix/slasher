@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://animations/king_frames.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://AStarNavigation/astar_goto.gd" type="Script" id=2]
+[ext_resource path="res://AStarNavigation/flagged_goto.gd" type="Script" id=2]
 [ext_resource path="res://TrokaraScripts/character2d.gd" type="Script" id=3]
 [ext_resource path="res://TrokaraScripts/character_movement_2d.gd" type="Script" id=4]
-[ext_resource path="res://scenes/soldiers/terrestrial_traversing.gd" type="Script" id=5]
+[ext_resource path="res://AStarNavigation/terrestrial_traversing.gd" type="Script" id=5]
 [ext_resource path="res://TrokaraScripts/character_jump.gd" type="Script" id=6]
+[ext_resource path="res://animations/character_animator.gd" type="Script" id=7]
+[ext_resource path="res://combat/damageable.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 33.67, 41.821 )
@@ -18,28 +20,40 @@ script = ExtResource( 3 )
 position = Vector2( 0, -42.095 )
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="CharacterAnimator" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -38.97 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 1
+frame = 3
 playing = true
+script = ExtResource( 7 )
+character_jump_path = NodePath("../CharacterJump")
 
 [node name="CharacterMovement2D" type="Node" parent="."]
 script = ExtResource( 4 )
+fast_speed = 500.0
 default_speed = 100.0
+slow_speed = 100.0
 air_speed = 50.0
-movement_state = 2
-body_node_path = NodePath("../AnimatedSprite")
+body_node_path = NodePath("../CharacterAnimator")
 
 [node name="Goto" type="Node" parent="."]
 script = ExtResource( 2 )
 character_movement_path = NodePath("../CharacterMovement2D")
+simplify_distance = 5.0
 
 [node name="TerrestrialTraversing" type="Node" parent="Goto"]
 script = ExtResource( 5 )
+desired_flag = "jump"
 
 [node name="CharacterJump" type="Node" parent="."]
 script = ExtResource( 6 )
 initial_jump_height = 100.0
 full_jump_height = 200.0
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource( 8 )
+health = 5.0
+min_health = 2.0
+texture_source_path = NodePath("../CharacterAnimator")
+character_movement_path = NodePath("../CharacterMovement2D")
