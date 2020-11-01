@@ -13,11 +13,12 @@ func _ready():
 		to_node_paths.append("..")
 
 	for to_node in node.get_parent().get_children():
-		if to_node != node:
+		if to_node != node and to_node is LinkedNode:
 			to_node_paths.append(node.get_path_to(to_node))
 
 	for to_node in node.get_children():
-		to_node_paths.append(to_node.name)
+		if to_node is LinkedNode:
+			to_node_paths.append(to_node.name)
 	
 	popup.hide_on_checkable_item_selection = false
 	popup.connect("index_pressed", self, "_handle_checked")
