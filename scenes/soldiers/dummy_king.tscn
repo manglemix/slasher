@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://animations/king_frames.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://AStarNavigation/flagged_goto.gd" type="Script" id=2]
+[ext_resource path="res://addons/astar_navigation/scripts/flagged_goto.gd" type="Script" id=2]
 [ext_resource path="res://TrokaraScripts/character2d.gd" type="Script" id=3]
 [ext_resource path="res://TrokaraScripts/character_movement_2d.gd" type="Script" id=4]
-[ext_resource path="res://AStarNavigation/terrestrial_traversing.gd" type="Script" id=5]
+[ext_resource path="res://addons/astar_navigation/scripts/terrestrial_traversing.gd" type="Script" id=5]
 [ext_resource path="res://TrokaraScripts/character_jump.gd" type="Script" id=6]
 [ext_resource path="res://animations/character_animator.gd" type="Script" id=7]
 [ext_resource path="res://combat/damageable.gd" type="Script" id=8]
@@ -24,7 +24,6 @@ shape = SubResource( 1 )
 position = Vector2( 0, -38.97 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
 playing = true
 script = ExtResource( 7 )
 character_jump_path = NodePath("../CharacterJump")

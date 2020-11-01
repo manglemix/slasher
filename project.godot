@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "AStarGoto",
 "language": "GDScript",
-"path": "res://AStarNavigation/astar_goto.gd"
+"path": "res://addons/astar_navigation/scripts/astar_goto.gd"
 }, {
 "base": "Node",
 "class": "AStarNavigation",
 "language": "GDScript",
-"path": "res://AStarNavigation/astar_navigation.gd"
+"path": "res://addons/astar_navigation/scripts/astar_navigation.gd"
 }, {
 "base": "Node2D",
 "class": "BasicFaller",
@@ -49,10 +49,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://TrokaraScripts/classic_character_2d.gd"
 }, {
-"base": "AStarTravelExtensions",
+"base": "TravelExtension",
 "class": "ClimbExtension",
 "language": "GDScript",
-"path": "res://AStarNavigation/climb_extension.gd"
+"path": "res://addons/astar_navigation/scripts/climb_extension.gd"
 }, {
 "base": "Reference",
 "class": "ControllableCharacterJump",
@@ -72,22 +72,27 @@ _global_script_classes=[ {
 "base": "AStarGoto",
 "class": "FlaggedGoto",
 "language": "GDScript",
-"path": "res://AStarNavigation/flagged_goto.gd"
+"path": "res://addons/astar_navigation/scripts/flagged_goto.gd"
 }, {
-"base": "Node",
-"class": "Health",
+"base": "LinkFlag",
+"class": "JumpFlag",
 "language": "GDScript",
-"path": "res://AI/health.gd"
+"path": "res://addons/astar_navigation/custom_resources/jump_flag.gd"
+}, {
+"base": "Resource",
+"class": "LinkFlag",
+"language": "GDScript",
+"path": "res://addons/astar_navigation/custom_resources/link_flag.gd"
 }, {
 "base": "Node",
 "class": "LinkedNode",
 "language": "GDScript",
-"path": "res://AStarNavigation/linked_node.gd"
+"path": "res://addons/astar_navigation/scripts/linked_node.gd"
 }, {
-"base": "Camera2D",
+"base": "Reference",
 "class": "MobileCamera",
 "language": "GDScript",
-"path": "res://cinematics/mobile_camera.gd"
+"path": "res://cinematics/mobile_camera_2d.gd"
 }, {
 "base": "ControllableCharacterJump",
 "class": "MultiJump",
@@ -117,17 +122,17 @@ _global_script_classes=[ {
 "base": "TravelExtension",
 "class": "TerrestrialTraversing",
 "language": "GDScript",
-"path": "res://AStarNavigation/terrestrial_traversing.gd"
+"path": "res://addons/astar_navigation/scripts/terrestrial_traversing.gd"
 }, {
 "base": "Node",
 "class": "TravelExtension",
 "language": "GDScript",
-"path": "res://AStarNavigation/travel_extension.gd"
+"path": "res://addons/astar_navigation/scripts/travel_extension.gd"
 }, {
-"base": "MobileCamera",
+"base": "Reference",
 "class": "ZoomableCamera2D",
 "language": "GDScript",
-"path": "res://cinematics/zoomable_camera2D.gd"
+"path": "res://cinematics/zoomable_camera_2d.gd"
 } ]
 _global_script_class_icons={
 "AStarGoto": "",
@@ -143,7 +148,8 @@ _global_script_class_icons={
 "ControllableCharacterMovement2D": "",
 "Damageable": "",
 "FlaggedGoto": "",
-"Health": "",
+"JumpFlag": "",
+"LinkFlag": "",
 "LinkedNode": "",
 "MobileCamera": "",
 "MultiJump": "",
@@ -161,6 +167,14 @@ _global_script_class_icons={
 config/name="slasher"
 run/main_scene="res://scenes/levels/testing.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+settings/stdout/print_fps=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "astar_navigation" )
 
 [input]
 

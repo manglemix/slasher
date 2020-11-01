@@ -1,3 +1,4 @@
+# Contains standard responses to most flags encountered by a terrestrial character
 class_name TerrestrialTraversing
 extends TravelExtension
 

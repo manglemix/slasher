@@ -1,5 +1,5 @@
 class_name ClimbExtension
-extends AStarTravelExtensions
+extends TravelExtension
 
 
 export var _jump_path: NodePath = "../../CharacterJump"

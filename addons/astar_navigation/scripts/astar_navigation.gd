@@ -97,7 +97,7 @@ func _get_nodes(node=self) -> Array:
 	var children: Array
 	
 	for child in node.get_children():
-		if LinkedNode.is_linked_node(child):
+		if child is LinkedNode:
 			children.append(child)
 			children += _get_nodes(child)
 	
