@@ -4,7 +4,7 @@
 [ext_resource path="res://addons/astar_navigation/scripts/linked_node.gd" type="Script" id=2]
 [ext_resource path="res://addons/astar_navigation/scripts/astar_navigation.gd" type="Script" id=3]
 [ext_resource path="res://scenes/levels/testing.gd" type="Script" id=4]
-[ext_resource path="res://addons/astar_navigation/custom_resources/jump_flag.gd" type="Script" id=5]
+[ext_resource path="res://addons/astar_navigation/scripts/jump_zone.gd" type="Script" id=6]
 [ext_resource path="res://scenes/soldiers/dummy_king.tscn" type="PackedScene" id=8]
 [ext_resource path="res://cinematics/zoomable_camera_2d.gd" type="Script" id=11]
 
@@ -20,9 +20,8 @@ size = Vector2( 500, 150 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 250, 75 )
 
-[sub_resource type="Resource" id=5]
-script = ExtResource( 5 )
-distance = 50.0
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 22.0692, 50 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
@@ -50,18 +49,17 @@ mesh = SubResource( 3 )
 position = Vector2( -0.840881, 0 )
 shape = SubResource( 4 )
 
-[node name="DummyKing" parent="." instance=ExtResource( 8 )]
-position = Vector2( -71.084, 150 )
-
-[node name="CharacterAnimator" parent="DummyKing" index="1"]
-frame = 0
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 92.4984, -37.8402 )
 current = true
 zoom = Vector2( 0.75, 0.75 )
 script = ExtResource( 11 )
 _parent_path = NodePath("../Protagonist")
+
+[node name="DummyKing" parent="." instance=ExtResource( 8 )]
+
+[node name="CharacterAnimator" parent="DummyKing" index="1"]
+frame = 1
 
 [node name="Navigation" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -77,13 +75,32 @@ script = ExtResource( 2 )
 link_paths = [ NodePath("../LinkedNode2D3") ]
 
 [node name="LinkedNode2D3" type="Node2D" parent="Navigation"]
-position = Vector2( 647.165, 167.313 )
+position = Vector2( 568.235, 167.313 )
 script = ExtResource( 2 )
 link_paths = [ NodePath("../LinkedNode2D4") ]
-flags = [ SubResource( 5 ) ]
+
+[node name="JumpZone" type="Area2D" parent="Navigation/LinkedNode2D3"]
+position = Vector2( 0, -4.76758 )
+script = ExtResource( 6 )
+_linked_node_path = NodePath("../../LinkedNode2D4")
+max_angle_to_next_degrees = 60.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation/LinkedNode2D3/JumpZone"]
+position = Vector2( 0.529673, -14.8325 )
+shape = SubResource( 5 )
+
+[node name="LinkedNode2D6" type="Node2D" parent="Navigation"]
+position = Vector2( 676.098, 159.791 )
+script = ExtResource( 2 )
+link_paths = [ NodePath("../LinkedNode2D3") ]
 
 [node name="LinkedNode2D4" type="Node2D" parent="Navigation"]
-position = Vector2( 762.611, 0.256989 )
+position = Vector2( 684.211, 0.256989 )
+script = ExtResource( 2 )
+link_paths = [ NodePath("../LinkedNode2D5") ]
+
+[node name="LinkedNode2D5" type="Node2D" parent="Navigation"]
+position = Vector2( 1171.37, 0.256989 )
 script = ExtResource( 2 )
 
 [editable path="DummyKing"]

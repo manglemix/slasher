@@ -5,7 +5,6 @@ extends Node
 enum Dimensions {TWO_DIMENSIONAL, THREE_DIMENSIONAL}
 
 export(Dimensions) var dimension := Dimensions.TWO_DIMENSIONAL
-export var threshold := 0.01
 
 var nodes: Dictionary
 
@@ -40,6 +39,7 @@ func get_id_path(start, end) -> PoolIntArray:
 		id_path.remove(0)
 	
 	var end_segment := get_closest_segment(end)
+	print(start_segment)
 	if not end_segment.empty():
 		# remove the last point IF
 		# the start and end are in the same segment OR
@@ -78,13 +78,13 @@ func get_closest_point(to_point):
 func get_closest_segment(position) -> PoolIntArray:
 	var closest_id: int = a_star.get_closest_point(position)
 	var closest_point = a_star.get_point_position(closest_id)
-	position = (position - closest_point).normalized()
+	var rel_vec = (position - closest_point).normalized()
 	
 	var highest := - INF
 	var highest_id := closest_id
 	
 	for id in a_star.get_point_connections(closest_id):
-		var product: float = position.dot((a_star.get_point_position(id) - closest_point).normalized())
+		var product: float = rel_vec.dot((a_star.get_point_position(id) - closest_point).normalized())
 		
 		if product > highest:
 			highest = product
