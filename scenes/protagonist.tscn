@@ -24,6 +24,7 @@ script = ExtResource( 3 )
 position = Vector2( 0, 10.7 )
 frames = ExtResource( 4 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 5 )
 character_jump_path = NodePath("../ControllableCharacterJump")

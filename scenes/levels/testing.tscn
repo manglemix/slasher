@@ -59,7 +59,7 @@ _parent_path = NodePath("../Protagonist")
 [node name="DummyKing" parent="." instance=ExtResource( 8 )]
 
 [node name="CharacterAnimator" parent="DummyKing" index="1"]
-frame = 1
+frame = 3
 
 [node name="Navigation" type="Node" parent="."]
 script = ExtResource( 3 )

@@ -88,25 +88,26 @@ func set_acceleration(value: float) -> void:
 
 
 func set_jumping(value: bool) -> void:
-	if value != jumping and current_jumps > 0:
-		if value:
+	if value:
+		if current_jumps > 0:
 			current_jumps -= 1
-		
-		set_physics_process(value)
-		jumping = value
-		
-		var impulse = initial_velocity
-		
-		if character.get_vertical_speed() < 0:
-			impulse -= character.linear_velocity.project(character.up_vector)
-		
-		if value:
+			var impulse = initial_velocity
+			
+			if character.get_vertical_speed() < 0:
+				impulse -= character.linear_velocity.project(character.up_vector)
+			
 			character.apply_impulse(impulse)
 			_current_jump_time = jump_time
 			emit_signal("jumped")
 		
 		else:
-			emit_signal("falling")
+			return
+		
+	elif jumping:
+		emit_signal("falling")
+	
+	set_physics_process(value)
+	jumping = value
 
 
 func _ready():
@@ -120,6 +121,26 @@ func _physics_process(delta):
 	
 	_current_jump_time -= delta
 	character.linear_velocity += character.up_vector * acceleration * delta
+
+
+func jump_to(height: float) -> void:
+	height -= initial_jump_height
+	
+	var a := acceleration
+	var b: float = 2 * initial_velocity.dot(character.up_vector)
+	var c := - 2 * height
+	var t := (- b + sqrt(b * b - 4 * a * c)) / 2 / a
+	
+	set_jumping(true)
+	
+	if t > 0:
+		yield(get_tree().create_timer(t), "timeout")
+	
+	else:
+		yield(get_tree(), "physics_frame")
+	
+	if t <= jump_time:
+		set_jumping(false)
 
 
 func _reset_jumps(_vertical_speed) -> void:

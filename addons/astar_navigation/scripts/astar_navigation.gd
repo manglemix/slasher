@@ -29,6 +29,10 @@ func update_nodes() -> void:
 			a_star.connect_points(node.id, link.id)
 
 
+func update_node_position(node: LinkedNode) -> void:
+	a_star.set_point_position(node.id, node.global_transform.origin)
+
+
 func get_id_path(start, end) -> PoolIntArray:
 	var id_path: PoolIntArray = a_star.get_id_path(a_star.get_closest_point(start), a_star.get_closest_point(end))
 	
@@ -39,11 +43,10 @@ func get_id_path(start, end) -> PoolIntArray:
 		id_path.remove(0)
 	
 	var end_segment := get_closest_segment(end)
-	print(start_segment)
 	if not end_segment.empty():
 		# remove the last point IF
 		# the start and end are in the same segment OR
-		# the last point is past the end point (ie. backtracking)
+		# the last node is past the end (backtracking)
 		if (not start_segment.empty() and (end_segment == start_segment or (end_segment[1] == start_segment[0] and end_segment[0] == start_segment[1]))) or \
 		(id_path.size() > 1 and (id_path[-1] == end_segment[0] and id_path[-2] == end_segment[1])):
 			id_path.remove(id_path.size() - 1)

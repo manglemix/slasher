@@ -45,6 +45,7 @@ func _ready():
 
 func update_path():
 	var character_origin = character.global_transform.origin
+	var character_origin_on_segment = navigation.a_star.get_closest_position_in_segment(character_origin)
 	var target_origin
 	
 	if is_instance_valid(override_target):
@@ -53,7 +54,7 @@ func update_path():
 	else:
 		target_origin = target.global_transform.origin
 	
-	if (stop_on_arrival or is_instance_valid(override_target)) and target_origin.distance_to(character_origin) <= simplify_distance:
+	if (stop_on_arrival or is_instance_valid(override_target)) and character_origin_on_segment.distance_to(navigation.a_star.get_closest_position_in_segment(target_origin)) <= simplify_distance:
 		if is_instance_valid(override_target):
 			override_target = null
 		
@@ -64,12 +65,22 @@ func update_path():
 	
 	id_path = navigation.get_id_path(character_origin, target_origin)
 	path = navigation.id_path_to_vector_path(id_path)
-	
-	if not path.empty() and navigation.a_star.get_closest_position_in_segment(character_origin).distance_to(path[0]) <= simplify_distance:
-		path.remove(0)
-	
 	path.insert(0, character_origin)
 	path.append(target_origin)
+	
+	if path.size() > 2:
+		var to = (path[1] - character_origin).normalized()
+		var out = (path[2] - path[1]).normalized()
+		var bisector = to.linear_interpolate(out, 0.5)
+		
+		if typeof(bisector) == TYPE_VECTOR2:
+			bisector = bisector.rotated(PI / 2)
+		
+		else:
+			bisector = to.cross(out).cross(bisector).normalized()
+		
+		if abs(bisector.dot(character_origin_on_segment - path[1])) <= simplify_distance:
+			path.remove(1)
 	
 	character_movement.movement_vector = (path[1] - character_origin).normalized()
 

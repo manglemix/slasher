@@ -30,5 +30,5 @@ func _check_body(body: Node) -> void:
 		_triggered(body)
 
 
-func _triggered(body: Node) -> void:
+func _triggered(variant) -> void:
 	return
