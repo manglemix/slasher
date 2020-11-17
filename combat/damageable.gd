@@ -36,9 +36,10 @@ func damage(hit_points: float) -> void:
 		health = clamp(health - hit_points / armour, min_health, INF)
 		
 		if is_instance_valid(character_movement) and texture_source.has_method("override_play"):
-			character_movement.enabled = false
+			character_movement.set_process(false)
+			character_movement.character.movement_vector = Vector2.ZERO
 			yield(texture_source, "animation_finished")
-			character_movement.enabled = true
+			character_movement.set_process(true)
 
 
 func slash() -> void:

@@ -1,6 +1,6 @@
 # Adds dual jump functionality to the parent character
-# If jumping is set to true for a moment, the character will jump to the initial_jump_height
-# If jumping is set to true until the highest point of the jump, the height will be the full_jump_height
+# If jumping is set to true, then false, the character will jump to the initial_jump_height
+# If jumping is just set to true, the height will be the full_jump_height
 class_name CharacterJump
 extends Node
 
@@ -14,11 +14,17 @@ export var initial_jump_height: float setget set_initial_jump_height
 # The maximum height of the jump if the spacebar is held down all the way (aka the "hold" jump)
 export var full_jump_height: float setget set_full_jump_height
 
-# The max number of jumps that can occur before needing to land
-export var max_jumps := 1
+# The number of jumps possible in the air
+export var extra_jumps := 1
 
 # A small period of time after falling in which you can still jump
 export var coyote_time := 0.1
+
+# if true, the initial_velocity will move towards the character's movement_vector, when jumping in the air
+export var deform_to_movement := true
+
+# this value is multiplied with the movement_vector to determine how much the initial_velocity is deformed/skewed
+export var deformation_factor := 1.0
 
 # The velocity applied on the initial jump
 var initial_velocity setget set_initial_velocity
@@ -39,6 +45,12 @@ var current_jumps := 0
 # How much time there is left for the full jump
 var _current_jump_time: float
 
+# True if the character jumped off the floor, until the character lands
+# needed to prevent the character from jumping multiple times within the coyote time
+var _initial_jumped := false
+
+
+# no type hint as character can be 2D or 3D
 onready var character := get_parent()
 
 
@@ -89,14 +101,29 @@ func set_acceleration(value: float) -> void:
 
 func set_jumping(value: bool) -> void:
 	if value:
-		if current_jumps > 0:
-			current_jumps -= 1
-			var impulse = initial_velocity
+		if character.air_time < coyote_time or current_jumps > 0:
+			if not _initial_jumped and character.air_time < coyote_time:
+				_initial_jumped = true
 			
-			if character.get_vertical_speed() < 0:
-				impulse -= character.linear_velocity.project(character.up_vector)
+			else:
+				current_jumps -= 1
 			
-			character.apply_impulse(impulse)
+			var impulse
+			if deform_to_movement and not character.is_on_floor():
+				# The impulse vector consists of the initial_velocity added with the flattened movement_vector
+				impulse = initial_velocity + character.movement_vector.slide(character.up_vector).normalized() * character.movement_vector.length() * deformation_factor
+				# this rescales the impluse so that the vertical speed is equal to initial_velocity's vertical speed
+				impulse *= initial_velocity.dot(character.up_vector) / impulse.dot(character.up_vector)
+			
+			else:
+				impulse = initial_velocity
+			
+			if character.is_on_floor():
+				character.apply_impulse(impulse)
+			
+			else:
+				character.linear_velocity = impulse
+			
 			_current_jump_time = jump_time
 			emit_signal("jumped")
 		
@@ -111,6 +138,7 @@ func set_jumping(value: bool) -> void:
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	set_physics_process(false)
 	character.connect("landed", self, "_reset_jumps")
 
@@ -124,24 +152,22 @@ func _physics_process(delta):
 
 
 func jump_to(height: float) -> void:
-	height -= initial_jump_height
-	
+	# sets jumping to true until the target height is reached, or the apex of the jump is reached
+	# if height is set to below initial_jump_height, the character wil lstill jump to the initial_jump_height
 	var a := acceleration
 	var b: float = 2 * initial_velocity.dot(character.up_vector)
-	var c := - 2 * height
+	var c := - 2 * (height - initial_jump_height)
 	var t := (- b + sqrt(b * b - 4 * a * c)) / 2 / a
 	
 	set_jumping(true)
 	
-	if t > 0:
-		yield(get_tree().create_timer(t), "timeout")
-	
-	else:
-		yield(get_tree(), "physics_frame")
-	
 	if t <= jump_time:
+		if t > 0:
+			yield(get_tree().create_timer(t), "timeout")
+		
 		set_jumping(false)
 
 
 func _reset_jumps(_vertical_speed) -> void:
-	current_jumps = max_jumps
+	current_jumps = extra_jumps
+	_initial_jumped = false
