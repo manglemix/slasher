@@ -14,6 +14,7 @@ extents = Vector2( 33.67, 41.821 )
 [node name="DummyKing" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 3 )
+gravity_factor = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -42.095 )
@@ -31,9 +32,8 @@ character_jump_path = NodePath("../CharacterJump")
 [node name="CharacterMovement2D" type="Node" parent="."]
 script = ExtResource( 4 )
 fast_speed = 500.0
-default_speed = 100.0
+default_speed = 200.0
 slow_speed = 100.0
-air_speed = 50.0
 body_node_path = NodePath("../CharacterAnimator")
 
 [node name="Goto" type="Node" parent="."]

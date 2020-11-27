@@ -9,13 +9,24 @@ onready var node: LinkedNode = get_edited_object()
 
 
 func _ready():
+#	var remove: Array
+#	for path in node.link_paths:
+#		if node.get_node_or_null(path) == null:
+#			remove.append(path)
+#
+#	var new_link_paths := node.link_paths.duplicate()
+#	for path in remove:
+#		new_link_paths.erase(path)
+#
+#	emit_changed("link_paths", new_link_paths)
+	
 	if node.get_parent() is LinkedNode:
 		to_node_paths.append("..")
-
+	
 	for to_node in node.get_parent().get_children():
 		if to_node != node and to_node is LinkedNode:
 			to_node_paths.append(node.get_path_to(to_node))
-
+	
 	for to_node in node.get_children():
 		if to_node is LinkedNode:
 			to_node_paths.append(to_node.name)

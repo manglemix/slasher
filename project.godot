@@ -84,15 +84,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://cinematics/mobile_camera_2d.gd"
 }, {
-"base": "PathTrigger",
-"class": "PathOverrideZone",
-"language": "GDScript",
-"path": "res://addons/astar_navigation/scripts/path_override_zone.gd"
-}, {
 "base": "Area2D",
 "class": "PathTrigger2D",
 "language": "GDScript",
-"path": "res://addons/astar_navigation/scripts/path_trigger.gd"
+"path": "res://addons/astar_navigation/scripts/path_trigger_2D.gd"
 }, {
 "base": "Node2D",
 "class": "Slashed",
@@ -135,7 +130,6 @@ _global_script_class_icons={
 "JumpZone": "",
 "LinkedNode": "",
 "MobileCamera": "",
-"PathOverrideZone": "",
 "PathTrigger2D": "",
 "Slashed": "",
 "Speedometer": "",

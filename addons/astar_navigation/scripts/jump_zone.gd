@@ -42,7 +42,7 @@ func _check_body(body: Node) -> void:
 	if not is_instance_valid(jump_node):
 		return
 	
-	if not (not jump_in_air and body.air_time > jump_node.coyote_time) and \
+	if not (not jump_in_air and not body.is_on_slope()) and \
 	(not goto.id_path.empty() and ((goto.id_path.size() > 1 and goto.id_path[0] == get_parent().id and goto.id_path[1] == linked_node.id) or goto.id_path[0] == linked_node.id)):
 		if goto.id_path[0] == get_parent().id:
 			if abs(goto.get_parent().linear_velocity.angle_to(goto.path[2] - goto.path[1])) <= max_angle_to_next:

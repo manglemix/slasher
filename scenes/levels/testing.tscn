@@ -28,6 +28,7 @@ script = ExtResource( 4 )
 node_links_path = NodePath("")
 
 [node name="Protagonist" parent="." instance=ExtResource( 1 )]
+gravity_factor = 2.0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 position = Vector2( 3.633, 250.137 )
@@ -49,6 +50,16 @@ mesh = SubResource( 3 )
 position = Vector2( -0.840881, 0 )
 shape = SubResource( 4 )
 
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="."]
+position = Vector2( 315.886, -170.989 )
+mesh = SubResource( 3 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D3/StaticBody2D"]
+position = Vector2( -0.840881, 0 )
+shape = SubResource( 4 )
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 92.4984, -37.8402 )
 current = true
@@ -65,7 +76,7 @@ frame = 3
 script = ExtResource( 3 )
 
 [node name="LinkedNode2D" type="Node2D" parent="Navigation"]
-position = Vector2( -822.408, 149.216 )
+position = Vector2( -970.449, 149.216 )
 script = ExtResource( 2 )
 link_paths = [ NodePath("../LinkedNode2D2") ]
 
@@ -75,7 +86,7 @@ script = ExtResource( 2 )
 link_paths = [ NodePath("../LinkedNode2D3") ]
 
 [node name="LinkedNode2D3" type="Node2D" parent="Navigation"]
-position = Vector2( 568.235, 167.313 )
+position = Vector2( 540.516, 167.313 )
 script = ExtResource( 2 )
 link_paths = [ NodePath("../LinkedNode2D4") ]
 
@@ -90,17 +101,52 @@ position = Vector2( 0.529673, -14.8325 )
 shape = SubResource( 5 )
 
 [node name="LinkedNode2D6" type="Node2D" parent="Navigation"]
-position = Vector2( 676.098, 159.791 )
+position = Vector2( 648.379, 159.791 )
 script = ExtResource( 2 )
 link_paths = [ NodePath("../LinkedNode2D3") ]
 
 [node name="LinkedNode2D4" type="Node2D" parent="Navigation"]
-position = Vector2( 684.211, 0.256989 )
+position = Vector2( 765.948, 0.256989 )
 script = ExtResource( 2 )
-link_paths = [ NodePath("../LinkedNode2D5") ]
+link_paths = [ NodePath("../LinkedNode2D9"), NodePath("../LinkedNode2D5") ]
+
+[node name="JumpZone2" type="Area2D" parent="Navigation/LinkedNode2D4"]
+position = Vector2( -21.2925, 16.4599 )
+script = ExtResource( 6 )
+_linked_node_path = NodePath("../../LinkedNode2D9")
+max_angle_to_next_degrees = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation/LinkedNode2D4/JumpZone2"]
+position = Vector2( 0.529673, -14.8325 )
+shape = SubResource( 5 )
+
+[node name="LinkedNode2D9" type="Node2D" parent="Navigation"]
+position = Vector2( 682.656, -160.348 )
+script = ExtResource( 2 )
+link_paths = [ NodePath("../LinkedNode2D7") ]
+
+[node name="JumpZone2" type="Area2D" parent="Navigation/LinkedNode2D9"]
+position = Vector2( -31.9713, 16.4599 )
+script = ExtResource( 6 )
+_linked_node_path = NodePath("../../LinkedNode2D7")
+jump_in_air = true
+max_angle_to_next_degrees = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation/LinkedNode2D9/JumpZone2"]
+position = Vector2( 0.529673, -14.8325 )
+shape = SubResource( 5 )
 
 [node name="LinkedNode2D5" type="Node2D" parent="Navigation"]
 position = Vector2( 1171.37, 0.256989 )
+script = ExtResource( 2 )
+
+[node name="LinkedNode2D7" type="Node2D" parent="Navigation"]
+position = Vector2( 547.941, -283.377 )
+script = ExtResource( 2 )
+link_paths = [ NodePath("../LinkedNode2D8") ]
+
+[node name="LinkedNode2D8" type="Node2D" parent="Navigation"]
+position = Vector2( 89.2181, -291.872 )
 script = ExtResource( 2 )
 
 [editable path="DummyKing"]

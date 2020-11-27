@@ -10,21 +10,20 @@
 [ext_resource path="res://combat/slash_attack.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40, 50 )
+extents = Vector2( 33.67, 41.821 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 50 )
 
 [node name="Protagonist" type="KinematicBody2D"]
-position = Vector2( 92.4984, -37.8402 )
 collision_layer = 0
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, 10.7 )
+position = Vector2( 0, -39.3333 )
 frames = ExtResource( 4 )
 animation = "idle"
-frame = 1
+frame = 5
 playing = true
 script = ExtResource( 5 )
 character_jump_path = NodePath("../ControllableCharacterJump")
@@ -35,6 +34,7 @@ remote_path = NodePath("../../Attack")
 update_scale = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -42.2464 )
 shape = SubResource( 1 )
 
 [node name="ControllableCharacterMovement2D" type="Node" parent="."]
@@ -42,7 +42,6 @@ script = ExtResource( 6 )
 fast_speed = 500.0
 default_speed = 200.0
 slow_speed = 100.0
-air_speed = 100.0
 rotation_style = 0
 basis_node_path = NodePath("../../Camera2D")
 body_node_path = NodePath("../../Protagonist/AnimatedSprite")
@@ -51,10 +50,9 @@ body_node_path = NodePath("../../Protagonist/AnimatedSprite")
 script = ExtResource( 7 )
 initial_jump_height = 100.0
 full_jump_height = 200.0
-max_jumps = 2
 
 [node name="Attack" type="Area2D" parent="."]
-position = Vector2( 71, 0 )
+position = Vector2( 71, -50.0333 )
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 8 )

@@ -22,7 +22,7 @@ func override_play(anim: String, restart:=true) -> void:
 
 
 func _process(_delta):
-	if character.air_time < character_jump.coyote_time:
+	if character.is_on_floor():
 		if is_zero_approx(character.movement_vector.length_squared()):
 			play("idle")
 		
