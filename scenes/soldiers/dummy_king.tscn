@@ -24,7 +24,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -38.97 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 5
+frame = 2
 playing = true
 script = ExtResource( 7 )
 character_jump_path = NodePath("../CharacterJump")
@@ -32,7 +32,7 @@ character_jump_path = NodePath("../CharacterJump")
 [node name="CharacterMovement2D" type="Node" parent="."]
 script = ExtResource( 4 )
 fast_speed = 500.0
-default_speed = 200.0
+default_speed = 150.0
 slow_speed = 100.0
 body_node_path = NodePath("../CharacterAnimator")
 
@@ -52,3 +52,6 @@ health = 5.0
 min_health = 2.0
 texture_source_path = NodePath("../CharacterAnimator")
 character_movement_path = NodePath("../CharacterMovement2D")
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -33.67, -83.642, 67.34, 83.642 )

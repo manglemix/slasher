@@ -1,11 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/protagonist.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/astar_navigation/scripts/linked_node.gd" type="Script" id=2]
 [ext_resource path="res://addons/astar_navigation/scripts/astar_navigation.gd" type="Script" id=3]
 [ext_resource path="res://scenes/levels/testing.gd" type="Script" id=4]
+[ext_resource path="res://enemy_barycentre.gd" type="Script" id=5]
 [ext_resource path="res://addons/astar_navigation/scripts/jump_zone.gd" type="Script" id=6]
+[ext_resource path="res://joystick.gd" type="Script" id=7]
 [ext_resource path="res://scenes/soldiers/dummy_king.tscn" type="PackedScene" id=8]
+[ext_resource path="res://jump_button.gd" type="Script" id=9]
 [ext_resource path="res://cinematics/zoomable_camera_2d.gd" type="Script" id=11]
 
 [sub_resource type="QuadMesh" id=1]
@@ -20,7 +23,46 @@ size = Vector2( 500, 150 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 250, 75 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="SphereMesh" id=5]
+radius = 100.0
+height = 200.0
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 2
+
+[sub_resource type="SphereMesh" id=7]
+radius = 40.0
+height = 80.0
+
+[sub_resource type="GradientTexture" id=10]
+
+[sub_resource type="SphereMesh" id=11]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="MeshTexture" id=12]
+mesh = SubResource( 11 )
+base_texture = SubResource( 10 )
+
+[sub_resource type="Gradient" id=13]
+offsets = PoolRealArray( 1 )
+colors = PoolColorArray( 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=14]
+gradient = SubResource( 13 )
+
+[sub_resource type="SphereMesh" id=15]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="MeshTexture" id=16]
+mesh = SubResource( 15 )
+base_texture = SubResource( 14 )
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 20.0
+
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 22.0692, 50 )
 
 [node name="Node2D" type="Node2D"]
@@ -29,6 +71,9 @@ node_links_path = NodePath("")
 
 [node name="Protagonist" parent="." instance=ExtResource( 1 )]
 gravity_factor = 2.0
+
+[node name="AnimatedSprite" parent="Protagonist" index="0"]
+frame = 2
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 position = Vector2( 3.633, 250.137 )
@@ -65,12 +110,30 @@ position = Vector2( 92.4984, -37.8402 )
 current = true
 zoom = Vector2( 0.75, 0.75 )
 script = ExtResource( 11 )
+targeting_style = 1
+_target_path = NodePath("../EnemyBarycentre")
 _parent_path = NodePath("../Protagonist")
 
-[node name="DummyKing" parent="." instance=ExtResource( 8 )]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Camera2D"]
+position = Vector2( -271.376, 115.285 )
+mesh = SubResource( 5 )
 
-[node name="CharacterAnimator" parent="DummyKing" index="1"]
-frame = 3
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Camera2D/MeshInstance2D"]
+material = SubResource( 6 )
+mesh = SubResource( 7 )
+script = ExtResource( 7 )
+padding = 10.0
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Camera2D"]
+position = Vector2( 307.703, 89.1961 )
+normal = SubResource( 12 )
+pressed = SubResource( 16 )
+shape = SubResource( 9 )
+shape_centered = false
+shape_visible = false
+script = ExtResource( 9 )
+
+[node name="DummyKing" parent="." instance=ExtResource( 8 )]
 
 [node name="Navigation" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -98,7 +161,7 @@ max_angle_to_next_degrees = 60.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation/LinkedNode2D3/JumpZone"]
 position = Vector2( 0.529673, -14.8325 )
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="LinkedNode2D6" type="Node2D" parent="Navigation"]
 position = Vector2( 648.379, 159.791 )
@@ -118,7 +181,7 @@ max_angle_to_next_degrees = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation/LinkedNode2D4/JumpZone2"]
 position = Vector2( 0.529673, -14.8325 )
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="LinkedNode2D9" type="Node2D" parent="Navigation"]
 position = Vector2( 682.656, -160.348 )
@@ -134,7 +197,7 @@ max_angle_to_next_degrees = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation/LinkedNode2D9/JumpZone2"]
 position = Vector2( 0.529673, -14.8325 )
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="LinkedNode2D5" type="Node2D" parent="Navigation"]
 position = Vector2( 1171.37, 0.256989 )
@@ -148,5 +211,10 @@ link_paths = [ NodePath("../LinkedNode2D8") ]
 [node name="LinkedNode2D8" type="Node2D" parent="Navigation"]
 position = Vector2( 89.2181, -291.872 )
 script = ExtResource( 2 )
+
+[node name="EnemyBarycentre" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[editable path="Protagonist"]
 
 [editable path="DummyKing"]

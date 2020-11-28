@@ -64,11 +64,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/damageable.gd"
 }, {
-"base": "Node",
-"class": "DisablePathOverride",
-"language": "GDScript",
-"path": "res://addons/astar_navigation/scripts/disable_path_override.gd"
-}, {
 "base": "PathTrigger2D",
 "class": "JumpZone",
 "language": "GDScript",
@@ -99,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://speedometer.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "State",
 "language": "GDScript",
 "path": "res://AI/state.gd"
@@ -109,7 +104,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AI/state_machine.gd"
 }, {
-"base": "Reference",
+"base": "MobileCamera",
 "class": "ZoomableCamera2D",
 "language": "GDScript",
 "path": "res://cinematics/zoomable_camera_2d.gd"
@@ -126,7 +121,6 @@ _global_script_class_icons={
 "ControllableCharacterJump": "",
 "ControllableCharacterMovement2D": "",
 "Damageable": "",
-"DisablePathOverride": "",
 "JumpZone": "",
 "LinkedNode": "",
 "MobileCamera": "",

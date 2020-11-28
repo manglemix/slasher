@@ -5,8 +5,8 @@
 [ext_resource path="res://TrokaraScripts/classic_character_2d.gd" type="Script" id=3]
 [ext_resource path="res://animations/king_frames.tres" type="SpriteFrames" id=4]
 [ext_resource path="res://animations/character_animator.gd" type="Script" id=5]
-[ext_resource path="res://TrokaraScripts/controllable_character_movement_2d.gd" type="Script" id=6]
-[ext_resource path="res://TrokaraScripts/controllable_character_jump.gd" type="Script" id=7]
+[ext_resource path="res://TrokaraScripts/character_movement_2d.gd" type="Script" id=6]
+[ext_resource path="res://TrokaraScripts/character_jump.gd" type="Script" id=7]
 [ext_resource path="res://combat/slash_attack.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -23,10 +23,10 @@ script = ExtResource( 3 )
 position = Vector2( 0, -39.3333 )
 frames = ExtResource( 4 )
 animation = "idle"
-frame = 5
+frame = 4
 playing = true
 script = ExtResource( 5 )
-character_jump_path = NodePath("../ControllableCharacterJump")
+character_jump_path = NodePath("../CharacterJump")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="AnimatedSprite"]
 position = Vector2( 71, -10.7 )
@@ -37,16 +37,12 @@ update_scale = false
 position = Vector2( 0, -42.2464 )
 shape = SubResource( 1 )
 
-[node name="ControllableCharacterMovement2D" type="Node" parent="."]
+[node name="CharacterMovement2D" type="Node" parent="."]
 script = ExtResource( 6 )
-fast_speed = 500.0
 default_speed = 200.0
-slow_speed = 100.0
-rotation_style = 0
-basis_node_path = NodePath("../../Camera2D")
-body_node_path = NodePath("../../Protagonist/AnimatedSprite")
+body_node_path = NodePath("../AnimatedSprite")
 
-[node name="ControllableCharacterJump" type="Node" parent="."]
+[node name="CharacterJump" type="Node" parent="."]
 script = ExtResource( 7 )
 initial_jump_height = 100.0
 full_jump_height = 200.0
