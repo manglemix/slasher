@@ -19,4 +19,4 @@ func _process(delta):
 			origin += enemy.global_transform.origin
 			i += 1
 	origin /= i
-	global_transform.origin = global_transform.origin.linear_interpolate(origin, weight * delta)
+	global_transform.origin = global_transform.origin.linear_interpolate(origin, weight)

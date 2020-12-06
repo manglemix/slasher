@@ -5,9 +5,9 @@
 [ext_resource path="res://TrokaraScripts/classic_character_2d.gd" type="Script" id=3]
 [ext_resource path="res://animations/king_frames.tres" type="SpriteFrames" id=4]
 [ext_resource path="res://animations/character_animator.gd" type="Script" id=5]
-[ext_resource path="res://TrokaraScripts/character_movement_2d.gd" type="Script" id=6]
-[ext_resource path="res://TrokaraScripts/character_jump.gd" type="Script" id=7]
-[ext_resource path="res://combat/slash_attack.gd" type="Script" id=8]
+[ext_resource path="res://TrokaraScripts/controllable_character_movement_2d.gd" type="Script" id=6]
+[ext_resource path="res://TrokaraScripts/controllable_character_jump.gd" type="Script" id=7]
+[ext_resource path="res://combat/controllable_attack.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 33.67, 41.821 )
@@ -16,51 +16,45 @@ extents = Vector2( 33.67, 41.821 )
 extents = Vector2( 40, 50 )
 
 [node name="Protagonist" type="KinematicBody2D"]
-collision_layer = 0
+collision_layer = 2
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="CharacterAnimator" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -39.3333 )
 frames = ExtResource( 4 )
-animation = "idle"
-frame = 4
+animation = "jump"
 playing = true
 script = ExtResource( 5 )
-character_jump_path = NodePath("../CharacterJump")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="AnimatedSprite"]
-position = Vector2( 71, -10.7 )
-remote_path = NodePath("../../Attack")
-update_scale = false
+character_jump_path = NodePath("../ControllableCharacterJump")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -42.2464 )
 shape = SubResource( 1 )
 
-[node name="CharacterMovement2D" type="Node" parent="."]
+[node name="ControllableCharacterMovement2D" type="Node" parent="."]
 script = ExtResource( 6 )
 default_speed = 200.0
-body_node_path = NodePath("../AnimatedSprite")
+body_node_path = NodePath("../CharacterAnimator")
 
-[node name="CharacterJump" type="Node" parent="."]
+[node name="ControllableCharacterJump" type="Node" parent="."]
 script = ExtResource( 7 )
 initial_jump_height = 100.0
 full_jump_height = 200.0
+deformation_factor = 0.5
 
-[node name="Attack" type="Area2D" parent="."]
-position = Vector2( 71, -50.0333 )
+[node name="SlashAttack" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 4
 script = ExtResource( 8 )
-animated_sprite_path = NodePath("../../Protagonist/AnimatedSprite")
+animated_sprite_path = NodePath("../CharacterAnimator")
 audio_paths = [ NodePath("Slash1"), NodePath("Slash2") ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
-position = Vector2( -30, 0 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlashAttack"]
+position = Vector2( 41.4946, -50.1131 )
 shape = SubResource( 2 )
 
-[node name="Slash1" type="AudioStreamPlayer" parent="Attack"]
+[node name="Slash1" type="AudioStreamPlayer" parent="SlashAttack"]
 stream = ExtResource( 2 )
 
-[node name="Slash2" type="AudioStreamPlayer" parent="Attack"]
+[node name="Slash2" type="AudioStreamPlayer" parent="SlashAttack"]
 stream = ExtResource( 1 )

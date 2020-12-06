@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://TrokaraScripts/classic_character_2d.gd"
 }, {
+"base": "SlashAttack",
+"class": "ControllableAttack",
+"language": "GDScript",
+"path": "res://combat/controllable_attack.gd"
+}, {
 "base": "CharacterJump",
 "class": "ControllableCharacterJump",
 "language": "GDScript",
@@ -69,12 +74,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/astar_navigation/scripts/jump_zone.gd"
 }, {
+"base": "Node2D",
+"class": "Lerper",
+"language": "GDScript",
+"path": "res://cinematics/lerper.gd"
+}, {
 "base": "Node",
 "class": "LinkedNode",
 "language": "GDScript",
 "path": "res://addons/astar_navigation/scripts/linked_node.gd"
 }, {
-"base": "Reference",
+"base": "Camera2D",
 "class": "MobileCamera",
 "language": "GDScript",
 "path": "res://cinematics/mobile_camera_2d.gd"
@@ -84,15 +94,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/astar_navigation/scripts/path_trigger_2D.gd"
 }, {
+"base": "SlashAttack",
+"class": "ProximityAttack",
+"language": "GDScript",
+"path": "res://combat/proximity_attack.gd"
+}, {
+"base": "Area2D",
+"class": "SlashAttack",
+"language": "GDScript",
+"path": "res://combat/slash_attack.gd"
+}, {
 "base": "Node2D",
 "class": "Slashed",
 "language": "GDScript",
 "path": "res://effects/slashed.gd"
-}, {
-"base": "Label",
-"class": "Speedometer",
-"language": "GDScript",
-"path": "res://speedometer.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -103,6 +118,11 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://AI/state_machine.gd"
+}, {
+"base": "CanvasFollower",
+"class": "UIBase",
+"language": "GDScript",
+"path": "res://scenes/ui/ui_base.gd"
 }, {
 "base": "MobileCamera",
 "class": "ZoomableCamera2D",
@@ -118,17 +138,21 @@ _global_script_class_icons={
 "CharacterJump": "",
 "CharacterMovement2D": "",
 "ClassicCharacter2D": "",
+"ControllableAttack": "",
 "ControllableCharacterJump": "",
 "ControllableCharacterMovement2D": "",
 "Damageable": "",
 "JumpZone": "",
+"Lerper": "",
 "LinkedNode": "",
 "MobileCamera": "",
 "PathTrigger2D": "",
+"ProximityAttack": "",
+"SlashAttack": "",
 "Slashed": "",
-"Speedometer": "",
 "State": "",
 "StateMachine": "",
+"UIBase": "",
 "ZoomableCamera2D": ""
 }
 
@@ -138,9 +162,18 @@ config/name="slasher"
 run/main_scene="res://scenes/levels/testing.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+DebugLabel="*res://debug_label.gd"
+
 [debug]
 
 settings/stdout/print_fps=true
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
@@ -148,11 +181,6 @@ enabled=PoolStringArray( "astar_navigation" )
 
 [input]
 
-attack={
-"deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
-}
 "move left"={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
@@ -173,21 +201,20 @@ attack={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
-sprint={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
- ]
-}
-walk={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"unicode":0,"echo":false,"script":null)
- ]
-}
 jump={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
+attack={
+"deadzone": 0.5,
+"events": [  ]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+pointing/emulate_mouse_from_touch=false
 
 [physics]
 

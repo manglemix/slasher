@@ -1,3 +1,4 @@
+class_name SlashAttack
 extends Area2D
 
 
@@ -25,6 +26,10 @@ func _ready():
 	if is_instance_valid(animated_sprite):
 		var frames := animated_sprite.frames
 		attack_delay = frame_number / frames.get_animation_speed(anim_name)
+
+
+func charge_attack() -> void:
+	set_process(true)
 
 
 func attack() -> void:
@@ -56,16 +61,6 @@ func attack() -> void:
 		
 	yield(animated_sprite, "animation_finished")
 	_attacking = false
-
-
-func _input(event):
-	if _current_charge > 0:
-		if event.is_action_released("attack"):
-			attack()
-	
-	else:
-		if event.is_action_pressed("attack"):
-			set_process(true)
 
 
 func _process(delta):
