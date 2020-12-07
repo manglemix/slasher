@@ -9,6 +9,7 @@ export var min_damage := 1.0
 export var animated_sprite_path: NodePath = "../AnimatedSprite"
 export var anim_name := "slash"
 export var frame_number := 3
+export var override_priority := 5
 export(Array, NodePath) var audio_paths: Array
 export var max_charge_time := 1.0
 
@@ -43,7 +44,7 @@ func attack() -> void:
 	_attacking = true
 	
 	if is_instance_valid(animated_sprite):
-		animated_sprite.override_play(anim_name)
+		animated_sprite.override_play(anim_name, override_priority)
 		yield(get_tree().create_timer(attack_delay), "timeout")
 		
 		if animated_sprite.animation != anim_name:

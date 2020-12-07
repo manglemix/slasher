@@ -21,6 +21,7 @@ export var target_origin: Vector2									# The position in global space the bod
 
 var movement_vector: Vector2
 var target_node: Node2D
+var rotate_once := false
 
 # Modify these after _ready if need be, instead of basis_node_path
 onready var basis_node: Node2D = get_node(basis_node_path)
@@ -43,6 +44,10 @@ func _process(_delta):
 	
 	if auto_rotate:
 		var local_origin: Vector2
+		
+		if rotate_once:
+			auto_rotate = false
+		
 		match rotation_style:
 			RotationStyles.FACE_MOUSE:
 				local_origin = body_node.get_global_mouse_position()

@@ -1,29 +1,35 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/protagonist.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/astar_navigation/scripts/linked_node.gd" type="Script" id=2]
 [ext_resource path="res://addons/astar_navigation/scripts/astar_navigation.gd" type="Script" id=3]
 [ext_resource path="res://scenes/levels/testing.gd" type="Script" id=4]
 [ext_resource path="res://cinematics/enemy_barycentre.gd" type="Script" id=5]
-[ext_resource path="res://addons/astar_navigation/scripts/jump_zone.gd" type="Script" id=6]
 [ext_resource path="res://scenes/ui/ui.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/soldiers/dummy_king.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/background1.png" type="Texture" id=9]
+[ext_resource path="res://scenes/backgroundF1.png" type="Texture" id=10]
 [ext_resource path="res://cinematics/lerper.gd" type="Script" id=11]
+[ext_resource path="res://scenes/grass.png" type="Texture" id=12]
+[ext_resource path="res://scenes/platform.png" type="Texture" id=13]
 
-[sub_resource type="QuadMesh" id=1]
-size = Vector2( 2000, 100 )
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 676.905, 51.5445 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1000, 50 )
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 141.439, 51.5445 )
 
-[sub_resource type="QuadMesh" id=3]
-size = Vector2( 500, 150 )
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 101.751, 51.5445 )
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 250, 75 )
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 155.36, 68.8974 )
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 22.0692, 50 )
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 38.6519, 170.905 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 55.1851, 68.8974 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
@@ -32,46 +38,46 @@ node_links_path = NodePath("")
 [node name="Protagonist" parent="." instance=ExtResource( 1 )]
 gravity_factor = 2.0
 
-[node name="Lerper" type="Node2D" parent="Protagonist"]
-script = ExtResource( 11 )
-_target_path = NodePath("../../EnemyBarycentre")
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Protagonist"]
 
-[node name="Camera2D" type="Camera2D" parent="Protagonist/Lerper"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Protagonist/ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+
+[node name="Sprite" type="Sprite" parent="Protagonist/ParallaxBackground/ParallaxLayer"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 9 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Protagonist/ParallaxBackground"]
+motion_scale = Vector2( 0.8, 0.8 )
+motion_mirroring = Vector2( 640, 0 )
+
+[node name="Sprite" type="Sprite" parent="Protagonist/ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource( 10 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1280, 360 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Protagonist/ParallaxBackground"]
+motion_mirroring = Vector2( 640, 0 )
+
+[node name="Sprite" type="Sprite" parent="Protagonist/ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource( 12 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1280, 360 )
+
+[node name="CameraOffset" type="Node2D" parent="Protagonist"]
+
+[node name="Lerper" type="Node2D" parent="Protagonist/CameraOffset"]
+script = ExtResource( 11 )
+_target_path = NodePath("../../../EnemyBarycentre")
+
+[node name="Camera2D" type="Camera2D" parent="Protagonist/CameraOffset/Lerper"]
 position = Vector2( 0, -70 )
 current = true
 zoom = Vector2( 0.8, 0.8 )
 smoothing_enabled = true
 smoothing_speed = 10.0
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-position = Vector2( 3.633, 250.137 )
-mesh = SubResource( 1 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D/StaticBody2D"]
-position = Vector2( -0.840881, 0 )
-shape = SubResource( 2 )
-
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
-position = Vector2( 934.124, 125.388 )
-mesh = SubResource( 3 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D2"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D2/StaticBody2D"]
-position = Vector2( -0.840881, 0 )
-shape = SubResource( 4 )
-
-[node name="MeshInstance2D3" type="MeshInstance2D" parent="."]
-position = Vector2( 315.886, -170.989 )
-mesh = SubResource( 3 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D3"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D3/StaticBody2D"]
-position = Vector2( -0.840881, 0 )
-shape = SubResource( 4 )
 
 [node name="DummyKing" parent="." instance=ExtResource( 8 )]
 
@@ -83,83 +89,72 @@ frame = 0
 [node name="Navigation" type="Node" parent="."]
 script = ExtResource( 3 )
 
-[node name="LinkedNode2D" type="Node2D" parent="Navigation"]
-position = Vector2( -970.449, 149.216 )
+[node name="LinkedNode" type="Node2D" parent="Navigation"]
+position = Vector2( -701.146, 324.43 )
 script = ExtResource( 2 )
-link_paths = [ NodePath("../LinkedNode2D2") ]
+link_paths = [ NodePath("../LinkedNode2") ]
 
-[node name="LinkedNode2D2" type="Node2D" parent="Navigation"]
-position = Vector2( -7.94598, 157.044 )
+[node name="LinkedNode2" type="Node2D" parent="Navigation"]
+position = Vector2( 93.8641, 280.962 )
 script = ExtResource( 2 )
-link_paths = [ NodePath("../LinkedNode2D3") ]
+link_paths = [ NodePath("../LinkedNode3") ]
 
-[node name="LinkedNode2D3" type="Node2D" parent="Navigation"]
-position = Vector2( 540.516, 167.313 )
+[node name="LinkedNode3" type="Node2D" parent="Navigation"]
+position = Vector2( 177.649, 191.508 )
 script = ExtResource( 2 )
-link_paths = [ NodePath("../LinkedNode2D4") ]
+link_paths = [ NodePath("../LinkedNode4") ]
 
-[node name="JumpZone" type="Area2D" parent="Navigation/LinkedNode2D3"]
-position = Vector2( 0, -4.76758 )
-script = ExtResource( 6 )
-_linked_node_path = NodePath("../../LinkedNode2D4")
-max_angle_to_next_degrees = 60.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation/LinkedNode2D3/JumpZone"]
-position = Vector2( 0.529673, -14.8325 )
-shape = SubResource( 5 )
-
-[node name="LinkedNode2D6" type="Node2D" parent="Navigation"]
-position = Vector2( 648.379, 159.791 )
+[node name="LinkedNode4" type="Node2D" parent="Navigation"]
+position = Vector2( 354.038, 187.728 )
 script = ExtResource( 2 )
-link_paths = [ NodePath("../LinkedNode2D3") ]
+link_paths = [ NodePath("../LinkedNode5") ]
 
-[node name="LinkedNode2D4" type="Node2D" parent="Navigation"]
-position = Vector2( 745.744, 0.256989 )
+[node name="LinkedNode5" type="Node2D" parent="Navigation"]
+position = Vector2( 498.929, -5.66965 )
 script = ExtResource( 2 )
-link_paths = [ NodePath("../LinkedNode2D9"), NodePath("../LinkedNode2D5") ]
+link_paths = [ NodePath("../LinkedNode6") ]
 
-[node name="JumpZone2" type="Area2D" parent="Navigation/LinkedNode2D4"]
-position = Vector2( -21.2925, 16.4599 )
-script = ExtResource( 6 )
-_linked_node_path = NodePath("../../LinkedNode2D9")
-max_angle_to_next_degrees = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation/LinkedNode2D4/JumpZone2"]
-position = Vector2( 0.529673, -14.8325 )
-shape = SubResource( 5 )
-
-[node name="LinkedNode2D9" type="Node2D" parent="Navigation"]
-position = Vector2( 670.87, -160.348 )
-script = ExtResource( 2 )
-link_paths = [ NodePath("../LinkedNode2D7") ]
-
-[node name="JumpZone2" type="Area2D" parent="Navigation/LinkedNode2D9"]
-position = Vector2( -31.9713, 16.4599 )
-script = ExtResource( 6 )
-_linked_node_path = NodePath("../../LinkedNode2D7")
-jump_in_air = true
-max_angle_to_next_degrees = 100.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation/LinkedNode2D9/JumpZone2"]
-position = Vector2( 0.529673, -14.8325 )
-shape = SubResource( 5 )
-
-[node name="LinkedNode2D5" type="Node2D" parent="Navigation"]
-position = Vector2( 1171.37, 0.256989 )
-script = ExtResource( 2 )
-
-[node name="LinkedNode2D7" type="Node2D" parent="Navigation"]
-position = Vector2( 547.941, -283.377 )
-script = ExtResource( 2 )
-link_paths = [ NodePath("../LinkedNode2D8") ]
-
-[node name="LinkedNode2D8" type="Node2D" parent="Navigation"]
-position = Vector2( 89.2181, -291.872 )
+[node name="LinkedNode6" type="Node2D" parent="Navigation"]
+position = Vector2( 592.163, 277.813 )
 script = ExtResource( 2 )
 
 [node name="EnemyBarycentre" type="Node2D" parent="."]
 script = ExtResource( 5 )
 weight = 0.3
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -36.0577, 94.338 )
+scale = Vector2( 2.1169, 2.1169 )
+z_index = 10
+texture = ExtResource( 13 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite"]
+position = Vector2( 0, 152.174 )
+scale = Vector2( 0.472389, 0.472389 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
+position = Vector2( 0.629944, 6.92957 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
+position = Vector2( -151.191, -10.0794 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
+position = Vector2( 91.9743, -42.2073 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
+position = Vector2( 338.863, -107.468 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
+position = Vector2( 531.297, -213.039 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
+position = Vector2( 622.214, -26.5103 )
+shape = SubResource( 11 )
 
 [editable path="Protagonist"]
 
