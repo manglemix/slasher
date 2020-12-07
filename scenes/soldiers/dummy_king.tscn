@@ -19,16 +19,17 @@ extents = Vector2( 40, 50 )
 collision_layer = 2147483652
 script = ExtResource( 3 )
 gravity_factor = 2.0
+snap_distance = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -42.095 )
 shape = SubResource( 1 )
 
 [node name="CharacterAnimator" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -38.97 )
+position = Vector2( 0, -40 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 1
+frame = 5
 playing = true
 script = ExtResource( 7 )
 character_jump_path = NodePath("../CharacterJump")

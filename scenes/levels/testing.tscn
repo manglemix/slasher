@@ -1,33 +1,15 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/protagonist.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/astar_navigation/scripts/linked_node.gd" type="Script" id=2]
 [ext_resource path="res://addons/astar_navigation/scripts/astar_navigation.gd" type="Script" id=3]
 [ext_resource path="res://scenes/levels/testing.gd" type="Script" id=4]
 [ext_resource path="res://cinematics/enemy_barycentre.gd" type="Script" id=5]
-[ext_resource path="res://scenes/MedievalBG1.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/medieval_bg_1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/ui/ui.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/soldiers/dummy_king.tscn" type="PackedScene" id=8]
 [ext_resource path="res://cinematics/lerper.gd" type="Script" id=11]
 [ext_resource path="res://scenes/platform.png" type="Texture" id=13]
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 676.905, 51.5445 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 141.439, 51.5445 )
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 101.751, 51.5445 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 155.36, 68.8974 )
-
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 38.6519, 170.905 )
-
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 55.1851, 68.8974 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
@@ -35,8 +17,7 @@ node_links_path = NodePath("")
 
 [node name="Protagonist" parent="." instance=ExtResource( 1 )]
 gravity_factor = 2.0
-
-[node name="ParallaxBackground" parent="Protagonist" instance=ExtResource( 6 )]
+snap_distance = 20.0
 
 [node name="CameraOffset" type="Node2D" parent="Protagonist"]
 
@@ -52,6 +33,9 @@ smoothing_enabled = true
 smoothing_speed = 10.0
 
 [node name="DummyKing" parent="." instance=ExtResource( 8 )]
+
+[node name="CharacterAnimator" parent="DummyKing" index="1"]
+frame = 2
 
 [node name="CanvasFollower" parent="." instance=ExtResource( 7 )]
 
@@ -101,29 +85,10 @@ texture = ExtResource( 13 )
 position = Vector2( 0, 152.174 )
 scale = Vector2( 0.472389, 0.472389 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
-position = Vector2( 0.629944, 6.92957 )
-shape = SubResource( 6 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite/StaticBody2D"]
+polygon = PoolVector2Array( -669.91, -40.6652, -300.159, -42.6674, -276.132, -62.0226, -25.8499, -58.6855, 20.202, -92.7239, 179.715, -92.7239, 183.72, -174.817, 496.74, -174.817, 498.075, -378.38, 566.819, -377.712, 568.821, -85.3823, 671.604, -84.0475, 670.936, -29.9865, -670.577, -15.9706 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
-position = Vector2( -151.191, -10.0794 )
-shape = SubResource( 7 )
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
-position = Vector2( 91.9743, -42.2073 )
-shape = SubResource( 8 )
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
-position = Vector2( 338.863, -107.468 )
-shape = SubResource( 9 )
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
-position = Vector2( 531.297, -213.039 )
-shape = SubResource( 10 )
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
-position = Vector2( 622.214, -26.5103 )
-shape = SubResource( 11 )
+[node name="ParallaxBackground" parent="." instance=ExtResource( 6 )]
 
 [editable path="Protagonist"]
 

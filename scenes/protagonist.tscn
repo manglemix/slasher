@@ -20,9 +20,10 @@ collision_layer = 2
 script = ExtResource( 3 )
 
 [node name="CharacterAnimator" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -39.3333 )
+position = Vector2( 0, -40 )
 frames = ExtResource( 4 )
 animation = "jump"
+frame = 1
 playing = true
 script = ExtResource( 5 )
 character_jump_path = NodePath("../ControllableCharacterJump")
