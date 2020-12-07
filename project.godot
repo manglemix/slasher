@@ -119,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AI/state_machine.gd"
 }, {
+"base": "RayCast2D",
+"class": "StepUp2D",
+"language": "GDScript",
+"path": "res://TrokaraScripts/step_up_2d.gd"
+}, {
 "base": "CanvasFollower",
 "class": "UIBase",
 "language": "GDScript",
@@ -152,6 +157,7 @@ _global_script_class_icons={
 "Slashed": "",
 "State": "",
 "StateMachine": "",
+"StepUp2D": "",
 "UIBase": "",
 "ZoomableCamera2D": ""
 }
