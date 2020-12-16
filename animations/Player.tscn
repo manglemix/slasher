@@ -1,14 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://sounds/slashes/118792__lmbubec__1-knife-slash-a.wav" type="AudioStream" id=1]
-[ext_resource path="res://sounds/slashes/35213__abyssmal__slashkut.wav" type="AudioStream" id=2]
-[ext_resource path="res://animations/Material_002.material" type="Material" id=3]
+[ext_resource path="res://animations/Material_002.material" type="Material" id=1]
+[ext_resource path="res://animations/cloack.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://animations/Player.gd" type="Script" id=3]
 [ext_resource path="res://animations/Material_003.material" type="Material" id=4]
-[ext_resource path="res://animations/cloack.obj" type="ArrayMesh" id=5]
-[ext_resource path="res://TrokaraScripts/controllable_character_jump.gd" type="Script" id=7]
-[ext_resource path="res://combat/controllable_attack.gd" type="Script" id=8]
-[ext_resource path="res://TrokaraScripts/classic_character.gd" type="Script" id=9]
-[ext_resource path="res://TrokaraScripts/controllable_character_movement.gd" type="Script" id=10]
 
 [sub_resource type="ArrayMesh" id=10]
 resource_name = "Mesh"
@@ -19,7 +14,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 97751,
 "index_count": 822,
-"material": ExtResource( 3 ),
+"material": ExtResource( 1 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 2.27546, -0.842143, -0.260919, 1.72538, 1.60541, 1.43857 ), AABB( 2.45125, 0.434973, 0.115264, 1.54959, 0.328298, 0.686209 ), AABB( 2.47082, 0.524615, 0.115264, 1.62165, 0.531962, 0.686209 ), AABB( 2.47082, 0.524615, -0.894261, 1.62165, 1.30263, 2.93079 ), AABB( 2.86167, 1.6081, 0.0336848, 1.49242, 1.17835, 0.849369 ), AABB( 3.12404, 1.80221, 0.0336848, 1.23005, 0.984241, 0.849369 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 2.49915, 0.757351, -0.894261, 1.29658, 0.735376, 0.748405 ), AABB( 2.49915, 0.172946, -1.34961, 1.29658, 1.31978, 1.20376 ), AABB( 2.62391, 0.129037, -1.3961, 1.44251, 1.08592, 0.831612 ), AABB( 2.97934, -0.610059, -1.43554, 1.80812, 1.42901, 0.734496 ), AABB( 2.49915, 0.648845, 1.06259, 1.29658, 0.843882, 0.792146 ), AABB( 2.49915, 0.172945, 1.06259, 1.29658, 1.31978, 1.20376 ), AABB( 2.62391, 0.129037, 1.48123, 1.44251, 1.09113, 0.831612 ), AABB( 3.22154, -0.550366, 1.48068, 3.95851, 1.36932, 1.17075 ), AABB( 2.27546, -2.26778, -0.370765, 1.91513, 2.43565, 1.54842 ), AABB( 2.81056, -2.84022, -0.542538, 1.38003, 2.18333, 0.865042 ), AABB( 2.81056, -3.24715, -0.567063, 1.57142, 1.98262, 0.889567 ), AABB( 2.81056, -3.24715, -0.567063, 1.57142, 1.01136, 0.889567 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 2.27546, -2.64437, 0.0905401, 1.91513, 2.93146, 1.19696 ), AABB( 2.81056, -2.84022, 0.594233, 1.38003, 2.18333, 0.865042 ), AABB( 2.81056, -3.24715, 0.594233, 1.57142, 1.93815, 0.889567 ), AABB( 2.81056, -3.24715, 0.594233, 1.57142, 1.01136, 0.889567 ) ],
 "vertex_count": 558
@@ -103,12 +98,6 @@ bind/23/pose = Transform( -0.495966, 0.0828592, 0.86438, 0.837423, -0.217625, 0.
 bind/24/name = "right_toe_end"
 bind/24/bone = -1
 bind/24/pose = Transform( -0.495966, 0.0828588, 0.86438, 0.837424, -0.217623, 0.50136, 0.229652, 0.972509, 0.0385459, 1.14495, -5.07289, 2.08124 )
-
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.25, 0.27, -0.05 )
-
-[sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.3, 0.4, 0.2 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "PlaneAction"
@@ -844,12 +833,13 @@ tracks/19/imported = true
 tracks/19/enabled = true
 tracks/19/keys = PoolRealArray( 0, 1, 0.760054, -1.65287, 0.147543, -0.00251823, 0.114053, 0.0225719, 0.993215, 1, 1, 1, 0.0666667, 1, 0.760054, -1.65287, 0.147543, -0.0084093, 0.125109, 0.0230656, 0.991839, 1, 1, 1, 0.133333, 1, 0.760054, -1.65287, 0.147543, -0.0265383, 0.187096, 0.0243633, 0.981681, 1, 1, 1, 0.2, 1, 0.760054, -1.65287, 0.147543, -0.0344728, 0.27928, 0.0334078, 0.959009, 1, 1, 1, 0.266667, 1, 0.760054, -1.65287, 0.147543, -0.0161672, 0.440468, 0.0552922, 0.895918, 1, 1, 1, 0.333333, 1, 0.760054, -1.65287, 0.147543, -0.0402488, 0.583681, 0.0322658, 0.810343, 1, 1, 1, 0.4, 1, 0.760054, -1.65287, 0.147543, -0.104698, 0.708104, 0.0203385, 0.698007, 1, 1, 1, 0.466667, 1, 0.760054, -1.65287, 0.147543, -0.139521, 0.81475, 0.0155717, 0.56256, 1, 1, 1, 0.533333, 1, 0.760054, -1.65287, 0.147543, -0.141642, 0.838726, 0.0484602, 0.523572, 1, 1, 1, 0.6, 1, 0.760054, -1.65287, 0.147543, -0.132266, 0.788787, 0.117148, 0.588725, 1, 1, 1, 0.666667, 1, 0.760054, -1.65287, 0.147543, -0.105286, 0.732421, 0.178074, 0.648663, 1, 1, 1, 0.733333, 1, 0.760054, -1.65287, 0.147543, -0.0790359, 0.676715, 0.185638, 0.70806, 1, 1, 1, 0.866667, 1, 0.760054, -1.65287, 0.147543, -0.0559102, 0.56032, 0.114712, 0.818387, 1, 1, 1, 0.933333, 1, 0.760054, -1.65287, 0.147543, -0.032215, 0.342966, 0.0707597, 0.936125, 1, 1, 1, 1, 1, 0.760054, -1.65287, 0.147543, -0.00647093, 0.103801, 0.0223077, 0.994327, 1, 1, 1, 1.36667, 1, 0.760054, -1.65287, 0.147543, -0.00647093, 0.103801, 0.0223077, 0.994327, 1, 1, 1 )
 
-[node name="ClassicCharacter" type="KinematicBody"]
-script = ExtResource( 9 )
-gravity_factor = 3.0
+[node name="Player" type="Spatial"]
+script = ExtResource( 3 )
 
-[node name="Skeleton" type="Skeleton" parent="."]
-transform = Transform( -0.1, 0, -3.25841e-08, 0, 0.1, 0, 3.25841e-08, 0, -0.1, 0, 0, 0 )
+[node name="Armature" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50436, -0.347923, 0.458369 )
+
+[node name="Skeleton" type="Skeleton" parent="Armature"]
 bones/0/name = "hips"
 bones/0/parent = -1
 bones/0/rest = Transform( -0.916196, -0.148522, -0.372192, -0.187459, 0.97974, 0.070491, 0.354182, 0.134354, -0.925475, 0.0986823, 2.29206, 0.08942 )
@@ -874,7 +864,7 @@ bones/4/name = "neck"
 bones/4/parent = 3
 bones/4/rest = Transform( 0.933905, -0.0131202, 0.357279, 0.0432352, 0.996137, -0.0764334, -0.354896, 0.0868286, 0.930865, 5.54244e-07, 0.366509, 2.98023e-08 )
 bones/4/enabled = true
-bones/4/bound_children = [ NodePath("BoneAttachment") ]
+bones/4/bound_children = [  ]
 bones/5/name = "head"
 bones/5/parent = 4
 bones/5/rest = Transform( 0.781788, -0.416833, 0.463744, 0.234147, 0.885543, 0.401235, -0.577913, -0.205096, 0.789907, 0.185112, 0.276288, 6.2363e-08 )
@@ -976,52 +966,15 @@ bones/24/rest = Transform( 1, 3.09665e-07, 3.96743e-07, -3.09664e-07, 1, -1.7732
 bones/24/enabled = true
 bones/24/bound_children = [  ]
 
-[node name="BoneAttachment" type="BoneAttachment" parent="Skeleton"]
-transform = Transform( -0.547643, -0.449368, -0.705801, -0.516064, 0.84539, -0.137818, 0.658609, 0.288764, -0.694874, -0.276337, 3.36075, 0.523529 )
+[node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
+transform = Transform( -0.544433, -0.451297, -0.707053, -0.5155, 0.844976, -0.142393, 0.661705, 0.286963, -0.692675, -0.298463, 3.35334, 0.518312 )
 bone_name = "neck"
 
-[node name="Mesh" type="MeshInstance" parent="Skeleton"]
+[node name="Mesh" type="MeshInstance" parent="Armature/Skeleton"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0133696, 0.0227704, -0.00712204 )
 mesh = SubResource( 10 )
 skin = SubResource( 11 )
 material/0 = null
-
-[node name="ControllableCharacterJump" type="Node" parent="."]
-script = ExtResource( 7 )
-initial_jump_height = 1.0
-full_jump_height = 2.0
-deformation_factor = 0.5
-
-[node name="ControllableCharacterMovement" type="Node" parent="."]
-script = ExtResource( 10 )
-continuously_rotate = true
-auto_rotate_weight = 12.0
-basis_node_path = NodePath("")
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.27, 0 )
-shape = SubResource( 1 )
-
-[node name="SlashAttack" type="Area" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
-collision_layer = 0
-collision_mask = 4
-script = ExtResource( 8 )
-animated_sprite_path = NodePath("../CharacterAnimator")
-audio_paths = [ NodePath("Slash1"), NodePath("Slash2") ]
-
-[node name="CollisionShape2D" type="CollisionShape" parent="SlashAttack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 0.4, 0 )
-shape = SubResource( 2 )
-
-[node name="Slash1" type="AudioStreamPlayer" parent="SlashAttack"]
-stream = ExtResource( 2 )
-
-[node name="Slash2" type="AudioStreamPlayer" parent="SlashAttack"]
-stream = ExtResource( 1 )
-
-[node name="CameraTarget" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.447647, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/PlaneAction = SubResource( 3 )
@@ -1033,24 +986,26 @@ anims/run-loop = SubResource( 8 )
 anims/slash-loop = SubResource( 9 )
 
 [node name="SoftBody" type="SoftBody" parent="."]
-transform = Transform( -0.976169, 0.00128463, -0.21701, 0.0016758, 0.999997, -0.00161854, 0.217007, -0.00194363, -0.976168, -0.000549192, 0.392274, -0.0569112 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.66272, 3.45016, 0.600986 )
 cast_shadow = 0
 extra_cull_margin = 3176.1
-mesh = ExtResource( 5 )
+mesh = ExtResource( 2 )
 material/0 = ExtResource( 4 )
-parent_collision_ignore = NodePath("..")
+parent_collision_ignore = NodePath("../Armature")
 total_mass = 2.0
 linear_stiffness = 0.52
 areaAngular_stiffness = 0.71
 drag_coefficient = 0.5
-ray_pickable = false
 pinned_points = [ 7, 4, 5 ]
 attachments/0/point_index = 7
-attachments/0/spatial_attachment_path = NodePath("../Skeleton/BoneAttachment")
-attachments/0/offset = Vector3( 2.03671, 1.35668, -5.30635 )
+attachments/0/spatial_attachment_path = NodePath("../Armature/Skeleton/BoneAttachment")
+attachments/0/offset = Vector3( -0.398265, 0.223569, -0.55664 )
 attachments/1/point_index = 4
-attachments/1/spatial_attachment_path = NodePath("../Skeleton/BoneAttachment")
-attachments/1/offset = Vector3( -0.503052, 0.55706, -0.685255 )
+attachments/1/spatial_attachment_path = NodePath("../Armature/Skeleton/BoneAttachment")
+attachments/1/offset = Vector3( -0.729577, 0.0853209, -0.162225 )
 attachments/2/point_index = 5
-attachments/2/spatial_attachment_path = NodePath("../Skeleton/BoneAttachment")
-attachments/2/offset = Vector3( -3.14211, -0.273818, 4.11651 )
+attachments/2/spatial_attachment_path = NodePath("../Armature/Skeleton/BoneAttachment")
+attachments/2/offset = Vector3( -1.07384, -0.0583315, 0.24761 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.00156821, 0.399405, -0.916773, 0.000683213, 0.916775, 0.399405, 0.999999, 0, -0.00171058, -12.5882, 1.99421, 2.56268 )

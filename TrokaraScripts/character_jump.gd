@@ -121,26 +121,24 @@ func set_acceleration(value: float) -> void:
 
 func set_jumping(value: bool) -> void:
 	if value:
-		if current_jumps > 0:
-			if not _initial_jumped and _check_floor():
-				_initial_jumped = true
-				character.apply_impulse(_calculate_impulse(true) - clamp(character.get_vertical_speed(), - INF, 0) * character.up_vector)
-			
-			else:
-				current_jumps -= 1
-				character.linear_velocity = _calculate_impulse(false)
-			
-			_current_jump_time = jump_time
-			emit_signal("jumped")
+		if not _initial_jumped and _check_floor():
+			_initial_jumped = true
+			character.temporary_unsnap()
+			character.linear_velocity += _calculate_impulse(true)
 		
-		else:
-			return
+		elif current_jumps > 0:
+			current_jumps -= 1
+			character.linear_velocity = _calculate_impulse(false)
+		
+		_current_jump_time = jump_time
+		set_physics_process(value)
+		jumping = value
+		emit_signal("jumped")
 		
 	elif jumping:
+		set_physics_process(value)
+		jumping = value
 		emit_signal("falling")
-	
-	set_physics_process(value)
-	jumping = value
 
 
 func set_max_deflection_angle_degrees(value: float) -> void:

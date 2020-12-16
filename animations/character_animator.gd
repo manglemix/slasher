@@ -1,12 +1,12 @@
 class_name CharacterAnimator
-extends AnimatedSprite
+extends AnimatedSprite3D
 
 
 export var character_jump_path: NodePath
 
 var _override_priority: int
 
-onready var character: Character2D = get_parent()
+onready var character: Character = get_parent()
 onready var character_jump: CharacterJump = get_node(character_jump_path)
 
 

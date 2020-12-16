@@ -1,5 +1,5 @@
 class_name SlashAttack
-extends Area2D
+extends Area
 
 
 signal attacked

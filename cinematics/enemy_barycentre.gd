@@ -1,4 +1,4 @@
-extends Node2D
+extends Spatial
 
 
 export var weight := 5.0
@@ -12,10 +12,10 @@ func _ready():
 
 
 func _process(delta):
-	var origin: Vector2 = scene.player.global_transform.origin
+	var origin: Vector3 = scene.player.global_transform.origin
 	var i := 1
 	for enemy in scene.enemies:
-		if enemy.get_node("VisibilityNotifier2D").is_on_screen():
+		if enemy.get_node("VisibilityNotifier").is_on_screen():
 			origin += enemy.global_transform.origin
 			i += 1
 	origin /= i
