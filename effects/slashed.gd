@@ -31,7 +31,9 @@ func _init(texture: Texture, gradient:=0.0, origin:=Vector2(0.5, 0.5)):
 
 func _ready():
 	half1.connect("tree_exited", self, "_increment_exits")
+	half1.z_index = 100
 	half2.connect("tree_exited", self, "_increment_exits")
+	half2.z_index = 100	
 
 
 func parent_children(half1_parent: Node, half2_parent: Node) -> void:

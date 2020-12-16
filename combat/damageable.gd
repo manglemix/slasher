@@ -8,6 +8,7 @@ export var health := 2.0
 export var min_health := 1.0
 export var armour := 1.0
 export var texture_source_path: NodePath = "../AnimatedSprite"
+export var slashed_speed := 450.0
 export var hit_anim := "hit"
 export var character_movement_path: NodePath
 
@@ -67,6 +68,6 @@ func slash() -> void:
 		push_error(str(texture_source) + " is an unrecognised texture source")
 	
 	var slashed := Slashed.new(texture, tan(deg2rad(rand_range(- 89.99, 89.99))) * full_size.aspect(), origin)
-	slashed.parent_children_to_fallers(300)
+	slashed.parent_children_to_fallers(slashed_speed)
 	get_tree().current_scene.add_child(slashed)
 	slashed.global_transform = texture_source.global_transform

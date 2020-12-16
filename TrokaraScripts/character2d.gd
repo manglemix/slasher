@@ -188,6 +188,7 @@ func _physics_process(delta):
 			_impulsing = false
 			snap_to_floor = true
 	
+	
 	# I stayed away from move_and_slide_and_snap as it caused this node to slide down slopes even if stop on slope was true (and there was downward velocity)
 	# and for some reason had a bug when nearing the max floor angle, which caused this node to randomly shoot upwards at high speeds
 	# also, if there was any side to side movement on a slope, move_and_slide_and_snap would cause this node to drift downards
