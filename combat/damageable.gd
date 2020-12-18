@@ -12,7 +12,7 @@ export var slashed_speed := 450.0
 export var hit_anim := "hit"
 export var character_movement_path: NodePath
 
-var character_movement: CharacterMovement2D
+var character_movement: CharacterMovement
 
 onready var texture_source: Node = get_node(texture_source_path)
 
@@ -38,7 +38,7 @@ func damage(hit_points: float) -> void:
 		
 		if is_instance_valid(character_movement) and texture_source.has_method("override_play"):
 			character_movement.set_process(false)
-			character_movement.character.movement_vector = Vector2.ZERO
+			character_movement.character.movement_vector = Vector3.ZERO
 			yield(texture_source, "animation_finished")
 			character_movement.set_process(true)
 

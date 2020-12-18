@@ -29,15 +29,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://TrokaraScripts/character.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "Character2D",
-"language": "GDScript",
-"path": "res://TrokaraScripts/character2d.gd"
-}, {
-"base": "AnimatedSprite3D",
+"base": "Reference",
 "class": "CharacterAnimator",
 "language": "GDScript",
-"path": "res://animations/character_animator.gd"
+"path": "res://TrokaraScripts/character_animator.gd"
 }, {
 "base": "Node",
 "class": "CharacterJump",
@@ -49,40 +44,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://TrokaraScripts/character_movement.gd"
 }, {
-"base": "Node",
-"class": "CharacterMovement2D",
-"language": "GDScript",
-"path": "res://TrokaraScripts/character_movement_2d.gd"
-}, {
 "base": "Character",
 "class": "ClassicCharacter",
 "language": "GDScript",
 "path": "res://TrokaraScripts/classic_character.gd"
 }, {
-"base": "Character2D",
-"class": "ClassicCharacter2D",
-"language": "GDScript",
-"path": "res://TrokaraScripts/classic_character_2d.gd"
-}, {
 "base": "SlashAttack",
 "class": "ControllableAttack",
 "language": "GDScript",
-"path": "res://combat/controllable_attack.gd"
+"path": "res://player/controllable_attack.gd"
 }, {
 "base": "CharacterJump",
 "class": "ControllableCharacterJump",
 "language": "GDScript",
-"path": "res://TrokaraScripts/controllable_character_jump.gd"
+"path": "res://player/controllable_character_jump.gd"
 }, {
 "base": "CharacterMovement",
 "class": "ControllableCharacterMovement",
 "language": "GDScript",
-"path": "res://TrokaraScripts/controllable_character_movement.gd"
-}, {
-"base": "CharacterMovement2D",
-"class": "ControllableCharacterMovement2D",
-"language": "GDScript",
-"path": "res://TrokaraScripts/controllable_character_movement_2d.gd"
+"path": "res://player/controllable_character_movement.gd"
 }, {
 "base": "Node",
 "class": "Damageable",
@@ -97,7 +77,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "Lerper",
 "language": "GDScript",
-"path": "res://cinematics/lerper.gd"
+"path": "res://player/camera/lerper.gd"
 }, {
 "base": "Node",
 "class": "LinkedNode",
@@ -129,37 +109,23 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://AI/state.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://AI/state_machine.gd"
-}, {
-"base": "RayCast2D",
-"class": "StepUp2D",
-"language": "GDScript",
-"path": "res://TrokaraScripts/step_up_2d.gd"
-}, {
-"base": "CanvasFollower",
-"class": "UIBase",
-"language": "GDScript",
-"path": "res://scenes/ui/ui_base.gd"
 } ]
 _global_script_class_icons={
 "AStarGoto": "",
 "AStarNavigation": "",
 "BasicFaller": "",
 "Character": "",
-"Character2D": "",
 "CharacterAnimator": "",
 "CharacterJump": "",
 "CharacterMovement": "",
-"CharacterMovement2D": "",
 "ClassicCharacter": "",
-"ClassicCharacter2D": "",
 "ControllableAttack": "",
 "ControllableCharacterJump": "",
 "ControllableCharacterMovement": "",
-"ControllableCharacterMovement2D": "",
 "Damageable": "",
 "JumpZone": "",
 "Lerper": "",
@@ -169,15 +135,13 @@ _global_script_class_icons={
 "SlashAttack": "",
 "Slashed": "",
 "State": "",
-"StateMachine": "",
-"StepUp2D": "",
-"UIBase": ""
+"StateMachine": ""
 }
 
 [application]
 
 config/name="Slasher 3d"
-run/main_scene="res://scenes/levels/main.tscn"
+run/main_scene="res://medieval_level/testing.tscn"
 config/icon="res://icon.png"
 
 [debug]

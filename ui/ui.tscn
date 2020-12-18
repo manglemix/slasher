@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ui/jump_button.gd" type="Script" id=1]
+[ext_resource path="res://ui/white_circle.png" type="Texture" id=2]
+[ext_resource path="res://ui/joystick.gd" type="Script" id=3]
+[ext_resource path="res://ui/attack_button.gd" type="Script" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 2
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="AttackBase" type="TextureRect" parent="."]
+margin_left = 427.52
+margin_top = 135.57
+margin_right = 627.52
+margin_bottom = 335.57
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+stretch_mode = 4
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="AttackBase"]
+material = SubResource( 1 )
+margin_right = 400.0
+margin_bottom = 400.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoystickBase" type="TextureRect" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = -250.0
+margin_right = 250.0
+margin_bottom = -50.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control2" type="TextureRect" parent="JoystickBase"]
+material = SubResource( 2 )
+margin_right = 400.0
+margin_bottom = 400.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JumpButton" type="TextureRect" parent="."]
+material = SubResource( 3 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -273.0
+margin_top = -259.0
+margin_right = -85.0
+margin_bottom = -72.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
