@@ -11,4 +11,4 @@ onready var target: Spatial = get_node(_target_path)
 
 
 func _physics_process(_delta):
-	global_transform.origin = basis.global_transform.origin.linear_interpolate(target.global_transform.origin, weight)
+    global_transform.origin = basis.global_transform.origin.linear_interpolate(target.global_transform.origin, weight)

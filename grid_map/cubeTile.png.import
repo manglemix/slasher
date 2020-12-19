@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/background1.png-db7929499d86df5ba4471396d6cac167.stex"
+path="res://.import/cubeTile.png-1de1f0b0c6b0972f3aaf8f71d663b3e0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Environment/background1.png"
-dest_files=[ "res://.import/background1.png-db7929499d86df5ba4471396d6cac167.stex" ]
+source_file="res://grid_map/cubeTile.png"
+dest_files=[ "res://.import/cubeTile.png-1de1f0b0c6b0972f3aaf8f71d663b3e0.stex" ]
 
 [params]
 
@@ -20,15 +20,15 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
-flags/mipmaps=false
+flags/filter=false
+flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
