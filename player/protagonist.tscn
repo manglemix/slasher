@@ -10,6 +10,7 @@
 [ext_resource path="res://trokara_scripts/classic_character.gd" type="Script" id=9]
 [ext_resource path="res://player/controllable_character_movement.gd" type="Script" id=10]
 
+
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Mesh"
 surfaces/0 = {
