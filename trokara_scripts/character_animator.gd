@@ -1,5 +1,5 @@
 class_name CharacterAnimator
-extends AnimatedSprite3D
+extends AnimationPlayer
 
 
 export var character_jump_path: NodePath
@@ -11,7 +11,7 @@ onready var character_jump: CharacterJump = get_node(character_jump_path)
 
 
 func _ready():
-	character_jump.connect("jumped", self, "override_play", ["jump"])
+	character_jump.connect("jumped", self, "override_play", ["jump-loop"])
 
 
 func override_play(anim: String, override_priority:=0, restart:=true) -> void:
@@ -28,10 +28,7 @@ func override_play(anim: String, override_priority:=0, restart:=true) -> void:
 func _process(_delta):
 	if character.is_on_floor():
 		if is_zero_approx(character.movement_vector.length_squared()):
-			play("idle")
+			play("idle-loop")
 		
 		else:
-			play("run")
-	
-	else:
-		play("fall")
+			play("run-loop")
