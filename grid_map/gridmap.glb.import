@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Player.gltf-816a4ac8167d5a97415b1acba9680e33.scn"
+path="res://.import/gridmap.glb-86d62f2ca510fc079903a43dcb441d58.scn"
 
 [deps]
 
-source_file="res://player/model1/Player.gltf"
-dest_files=[ "res://.import/Player.gltf-816a4ac8167d5a97415b1acba9680e33.scn" ]
+source_file="res://grid_map/gridmap.glb"
+dest_files=[ "res://.import/gridmap.glb-86d62f2ca510fc079903a43dcb441d58.scn" ]
 
 [params]
 
