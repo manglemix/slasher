@@ -44,7 +44,7 @@ func _input(event):
 	elif event is InputEventMouseMotion or (event is InputEventScreenDrag and event.index == _index):
 		var child: Control = get_child(0)
 		var tmp_vector: Vector2 = get_canvas_transform().affine_inverse().xform(event.position) - rect_global_position - child.get_global_transform().basis_xform(child.rect_size) / 2
-		var look_vector := Vector3(tmp_vector.x, 0, 0)
+		var look_vector := Vector3(- tmp_vector.x, 0, 0)
 		child.rect_global_position = tmp_vector.clamped(max_distance) + rect_global_position
 		player_movement.target_origin(player_movement.character.global_transform.origin + look_vector)
 
