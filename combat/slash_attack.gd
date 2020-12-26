@@ -22,11 +22,19 @@ onready var animated_sprite: CharacterAnimator = get_node_or_null(animated_sprit
 
 
 func _ready():
+<<<<<<< Updated upstream
     set_process(false)
     
     if is_instance_valid(animated_sprite):
         var frames = animated_sprite.frames
         attack_delay = frame_number / frames.get_animation_speed(anim_name)
+=======
+	set_process(false)
+	
+	if is_instance_valid(animated_sprite):
+		var frames = animated_sprite.frames
+		attack_delay = frame_number / frames.get_animation_speed(anim_name)
+>>>>>>> Stashed changes
 
 
 func charge_attack() -> void:
