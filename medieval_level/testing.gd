@@ -1,7 +1,13 @@
 extends Spatial
 
 
-onready var player := $ClassicCharacter
+export var player_path: NodePath = "ClassicCharacter"
+export var camera_base_path: NodePath = "Lerper"
+
+
+func _ready():
+	GlobalStuff.player = get_node(player_path)
+	GlobalStuff.camera_base = get_node(camera_base_path)
 
 
 func _input(event):

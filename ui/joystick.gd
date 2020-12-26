@@ -16,10 +16,9 @@ func _ready():
 		return
 	
 	set_process_input(false)
-	var scene := get_tree().current_scene
-	if scene.player == null:
-		yield(scene, "ready")
-	player_movement = scene.player.get_node("ControllableCharacterMovement")
+	if GlobalStuff.player == null:
+		yield(GlobalStuff, "player_changed")
+	player_movement = GlobalStuff.player.get_node("ControllableCharacterMovement")
 
 
 func _process(delta):

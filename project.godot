@@ -113,6 +113,16 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://ai/state_machine.gd"
+}, {
+"base": "Area",
+"class": "TurnArea",
+"language": "GDScript",
+"path": "res://turn_area.gd"
+}, {
+"base": "ClassicCharacter",
+"class": "TwoDStyleCharacter",
+"language": "GDScript",
+"path": "res://trokara_scripts/two_d_style_character.gd"
 } ]
 _global_script_class_icons={
 "AStarGoto": "",
@@ -135,7 +145,9 @@ _global_script_class_icons={
 "SlashAttack": "",
 "Slashed": "",
 "State": "",
-"StateMachine": ""
+"StateMachine": "",
+"TurnArea": "",
+"TwoDStyleCharacter": ""
 }
 
 [application]
@@ -143,6 +155,10 @@ _global_script_class_icons={
 config/name="Slasher 3d"
 run/main_scene="res://medieval_level/testing.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GlobalStuff="*res://global_stuff.gd"
 
 [debug]
 
@@ -179,6 +195,11 @@ attack={
 "deadzone": 0.5,
 "events": [  ]
 }
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+pointing/emulate_mouse_from_touch=false
 
 [rendering]
 
