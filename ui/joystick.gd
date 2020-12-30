@@ -4,8 +4,6 @@ extends Control
 export var max_distance := 100.0
 export var return_weight := 20.0
 
-var player_movement: CharacterMovement
-
 var _index: int
 var _mouse_clicked := false
 
@@ -16,9 +14,6 @@ func _ready():
 		return
 	
 	set_process_input(false)
-	if GlobalStuff.player == null:
-		yield(GlobalStuff, "player_changed")
-	player_movement = GlobalStuff.player.get_node("ControllableCharacterMovement")
 
 
 func _process(delta):
@@ -31,13 +26,19 @@ func _input(event):
 			set_process(true)
 			set_process_input(false)
 			_mouse_clicked = false
-			player_movement.movement_vector = Vector3.ZERO
+			GlobalStuff.trigger_event("move right", false)
+			GlobalStuff.trigger_event("move left", false)
 		
 	elif event is InputEventScreenDrag and event.index == _index:
 		var look_vector: Vector2 = (get_canvas_transform().affine_inverse().xform(event.position) - get_global_transform().basis_xform(rect_size) / 2 - rect_global_position).clamped(max_distance)
 		var tmp_vector := look_vector / max_distance
-		player_movement.movement_vector = Vector3(tmp_vector.x, 0, 0)
 		get_child(0).rect_global_position = look_vector + rect_global_position
+		
+		if tmp_vector.x > 0:
+			GlobalStuff.trigger_event("move right", true, tmp_vector.x)
+		
+		else:
+			GlobalStuff.trigger_event("move left", true, - tmp_vector.x)
 
 
 func _gui_input(event):
@@ -52,5 +53,10 @@ func _gui_input(event):
 		get_tree().set_input_as_handled()
 		var look_vector: Vector2 = (event.position - rect_size / 2).clamped(max_distance)
 		var tmp_vector := look_vector / max_distance
-		player_movement.movement_vector = Vector3(tmp_vector.x, 0, 0)
 		get_child(0).rect_position = look_vector
+		
+		if tmp_vector.x > 0:
+			GlobalStuff.trigger_event("move right", true, tmp_vector.x)
+		
+		else:
+			GlobalStuff.trigger_event("move left", true, - tmp_vector.x)
