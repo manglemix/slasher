@@ -22,6 +22,7 @@ export var auto_rotate_weight := 6.0	# The weight used to interpolate the rotati
 export(RotationStyles) var rotation_style := RotationStyles.FACE_MOVEMENT
 export var counter_rotate_basis := true								# Counter rotates the basis_node so that it is not affected by auto_rotate
 export var basis_node_path: NodePath = ".."							# The node which the movement vector will be relative to (modifying after _ready has no effect)
+export var dont_xform := false
 
 var movement_state := DEFAULT		# Corresponds to the speed that the character will move at
 var movement_vector: Vector3		# The vector towards which the character will move to, within the local space of the basis_node
@@ -52,7 +53,12 @@ func reset_target_basis() -> void:
 
 
 func _process(delta):
-	var tmp_vector := basis_node.global_transform.basis.xform(movement_vector)
+	var tmp_vector: Vector3
+	
+	if dont_xform:
+		tmp_vector = movement_vector
+	else:
+		tmp_vector = basis_node.global_transform.basis.xform(movement_vector)
 	
 	match movement_state:
 		FAST:
