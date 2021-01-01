@@ -130,6 +130,7 @@ material/0 = null
 [node name="Area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99772, 0.988659, 0 )
 script = ExtResource( 11 )
+rotations = PoolRealArray( 0, 90 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 4 )

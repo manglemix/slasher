@@ -1,6 +1,8 @@
 extends Control
 
 
+var rotations: PoolRealArray
+
 var _index: int
 var _mouse_clicked := false
 
@@ -26,5 +28,26 @@ func _gui_input(event):
 		_index = event.index
 		set_process_input(true)
 		event = InputEventAction.new()
-		GlobalStuff.player.turn(PI / 2)
-		GlobalStuff.camera_base.global_rotate(Vector3.UP, PI/2)
+		
+		var diff := INF
+		var idx: int
+		var original_angle: float = GlobalStuff.camera_base.rotation.y
+		
+		for i in range(rotations.size()):
+			var tmp_diff := deg2rad(rotations[i]) - original_angle
+			
+			if abs(tmp_diff) <= abs(diff):
+				diff = tmp_diff
+				idx = i
+		
+		var angle: float
+		idx += 1
+		
+		if idx == rotations.size():
+			angle = rotations[0]
+		
+		else:
+			angle = rotations[idx]
+		
+		GlobalStuff.player.turn_to(deg2rad(angle + 90))
+		GlobalStuff.camera_base.rotation_degrees.y = angle

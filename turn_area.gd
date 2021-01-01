@@ -2,6 +2,9 @@ class_name TurnArea
 extends Area
 
 
+export var rotations: PoolRealArray
+
+
 func _ready():
 	connect("body_entered", self, "_handle_body_entered")
 	connect("body_exited", self, "_handle_body_exited")
@@ -9,6 +12,7 @@ func _ready():
 
 func _handle_body_entered(body: Node) -> void:
 	if body == GlobalStuff.player:
+		GlobalStuff.ui.turn.rotations = rotations
 		GlobalStuff.ui.turn.show()
 
 

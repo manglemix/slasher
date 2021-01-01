@@ -41,7 +41,7 @@ func _input(event):
 		var look_vector := Vector3(- tmp_vector.x, 0, 0)
 		child.rect_global_position = tmp_vector.clamped(max_distance) + rect_global_position
 		
-		if look_vector.normalized().dot(player_movement.character.global_transform.basis.z) > 0 and not player_movement.character.turning:
+		if look_vector.normalized().dot(player_movement.character.global_transform.basis.z) > 0:
 			player_movement.character.turn()
 
 
