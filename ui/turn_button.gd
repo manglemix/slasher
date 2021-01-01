@@ -1,7 +1,7 @@
 extends Control
 
 
-export var glide_time := 0.1
+export var glide_time := 0.3
 
 var turn_area: TurnArea
 
@@ -33,11 +33,11 @@ func _gui_input(event):
 		
 		var diff := INF
 		var idx: int
-		var original_angle: float = GlobalStuff.camera_base.rotation.y
+		var original_angle: float = GlobalStuff.camera_base.rotation_degrees.y
 		var rotations := turn_area.rotations
 		
 		for i in range(rotations.size()):
-			var tmp_diff := deg2rad(rotations[i]) - original_angle
+			var tmp_diff := rotations[i] - original_angle
 			
 			if abs(tmp_diff) <= abs(diff):
 				diff = tmp_diff
@@ -52,9 +52,22 @@ func _gui_input(event):
 		else:
 			angle = rotations[idx]
 		
-		GlobalStuff.player.turn_to(deg2rad(angle + 90))
-		GlobalStuff.camera_base.rotation_degrees.y = angle
+		var transform := Transform.IDENTITY.rotated(Vector3.UP, deg2rad(angle))
+		transform.origin = GlobalStuff.camera_base.global_transform.origin
 		var tween := Tween.new()
-		tween.interpolate_property(GlobalStuff.player, NodePath("global_transform:origin"), GlobalStuff.player.global_transform.origin, turn_area.global_transform.origin, glide_time)
+		tween.interpolate_property(GlobalStuff.camera_base, NodePath("global_transform"), GlobalStuff.camera_base.global_transform, transform, glide_time, Tween.TRANS_QUAD)
+		GlobalStuff.camera_base.add_child(tween)
+		tween.start()
+		
+		transform = transform.rotated(Vector3.UP, PI / 2)
+		transform.origin = turn_area.global_transform.origin
+		tween = Tween.new()
+		tween.interpolate_property(GlobalStuff.player, NodePath("global_transform"), GlobalStuff.player.global_transform, transform, glide_time, Tween.TRANS_QUAD)
 		GlobalStuff.player.add_child(tween)
 		tween.start()
+		
+		var movement : ControllableCharacterMovement = GlobalStuff.player.get_node("ControllableCharacterMovement")
+		movement.targeting = false
+		yield(tween, "tween_completed")
+		movement.reset_target_basis()
+		movement.targeting = true
