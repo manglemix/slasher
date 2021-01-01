@@ -128,7 +128,7 @@ mesh = ExtResource( 10 )
 material/0 = null
 
 [node name="Area" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99772, 0.988659, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.998, 0, 0 )
 script = ExtResource( 11 )
 rotations = PoolRealArray( 0, 90 )
 

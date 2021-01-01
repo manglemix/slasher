@@ -12,7 +12,7 @@ func _ready():
 
 func _handle_body_entered(body: Node) -> void:
 	if body == GlobalStuff.player:
-		GlobalStuff.ui.turn.rotations = rotations
+		GlobalStuff.ui.turn.turn_area = self
 		GlobalStuff.ui.turn.show()
 
 
