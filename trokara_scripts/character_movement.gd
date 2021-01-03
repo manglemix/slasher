@@ -35,59 +35,59 @@ onready var character: Character = get_parent()
 
 
 func target_origin(origin: Vector3) -> bool:
-    var local_vector := character.to_local(origin)
-    if local_vector.x != 0 or local_vector.z != 0:
-        target_basis = character.global_transform.looking_at(origin, character.global_transform.basis.y).basis
-        return true
-    
-    else:
-        return false
+	var local_vector := character.to_local(origin)
+	if local_vector.x != 0 or local_vector.z != 0:
+		target_basis = character.global_transform.looking_at(origin, character.global_transform.basis.y).basis
+		return true
+	
+	else:
+		return false
 
 
 func target_local_origin(origin: Vector3) -> bool:
-    return target_origin(character.to_global(origin))
+	return target_origin(character.to_global(origin))
 
 
 func reset_target_basis() -> void:
-    target_basis = character.global_transform.basis
+	target_basis = character.global_transform.basis
 
 
 func _process(delta):
-    var tmp_vector: Vector3
-    
-    if dont_xform:
-        tmp_vector = movement_vector
-    else:
-        tmp_vector = basis_node.global_transform.basis.xform(movement_vector)
-    
-    match movement_state:
-        FAST:
-            tmp_vector *= sprint_speed
-        
-        SLOW:
-            tmp_vector *= walk_speed
-        
-        _:
-            tmp_vector *= default_speed
-    
-    character.movement_vector = tmp_vector
-    
-    if targeting:
-        if auto_rotate and not (is_zero_approx(tmp_vector.length_squared()) and continuously_rotate):
-            match rotation_style:
-                RotationStyles.COPY_BASIS:
-                    target_basis = basis_node.global_transform.basis
-                
-                RotationStyles.FACE_MOVEMENT:
-                    if not target_origin(character.global_transform.origin + tmp_vector):
-                        reset_target_basis()
-        
-        var original_basis: Basis
-        if counter_rotate_basis:
-            original_basis = basis_node.global_transform.basis
-        
-        character.global_transform = character.global_transform.interpolate_with(Transform(target_basis, character.global_transform.origin), auto_rotate_weight * delta)
-        
-        if counter_rotate_basis:
-            basis_node.global_transform.basis = original_basis
-    
+	var tmp_vector: Vector3
+	
+	if dont_xform:
+		tmp_vector = movement_vector
+	else:
+		tmp_vector = basis_node.global_transform.basis.xform(movement_vector)
+	
+	match movement_state:
+		FAST:
+			tmp_vector *= sprint_speed
+		
+		SLOW:
+			tmp_vector *= walk_speed
+		
+		_:
+			tmp_vector *= default_speed
+	
+	character.movement_vector = tmp_vector
+	
+	if targeting:
+		if auto_rotate and not (is_zero_approx(tmp_vector.length_squared()) and continuously_rotate):
+			match rotation_style:
+				RotationStyles.COPY_BASIS:
+					target_basis = basis_node.global_transform.basis
+				
+				RotationStyles.FACE_MOVEMENT:
+					if not target_origin(character.global_transform.origin + tmp_vector - tmp_vector.project(character.up_vector)):
+						reset_target_basis()
+		
+		var original_basis: Basis
+		if counter_rotate_basis:
+			original_basis = basis_node.global_transform.basis
+		
+		character.global_transform = character.global_transform.interpolate_with(Transform(target_basis, character.global_transform.origin), auto_rotate_weight * delta)
+		
+		if counter_rotate_basis:
+			basis_node.global_transform.basis = original_basis
+	

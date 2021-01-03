@@ -104,15 +104,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://effects/slashed.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "State",
 "language": "GDScript",
-"path": "res://AI/state.gd"
+"path": "res://ai/state.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://AI/state_machine.gd"
+"path": "res://ai/state_machine.gd"
 }, {
 "base": "Area",
 "class": "TurnArea",
@@ -163,6 +163,10 @@ GlobalStuff="*res://global_stuff.gd"
 [debug]
 
 settings/stdout/print_fps=true
+
+[display]
+
+window/stretch/aspect="keep_width"
 
 [editor_plugins]
 

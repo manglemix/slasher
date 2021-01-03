@@ -100,8 +100,8 @@ bind/24/bone = -1
 bind/24/pose = Transform( -0.903015, -0.118715, -0.412849, -0.418124, 0.0226579, 0.908096, -0.0984481, 0.99267, -0.0701009, -0.279894, -0.259976, 0.0124133 )
 
 [sub_resource type="CylinderShape" id=3]
-radius = 2.42462
-height = 6.0
+radius = 0.99
+height = 2.46
 
 [sub_resource type="Animation" id=4]
 resource_name = "run"
@@ -253,7 +253,7 @@ script = ExtResource( 2 )
 gravity_factor = 6.0
 
 [node name="Armature001" type="Spatial" parent="."]
-transform = Transform( -0.01, -3.25841e-09, 5.30863e-16, 0, -1.62921e-09, -0.01, 3.25841e-09, -0.01, 1.62921e-09, 0, 0, 0 )
+transform = Transform( 0.004, 0, 0, 0, -6.51683e-10, -0.004, 0, 0.004, -6.51683e-10, 0, 0, 0 )
 
 [node name="Skeleton" type="Skeleton" parent="Armature001"]
 transform = Transform( -400, 3.49691e-05, -1.52855e-12, 0, -1.74846e-05, -400, -3.49691e-05, -400, 1.74846e-05, 0, 0, 0 )
@@ -392,6 +392,8 @@ material/0 = ExtResource( 1 )
 script = ExtResource( 3 )
 default_speed = 3.0
 walk_speed = 3.0
+continuously_rotate = true
+counter_rotate_basis = false
 dont_xform = true
 
 [node name="AStarGoto" type="Node" parent="."]
@@ -399,7 +401,7 @@ script = ExtResource( 4 )
 character_movement_path = NodePath("../CharacterMovement")
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23, 0 )
 shape = SubResource( 3 )
 
 [node name="Armature" type="Spatial" parent="."]

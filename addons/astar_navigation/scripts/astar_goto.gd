@@ -7,7 +7,7 @@ signal untargeted
 
 export var navigation_path: NodePath = "../../Navigation"
 export var character_movement_path: NodePath
-export var simplify_distance := 0.0
+export var simplify_distance := 0.1
 export var stop_on_arrival := false
 
 var target: Node setget set_target

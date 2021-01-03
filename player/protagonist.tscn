@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://sounds/slashes/118792__lmbubec__1-knife-slash-a.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/slashes/35213__abyssmal__slashkut.wav" type="AudioStream" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://trokara_scripts/character_animator.gd" type="Script" id=6]
 [ext_resource path="res://player/controllable_character_jump.gd" type="Script" id=7]
 [ext_resource path="res://trokara_scripts/two_d_style_character.gd" type="Script" id=8]
+[ext_resource path="res://player/controllable_attack.gd" type="Script" id=9]
 [ext_resource path="res://player/controllable_character_movement.gd" type="Script" id=10]
 
 [sub_resource type="BoxShape" id=1]
@@ -17,7 +18,7 @@ extents = Vector3( 0.285149, 1.17374, 0.655532 )
 extents = Vector3( 0.25, 0.246374, -0.05 )
 
 [sub_resource type="BoxShape" id=3]
-extents = Vector3( 0.384417, 0.56527, 0.2 )
+extents = Vector3( 0.794054, 0.825265, 0.2 )
 
 [sub_resource type="ArrayMesh" id=4]
 resource_name = "Mesh"
@@ -1913,7 +1914,6 @@ tracks/24/keys = PoolRealArray( 0, 1, 0.016992, -0.151145, 0.0134086, -0.0195014
 [sub_resource type="Animation" id=17]
 resource_name = "slash-loop"
 length = 1.53333
-loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:head_top_end")
 tracks/0/interp = 1
@@ -2301,9 +2301,12 @@ disabled = true
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
 collision_layer = 0
 collision_mask = 4
+script = ExtResource( 9 )
+anim_name = "slash-loop"
+attack_delay = 0.7
 
 [node name="CollisionShape2D" type="CollisionShape" parent="SlashAttack"]
-transform = Transform( 1.00158, 0, 0, 0, 1.00158, 0, 0, 0, 1.00158, -0.96173, 0.864587, -6.60798e-08 )
+transform = Transform( 1.00158, 0, 0, 0, 1.00158, 0, 0, 0, 1.00158, 1.44832, 0.864587, 3.92669e-08 )
 shape = SubResource( 3 )
 
 [node name="Slash1" type="AudioStreamPlayer" parent="SlashAttack"]
@@ -2357,7 +2360,7 @@ bones/4/name = "neck"
 bones/4/parent = 3
 bones/4/rest = Transform( 0.961228, -0.27414, 0.0297892, 0.275057, 0.960863, -0.0329413, -0.0195928, 0.0398579, 0.999013, 2.19757e-07, 0.161547, 6.91478e-09 )
 bones/4/enabled = true
-bones/4/bound_children = [  ]
+bones/4/bound_children = [ NodePath("BoneAttachment") ]
 bones/5/name = "head"
 bones/5/parent = 4
 bones/5/rest = Transform( 0.960878, -0.250617, 0.117916, 0.241146, 0.966406, 0.0889314, -0.136242, -0.0570174, 0.989033, 0.058065, 0.0856134, 1.20381e-07 )
@@ -2465,7 +2468,7 @@ skin = SubResource( 5 )
 material/0 = null
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( -0.113773, -0.105966, -0.98784, -0.384145, 0.921656, -0.054623, 0.916235, 0.373259, -0.145566, -0.159217, 1.4935, 0.242449 )
+transform = Transform( 0.480548, 0.289313, -0.827872, -0.526788, 0.849951, -0.00875185, 0.701119, 0.440319, 0.560848, 0.0444591, 1.18594, 0.246591 )
 bone_name = "neck"
 
 [node name="AttachmentBox" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
