@@ -8,9 +8,9 @@ onready var movement: CharacterMovement = get_node(movement_path)
 
 
 func turn(angle:=PI) -> void:
-	global_rotate(Vector3.UP, angle)
-	movement.target_basis = global_transform.basis
+    global_rotate(Vector3.UP, angle)
+    movement.target_basis = global_transform.basis
 
 
 func turn_to(angle:=PI) -> void:
-	turn(angle - global_transform.basis.get_euler().y)
+    turn(angle - global_transform.basis.get_euler().y)

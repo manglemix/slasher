@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/sky.obj-b675eaf198d1b643d5b369eb3ae9ca2b.mesh"
+
+[deps]
+
+files=[ "res://.import/sky.obj-b675eaf198d1b643d5b369eb3ae9ca2b.mesh" ]
+
+source_file="res://flow_map/sky.obj"
+dest_files=[ "res://.import/sky.obj-b675eaf198d1b643d5b369eb3ae9ca2b.mesh", "res://.import/sky.obj-b675eaf198d1b643d5b369eb3ae9ca2b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
