@@ -5,8 +5,10 @@ export var rotation_delay := 1.0
 export var max_distance := 100.0
 
 var player_movement: CharacterMovement
+var player_attack: ControllableAttack
 
 var _index: int
+var _charge_time_msecs: int
 
 
 func _ready():
@@ -18,6 +20,7 @@ func _ready():
 		yield(GlobalStuff, "player_changed")
 	var player = GlobalStuff.player
 	player_movement = player.get_node("ControllableCharacterMovement")
+	player_attack = player.get_node("ControllableAttack")
 
 
 func _input(event):
@@ -29,6 +32,11 @@ func _input(event):
 			hide()
 			
 			GlobalStuff.trigger_event("attack", false)
+			
+			if (OS.get_system_time_msecs() - _charge_time_msecs) / 1000.0 <= player_attack.max_charge_time:
+				yield(player_attack.character_animator, "animation_finished")
+			
+			player_movement.auto_rotate = true
 	
 	elif event is InputEventMouseMotion or (event is InputEventScreenDrag and event.index == _index):
 		var child: Control = get_child(0)
@@ -56,3 +64,4 @@ func _unhandled_input(event):
 		show()
 		
 		GlobalStuff.trigger_event("attack", true)
+		_charge_time_msecs = OS.get_system_time_msecs()
