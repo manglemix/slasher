@@ -7,7 +7,6 @@ export var max_distance := 100.0
 var player_movement: CharacterMovement
 
 var _index: int
-var _timer: float
 
 
 func _ready():
@@ -27,13 +26,9 @@ func _input(event):
 			get_tree().set_input_as_handled()
 			set_process_input(false)
 			set_process_unhandled_input(true)
-			player_movement.auto_rotate = true
 			hide()
 			
 			GlobalStuff.trigger_event("attack", false)
-			
-			_timer = rotation_delay
-			set_process(true)
 	
 	elif event is InputEventMouseMotion or (event is InputEventScreenDrag and event.index == _index):
 		var child: Control = get_child(0)
@@ -61,9 +56,3 @@ func _unhandled_input(event):
 		show()
 		
 		GlobalStuff.trigger_event("attack", true)
-
-
-func _process(delta):
-	_timer -= delta
-	if _timer <= 0:
-		set_process(false)

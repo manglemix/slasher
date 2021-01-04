@@ -13,4 +13,4 @@ onready var turn := get_node(turn_path)
 
 
 func _ready():
-    GlobalStuff.ui = self
+	GlobalStuff.ui = self

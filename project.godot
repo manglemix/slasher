@@ -123,6 +123,16 @@ _global_script_classes=[ {
 "class": "TwoDStyleCharacter",
 "language": "GDScript",
 "path": "res://trokara_scripts/two_d_style_character.gd"
+}, {
+"base": "Area",
+"class": "WormholeArea",
+"language": "GDScript",
+"path": "res://wormhole_area.gd"
+}, {
+"base": "Spatial",
+"class": "WormholeSource",
+"language": "GDScript",
+"path": "res://wormhole_source.gd"
 } ]
 _global_script_class_icons={
 "AStarGoto": "",
@@ -147,7 +157,9 @@ _global_script_class_icons={
 "State": "",
 "StateMachine": "",
 "TurnArea": "",
-"TwoDStyleCharacter": ""
+"TwoDStyleCharacter": "",
+"WormholeArea": "",
+"WormholeSource": ""
 }
 
 [application]
