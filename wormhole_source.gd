@@ -2,16 +2,28 @@ class_name WormholeSource
 extends Spatial
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export(Array, PackedScene) var enemy_scenes: Array
+export var probabilities: PoolRealArray
+export var spawn_time := 10.0
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	while true:
+		yield(get_tree().create_timer(spawn_time), "timeout")
+		spawn_random()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func spawn_random() -> void:
+	var random := randf()
+	var chance: float
+	var i: int
+	
+	while i < probabilities.size() - 1:
+		chance = probabilities[i]
+		if random <= chance:
+			 break
+		i += 1
+	
+	var enemy: Spatial = enemy_scenes[i].instance()
+	get_tree().current_scene.add_child(enemy)
+	enemy.global_transform = global_transform

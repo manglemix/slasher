@@ -2,6 +2,9 @@ class_name WormholeArea
 extends Area
 
 
+export var to_future := true
+
+
 func _ready():
 	set_process_input(false)
 	connect("body_entered", self, "_handle_body_entered")
@@ -22,4 +25,8 @@ func _handle_body_exited(body: Node) -> void:
 
 func _input(event):
 	if event.is_action_pressed("transition"):
-		GlobalStuff.switch_future()
+		if to_future:
+			GlobalStuff.switch_future()
+		
+		else:
+			GlobalStuff.switch_past()

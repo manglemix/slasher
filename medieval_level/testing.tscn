@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://player/camera/lerper.gd" type="Script" id=1]
 [ext_resource path="res://player/protagonist.tscn" type="PackedScene" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://turn_area.gd" type="Script" id=11]
 [ext_resource path="res://addons/astar_navigation/scripts/linked_node.gd" type="Script" id=12]
 [ext_resource path="res://addons/astar_navigation/scripts/astar_navigation.gd" type="Script" id=13]
-[ext_resource path="res://wormhole_source.gd" type="Script" id=14]
 
 [sub_resource type="Environment" id=1]
 fog_enabled = true
@@ -161,7 +160,6 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32933, 2.36897 )
 mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
-script = ExtResource( 14 )
 
 [editable path="ClassicCharacter"]
 
