@@ -6,8 +6,8 @@ extends CharacterMovement
 func _input(_event):
 	movement_vector = Vector3(
 			Input.get_action_strength("move right") - Input.get_action_strength("move left"),
-			Input.get_action_strength("move up") - Input.get_action_strength("move down"),
-			0
+			0,
+			Input.get_action_strength("move down") - Input.get_action_strength("move up")
 		)
 	
 	if movement_vector.length() > 1:
