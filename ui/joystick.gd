@@ -28,6 +28,8 @@ func _input(event):
 			_mouse_clicked = false
 			GlobalStuff.trigger_event("move right", false)
 			GlobalStuff.trigger_event("move left", false)
+			GlobalStuff.trigger_event("move up", false)
+			GlobalStuff.trigger_event("move down", false)
 		
 	elif event is InputEventScreenDrag and event.index == _index:
 		var look_vector: Vector2 = (get_canvas_transform().affine_inverse().xform(event.position) - get_global_transform().basis_xform(rect_size) / 2 - rect_global_position).clamped(max_distance)
@@ -39,6 +41,12 @@ func _input(event):
 		
 		else:
 			GlobalStuff.trigger_event("move left", true, - tmp_vector.x)
+		
+		if tmp_vector.y > 0:
+			GlobalStuff.trigger_event("move down", true, tmp_vector.y)
+		
+		else:
+			GlobalStuff.trigger_event("move up", true, - tmp_vector.y)
 
 
 func _gui_input(event):
@@ -60,3 +68,9 @@ func _gui_input(event):
 		
 		else:
 			GlobalStuff.trigger_event("move left", true, - tmp_vector.x)
+		
+		if tmp_vector.y > 0:
+			GlobalStuff.trigger_event("move down", true, tmp_vector.y)
+		
+		else:
+			GlobalStuff.trigger_event("move up", true, - tmp_vector.y)
