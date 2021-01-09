@@ -22,7 +22,7 @@ func _input(_event):
 	
 	# the following magic with movement_vector allows finer control with joystick/joypad
 	var x := Input.get_action_strength("move right") - Input.get_action_strength("move left")
-	var z := Input.get_action_strength("move backward") - Input.get_action_strength("move forward")
+	var z := Input.get_action_strength("move down") - Input.get_action_strength("move up")
 	var movement_vector := Vector3(x, 0, z).normalized() * max(abs(x), abs(z))
 	
 	if Input.is_action_pressed("sprint"):

@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://bot/Material_002.material" type="Material" id=1]
-[ext_resource path="res://trokara_scripts/classic_character.gd" type="Script" id=2]
+[ext_resource path="res://bot/bot.gd" type="Script" id=2]
+[ext_resource path="res://trokara_scripts/face_movement.gd" type="Script" id=3]
 [ext_resource path="res://addons/astar_navigation/scripts/astar_goto.gd" type="Script" id=4]
 [ext_resource path="res://bot/AnimationPlayer.gd" type="Script" id=5]
+[ext_resource path="res://ai/enemy_flag.gd" type="Script" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Plane003"
@@ -249,7 +251,6 @@ tracks/19/keys = PoolRealArray( 0, 1, -1.47681e-05, -0.00047785, 0.00147761, 0.0
 
 [node name="bot" type="KinematicBody"]
 script = ExtResource( 2 )
-gravity_factor = 6.0
 
 [node name="Armature001" type="Spatial" parent="."]
 transform = Transform( 0.004, 0, 0, 0, -6.51683e-10, -0.004, 0, 0.004, -6.51683e-10, 0, 0, 0 )
@@ -400,3 +401,10 @@ shape = SubResource( 3 )
 method_call_mode = 1
 anims/run = SubResource( 4 )
 script = ExtResource( 5 )
+
+[node name="FaceMovement" type="Node" parent="."]
+script = ExtResource( 3 )
+use_true_movement = true
+
+[node name="EnemyFlag" type="Node" parent="."]
+script = ExtResource( 6 )

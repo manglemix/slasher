@@ -1,25 +1,9 @@
-shader_type spatial;
-render_mode unshaded, blend_mix, depth_draw_always, cull_back, diffuse_burley, specular_schlick_ggx;
+shader_type canvas_item;
+render_mode unshaded, blend_mix;
 uniform vec4 albedo : hint_color;
 uniform sampler2D texture_albedo : hint_albedo;
-uniform float specular;
-uniform float metallic;
-uniform float roughness : hint_range(0,1);
-uniform sampler2D texture_metallic : hint_white;
-uniform vec4 metallic_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-uniform sampler2D texture_roughness : hint_white;
-uniform vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-uniform sampler2D texture_emission : hint_black_albedo;
-uniform vec4 emission : hint_color;
-uniform float emission_energy;
-uniform sampler2D texture_refraction;
-uniform float refraction : hint_range(-16,16);
-uniform vec4 refraction_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
 uniform vec2 uv_scale = vec2(1.0, 1.0);
 uniform vec2 uv_offset;
-uniform float proximity_fade_distance;
-uniform float distance_fade_min;
-uniform float distance_fade_max;
 
 uniform sampler2D texture_normal : hint_normal;
 uniform float normal_scale : hint_range(-16,16);
@@ -83,40 +67,10 @@ void fragment() {
 	// Albedo
 	// Mix animated uv layers
 	vec4 albedo_tex = mix(texture(texture_albedo, layer1), texture(texture_albedo, layer2), blend_factor);
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
-
-	// Metallic / Roughness / Specular
-	// Mix animated uv layers
-	float metallic_tex = mix(dot(texture(texture_metallic, layer1), metallic_texture_channel), dot(texture(texture_metallic, layer2), metallic_texture_channel), blend_factor);
-	METALLIC = metallic_tex * metallic;
-	float roughness_tex = mix(dot(texture(texture_roughness, layer1), roughness_texture_channel), dot(texture(texture_roughness, layer2), roughness_texture_channel), blend_factor);
-	ROUGHNESS = roughness_tex * roughness;
-	SPECULAR = specular;
-
+	COLOR.rgb = albedo.rgb * albedo_tex.rgb;
+	
 	// Normalmap
 	// Mix animated uv layers
 	NORMALMAP = mix(texture(texture_normal, layer1), texture(texture_normal, layer2), blend_factor).rgb;
 	NORMALMAP_DEPTH = normal_scale * normal_influence;
-
-	// Refraction
-	vec3 ref_normal = normalize(mix(NORMAL,TANGENT * NORMALMAP.x + BINORMAL * NORMALMAP.y + NORMAL * NORMALMAP.z,NORMALMAP_DEPTH));
-	// Mix animated uv layers
-	vec4 ref_tex = mix(texture(texture_refraction, layer1), texture(texture_refraction, layer2), blend_factor);
-	vec2 ref_ofs = SCREEN_UV - ref_normal.xy * dot(ref_tex, refraction_texture_channel) * refraction;
-	float ref_amount = 1.0 - albedo.a * albedo_tex.a;
-	ALBEDO *= 1.0 - ref_amount;
-
-	// Emission
-	// Mix animated uv layers
-	vec3 emission_tex = mix(texture(texture_emission, layer1), texture(texture_emission, layer2), blend_factor).rgb;
-	EMISSION = (emission.rgb + emission_tex) * emission_energy;
-	EMISSION += textureLod(SCREEN_TEXTURE, ref_ofs, ROUGHNESS * 8.0).rgb * ref_amount;
-
-	// Proximity fade / Distance fade
-	float depth_tex = textureLod(DEPTH_TEXTURE,SCREEN_UV, 0.0).r;
-	vec4 world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, depth_tex * 2.0 - 1.0, 1.0);
-	world_pos.xyz /= world_pos.w;
-	ALPHA = 1.0;
-	ALPHA *= clamp(1.0 - smoothstep(world_pos.z + proximity_fade_distance, world_pos.z, VERTEX.z), 0.0, 1.0);
-	ALPHA *= clamp(smoothstep(distance_fade_min,distance_fade_max,-VERTEX.z), 0.0, 1.0);
 }
