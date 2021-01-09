@@ -4,7 +4,8 @@ extends Control
 export var rotation_delay := 1.0
 export var max_distance := 100.0
 
-var player_movement: CharacterMovement
+var player: Character
+var player_movement: FaceMovement
 var player_attack: ControllableAttack
 
 var _index: int
@@ -18,8 +19,8 @@ func _ready():
 	
 	if GlobalStuff.player == null:
 		yield(GlobalStuff, "player_changed")
-	var player = GlobalStuff.player
-	player_movement = player.get_node("ControllableCharacterMovement")
+	player = GlobalStuff.player
+	player_movement = player.get_node("FaceMovement")
 	player_attack = player.get_node("ControllableAttack")
 
 
@@ -36,7 +37,7 @@ func _input(event):
 			if (OS.get_system_time_msecs() - _charge_time_msecs) / 1000.0 <= player_attack.max_charge_time:
 				yield(player_attack.character_animator, "animation_finished")
 			
-			player_movement.auto_rotate = true
+			player_movement.enabled = true
 	
 	elif event is InputEventMouseMotion or (event is InputEventScreenDrag and event.index == _index):
 		var child: Control = get_child(0)
@@ -44,8 +45,8 @@ func _input(event):
 		var look_vector := Vector3(- tmp_vector.x, 0, 0)
 		child.rect_global_position = tmp_vector.clamped(max_distance) + rect_global_position
 		
-		if look_vector.normalized().dot(player_movement.character.global_transform.basis.z) > 0:
-			player_movement.character.turn()
+#		if look_vector.normalized().dot(player.global_transform.basis.z) > 0:
+#			player.turn()
 
 
 func _unhandled_input(event):
@@ -60,7 +61,7 @@ func _unhandled_input(event):
 		
 		rect_global_position = get_canvas_transform().affine_inverse().xform(event.position) - get_global_transform().basis_xform(rect_size) / 2
 		get_child(0).rect_position = Vector2.ZERO
-		player_movement.auto_rotate = false
+		player_movement.enabled = false
 		show()
 		
 		GlobalStuff.trigger_event("attack", true)

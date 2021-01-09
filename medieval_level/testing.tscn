@@ -40,10 +40,10 @@ script = ExtResource( 9 )
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 2.59545, 0 )
 collision_layer = 0
 
-[node name="ControllableCharacterMovement" parent="ClassicCharacter" index="2"]
+[node name="MovementInput" parent="ClassicCharacter" index="3"]
 basis_node_path = NodePath("../../Lerper/Lerper/Camera")
 
-[node name="SoftBody" parent="ClassicCharacter" index="6"]
+[node name="SoftBody" parent="ClassicCharacter" index="7"]
 transform = Transform( -0.976169, 0.00128463, -0.21701, 0.0016758, 0.999997, -0.00161854, 0.217007, -0.00194363, -0.976168, -0.195, 0.418383, 0.00948172 )
 material/0 = null
 total_mass = 3.0

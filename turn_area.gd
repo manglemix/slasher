@@ -60,8 +60,7 @@ func _input(event):
 		GlobalStuff.player.add_child(tween)
 		tween.start()
 		
-		var movement : ControllableCharacterMovement = GlobalStuff.player.get_node("ControllableCharacterMovement")
-		movement.targeting = false
+		var movement: FaceMovement = GlobalStuff.player.get_node("FaceMovement")
+		movement.enabled = false
 		yield(tween, "tween_completed")
-		movement.reset_target_basis()
-		movement.targeting = true
+		movement.enabled = true

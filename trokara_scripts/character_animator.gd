@@ -5,6 +5,8 @@ extends AnimationPlayer
 export var character_jump_path: NodePath
 export var blending := 0.2
 
+var overriding := false
+
 var _override_priority: int
 
 onready var character: Character = get_parent()
@@ -15,17 +17,16 @@ func _ready():
 	character_jump.connect("jumped", self, "play_jump_anim")
 
 
-func override_play(anim: String, override_priority:=0, restart:=true) -> void:
+func override_play(anim: String, override_priority:=0) -> void:
 	if override_priority >= _override_priority:
+		overriding = true
 		_override_priority = override_priority
-		set_process(false)
 		play("idle-loop")
 		play(anim, blending)
 		
-		if restart:
-			yield(self, "animation_finished")
-			_override_priority = 0
-			set_process(true)
+		yield(self, "animation_finished")
+		overriding = false
+		_override_priority = 0
 
 
 func play_jump_anim() -> void:
@@ -39,7 +40,13 @@ func play_jump_anim() -> void:
 func _process(_delta):
 	if character.is_on_floor():
 		if is_zero_approx(character.movement_vector.length_squared()):
-			play("idle-loop", blending)
+			if not overriding:
+				play("idle-loop", blending)
+			
+			get_child(0).play("idle-loop", blending)
 		
 		else:
-			play("run-loop", blending)
+			if not overriding:
+				play("run-loop", blending)
+			
+			get_child(0).play("run-loop", blending)

@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://bot/Material_002.material" type="Material" id=1]
 [ext_resource path="res://trokara_scripts/classic_character.gd" type="Script" id=2]
-[ext_resource path="res://trokara_scripts/character_movement.gd" type="Script" id=3]
 [ext_resource path="res://addons/astar_navigation/scripts/astar_goto.gd" type="Script" id=4]
 [ext_resource path="res://bot/AnimationPlayer.gd" type="Script" id=5]
 
@@ -388,17 +387,8 @@ mesh = SubResource( 1 )
 skin = SubResource( 2 )
 material/0 = ExtResource( 1 )
 
-[node name="CharacterMovement" type="Node" parent="."]
-script = ExtResource( 3 )
-default_speed = 3.0
-walk_speed = 3.0
-continuously_rotate = true
-counter_rotate_basis = false
-dont_xform = true
-
 [node name="AStarGoto" type="Node" parent="."]
 script = ExtResource( 4 )
-character_movement_path = NodePath("../CharacterMovement")
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23, 0 )

@@ -6,7 +6,7 @@ signal targeted
 signal untargeted
 
 export var navigation_path: NodePath = "../../Navigation"
-export var character_movement_path: NodePath
+export var speed := 5.0
 export var simplify_distance := 0.1
 export var stop_on_arrival := false
 
@@ -16,8 +16,7 @@ var id_path: PoolIntArray
 var path
 
 onready var navigation: AStarNavigation = get_node(navigation_path)
-onready var character_movement := get_node(character_movement_path)
-onready var character: Node = character_movement.character
+onready var character := get_parent()
 
 
 func set_target(node: Node) -> void:
@@ -82,7 +81,7 @@ func update_path():
 		if abs(bisector.dot(character_origin_on_segment - path[1])) <= simplify_distance:
 			path.remove(1)
 	
-	character_movement.movement_vector = (path[1] - character_origin).normalized()
+	character.movement_vector = (path[1] - character_origin).normalized() * speed
 
 
 func _process(_delta):
