@@ -65,11 +65,6 @@ _global_script_classes=[ {
 "path": "res://combat/damageable.gd"
 }, {
 "base": "Node",
-"class": "EnemyFlag",
-"language": "GDScript",
-"path": "res://ai/enemy_flag.gd"
-}, {
-"base": "Node",
 "class": "FaceMovement",
 "language": "GDScript",
 "path": "res://trokara_scripts/face_movement.gd"
@@ -122,12 +117,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://ai/state.gd"
+"path": "res://AI/state.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://ai/state_machine.gd"
+"path": "res://AI/state_machine.gd"
 }, {
 "base": "Area",
 "class": "TurnArea",
@@ -156,7 +151,6 @@ _global_script_class_icons={
 "ControllableAttack": "",
 "ControllableCharacterJump": "",
 "Damageable": "",
-"EnemyFlag": "",
 "FaceMovement": "",
 "JumpZone": "",
 "Lerper": "",

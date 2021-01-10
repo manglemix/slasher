@@ -1,10 +1,10 @@
-class_name EnemyFlag
+  
 extends Node
 
 
 func _enter_tree():
-	GlobalStuff.enemies.append(get_parent())
+    GlobalStuff.enemies.append(get_parent())
 
 
 func _exit_tree():
-	GlobalStuff.enemies.erase(get_parent())
+    GlobalStuff.enemies.erase(get_parent())

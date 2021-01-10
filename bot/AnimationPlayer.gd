@@ -8,7 +8,7 @@ extends AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_current_animation('run')
+    set_current_animation('run')
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -101,7 +101,7 @@ bind/24/bone = -1
 bind/24/pose = Transform( -0.903015, -0.118715, -0.412849, -0.418124, 0.0226579, 0.908096, -0.0984481, 0.99267, -0.0701009, -0.279894, -0.259976, 0.0124133 )
 
 [sub_resource type="CylinderShape" id=3]
-radius = 0.99
+radius = 0.50126
 height = 2.46
 
 [sub_resource type="Animation" id=4]

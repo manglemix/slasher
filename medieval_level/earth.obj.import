@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/earth.obj-6d10d0d443c21ab248b8026a9476cdac.mesh"
+
+[deps]
+
+files=[ "res://.import/earth.obj-6d10d0d443c21ab248b8026a9476cdac.mesh" ]
+
+source_file="res://medieval_level/earth.obj"
+dest_files=[ "res://.import/earth.obj-6d10d0d443c21ab248b8026a9476cdac.mesh", "res://.import/earth.obj-6d10d0d443c21ab248b8026a9476cdac.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

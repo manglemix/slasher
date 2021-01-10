@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/river.obj-c2b4b70cfebcb8c9d7333916b3867bf1.mesh"
+
+[deps]
+
+files=[ "res://.import/river.obj-c2b4b70cfebcb8c9d7333916b3867bf1.mesh" ]
+
+source_file="res://medieval_level/river.obj"
+dest_files=[ "res://.import/river.obj-c2b4b70cfebcb8c9d7333916b3867bf1.mesh", "res://.import/river.obj-c2b4b70cfebcb8c9d7333916b3867bf1.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
