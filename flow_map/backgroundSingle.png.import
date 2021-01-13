@@ -2,29 +2,26 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/backgroundSingle.png-c90e32410caa590817d2f4612124b919.s3tc.stex"
-path.etc2="res://.import/backgroundSingle.png-c90e32410caa590817d2f4612124b919.etc2.stex"
-path.etc="res://.import/backgroundSingle.png-c90e32410caa590817d2f4612124b919.etc.stex"
+path="res://.import/backgroundSingle.png-c90e32410caa590817d2f4612124b919.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://flow_map/backgroundSingle.png"
-dest_files=[ "res://.import/backgroundSingle.png-c90e32410caa590817d2f4612124b919.s3tc.stex", "res://.import/backgroundSingle.png-c90e32410caa590817d2f4612124b919.etc2.stex", "res://.import/backgroundSingle.png-c90e32410caa590817d2f4612124b919.etc.stex" ]
+dest_files=[ "res://.import/backgroundSingle.png-c90e32410caa590817d2f4612124b919.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=true
-flags/filter=true
-flags/mipmaps=true
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
