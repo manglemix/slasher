@@ -1,9 +1,43 @@
-shader_type canvas_item;
-render_mode unshaded, blend_mix, depth;
+shader_type spatial;
+render_mode unshaded, blend_mix, depth_draw_never, cull_back;
 uniform vec4 albedo : hint_color;
 uniform sampler2D texture_albedo : hint_albedo;
+
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_white;
+uniform vec4 metallic_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+uniform sampler2D texture_roughness : hint_white;
+uniform vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+uniform sampler2D texture_emission : hint_black_albedo;
+uniform vec4 emission : hint_color;
+uniform float emission_energy;
+uniform sampler2D texture_refraction;
+uniform float refraction : hint_range(-16,16);
+uniform vec4 refraction_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
 uniform vec2 uv_scale = vec2(1.0, 1.0);
 uniform vec2 uv_offset;
+uniform float proximity_fade_distance;
+uniform float distance_fade_min;
+uniform float distance_fade_max;
+uniform vec4 deep_color : hint_color;
+uniform vec4 shallow_color : hint_color = vec4(1);
+
+uniform float refraction_speed = 0.25;
+uniform float refraction_strength = 1.0;
+
+uniform float foam_amount = 1.0;
+uniform float foam_cutoff = 1.0;
+uniform vec4 foam_color : hint_color = vec4(1);
+
+uniform float displacement_strength = 0.25;
+
+uniform float depth_distance = 1.0;
+
+uniform vec2 movement_direction = vec2(1,0);
+
+uniform sampler2D refraction_noise : hint_normal;
+uniform sampler2D foam_noise : hint_black_albedo;
+uniform sampler2D displacement_noise : hint_black;
 
 uniform sampler2D texture_normal : hint_normal;
 uniform float normal_scale : hint_range(-16,16);
@@ -28,13 +62,16 @@ varying vec2 base_uv;
 
 void vertex() {
 	base_uv = UV * uv_scale.xy + uv_offset.xy;
+
+  float displacement = textureLod(displacement_noise, UV + (TIME * movement_direction) * refraction_speed, 0.1).r * 5.0 - 1.0;
+	VERTEX.y += displacement * displacement_strength;
 }
 
 void fragment() {
 	// UV flow  calculation
 	/****************************************************************************************************/
 	float half_cycle = blend_cycle * 0.5;
-
+    
 	// Use noise texture for offset to reduce pulsing effect
 	float offset = dot(texture(texture_flow_noise, UV * flow_noise_size), noise_texture_channel) * flow_noise_influence;
 
@@ -67,10 +104,19 @@ void fragment() {
 	// Albedo
 	// Mix animated uv layers
 	vec4 albedo_tex = mix(texture(texture_albedo, layer1), texture(texture_albedo, layer2), blend_factor);
-	COLOR.rgb = albedo.rgb * albedo_tex.rgb;
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
 	
-	// Normalmap
-	// Mix animated uv layers
-	NORMALMAP = mix(texture(texture_normal, layer1), texture(texture_normal, layer2), blend_factor).rgb;
-	NORMALMAP_DEPTH = normal_scale * normal_influence;
+	
+
+	
+
+	
+	
+
+
+
+	
+    
+    
 }
