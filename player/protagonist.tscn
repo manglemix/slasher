@@ -4430,7 +4430,7 @@ script = ExtResource( 8 )
 gravity_factor = 6.0
 
 [node name="CollisionBox" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185513, 1.14617, 0.00417018 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185513, 0.962138, 0.00417018 )
 shape = SubResource( 1 )
 
 [node name="ControllableCharacterJump" type="Node" parent="."]
@@ -4479,7 +4479,8 @@ mesh = ExtResource( 5 )
 skeleton = NodePath("")
 material/0 = null
 parent_collision_ignore = NodePath("../CollisionBox")
-total_mass = 4.0
+total_mass = 6.0
+drag_coefficient = 0.28
 pinned_points = [ 5, 9 ]
 attachments/0/point_index = 5
 attachments/0/spatial_attachment_path = NodePath("../Armature/Skeleton/BoneAttachment/AttachmentBox2")
