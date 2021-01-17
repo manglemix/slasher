@@ -25,6 +25,7 @@ func _ready():
 
 
 func _input(event):
+	# warning-ignore-all:return_value_discarded
 	if (event is InputEventMouseButton and event.button_index == BUTTON_LEFT) or (event is InputEventScreenTouch and event.index == _index):
 		if not event.pressed:
 			get_tree().set_input_as_handled()
@@ -50,6 +51,7 @@ func _input(event):
 
 
 func _unhandled_input(event):
+	# warning-ignore-all:return_value_discarded
 	if ((event is InputEventMouseButton and event.button_index == BUTTON_LEFT) or (event is InputEventScreenTouch)) and event.pressed:
 		get_tree().set_input_as_handled()
 		set_process(false)

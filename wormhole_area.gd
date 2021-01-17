@@ -6,6 +6,7 @@ export var to_future := true
 
 
 func _ready():
+	# warning-ignore-all:return_value_discarded
 	set_process_input(false)
 	connect("body_entered", self, "_handle_body_entered")
 	connect("body_exited", self, "_handle_body_exited")

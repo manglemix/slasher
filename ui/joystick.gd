@@ -21,6 +21,7 @@ func _process(delta):
 
 
 func _input(event):
+	# warning-ignore-all:return_value_discarded
 	if event is InputEventScreenTouch:
 		if not event.pressed and event.index == _index:
 			set_process(true)

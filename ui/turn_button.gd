@@ -11,6 +11,7 @@ func _ready():
 
 
 func _input(event):
+	# warning-ignore-all:return_value_discarded
 	if event is InputEventScreenTouch and not event.pressed and event.index == _index:
 		_mouse_clicked = false
 		set_process_input(false)
@@ -18,6 +19,7 @@ func _input(event):
 
 
 func _gui_input(event):
+	# warning-ignore-all:return_value_discarded
 	if _mouse_clicked or not visible:
 		return
 	

@@ -33,7 +33,7 @@ func trigger_event(name: String, pressed: bool, strength:=1.0) -> InputEventActi
 
 func switch_future() -> void:
 	var past_scene := get_tree().current_scene
-	var old_children: Array
+	var old_children := []
 	
 	for child in past_scene.get_children():
 		if child != player and child != camera_base and child != ui:
