@@ -6,8 +6,8 @@ extends Node
 export var movement_source_path: NodePath = ".."			# The path to the node which has a movement_vector (usually the character; modifying this after _ready has no effect)
 export var use_true_movement := false						# If true, the parent will face the direction the movement source is actually moving (useful when you want the character to face along the wall when sliding on it)
 export var enable_pitch_rotation := false					# If true, the parent will be able to turn up and down to face the movement_vector
-export(float, 0, 1) var interpolation_weight := 0.1						# If interpolation is not desired, set to 1
-export var threshold := 0.0
+export(float, 0, 1) var interpolation_weight := 0.1			# If interpolation is not desired, set to 1
+export var threshold := 0.0									# Will only rotate if the movement_vector is faster than this
 export var enabled := true setget set_enabled				# If true, this node's process method will run
 export var always_rotate := true							# If true, the character will always rotate to the movement_vector even if there was no movement (it will look at the last movement_vector)
 export var counter_rotate_target_path: NodePath				# If given, the given node will not be affected by the rotation of the parent
@@ -52,6 +52,9 @@ func _process(delta):
 	else:
 		tmp_vector = movement_source.movement_vector
 	
+	if not enable_pitch_rotation:
+		tmp_vector -= tmp_vector.project(get_parent().global_transform.basis.y)		# Flatten the vector
+	
 	var speed := tmp_vector.length()
 	if always_rotate:
 		if speed <= threshold:
@@ -61,10 +64,6 @@ func _process(delta):
 			# only update last movement vector if the new movement vector is nonzero
 			_last_movement_vector = tmp_vector
 	
-	if not enable_pitch_rotation:
-		tmp_vector -= tmp_vector.project(get_parent().global_transform.basis.y)		# Flatten the vector
-	
-	speed = tmp_vector.length()
 	if speed > threshold:
 		print(tmp_vector.length())
 		var transform: Transform = get_parent().global_transform.looking_at(get_parent().global_transform.origin + tmp_vector, Vector3.UP)
