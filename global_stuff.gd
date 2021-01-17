@@ -1,17 +1,15 @@
 extends Node
 
 
-const future_scene := preload("res://future.tscn")
+const packed_future := preload("res://future_level/future.tscn")
 
 signal player_changed
+signal switching_past
 
 var player: Character setget set_character
 var camera_base: Spatial
 var enemies: Array
 var ui: Node
-
-var _past_scene: Node
-var _original_player_origin: Vector3
 
 
 func set_character(node: Character) -> void:
@@ -34,31 +32,26 @@ func trigger_event(name: String, pressed: bool, strength:=1.0) -> InputEventActi
 
 
 func switch_future() -> void:
-	_past_scene = get_tree().current_scene
-	_past_scene.remove_child(player)
-	_past_scene.remove_child(camera_base)
-	_past_scene.remove_child(ui)
+	var past_scene := get_tree().current_scene
+	var old_children: Array
 	
-	get_tree().root.remove_child(_past_scene)
-	var current_scene := future_scene.instance()
-	get_tree().root.add_child(current_scene)
-	get_tree().current_scene = current_scene
+	for child in past_scene.get_children():
+		if child != player and child != camera_base and child != ui:
+			old_children.append(child)
+			past_scene.remove_child(child)
 	
-	current_scene.add_child(player)
-	current_scene.add_child(camera_base)
-	current_scene.add_child(ui)
+	var future_scene := packed_future.instance()
+	get_tree().root.add_child(future_scene)
+	get_tree().current_scene = future_scene
+	
+	yield(self, "switching_past")
+	
+	for child in old_children:
+		past_scene.add_child(child)
+	
+	future_scene.queue_free()
+	get_tree().current_scene = past_scene
 
 
 func switch_past() -> void:
-	var current_scene := get_tree().current_scene
-	current_scene.remove_child(player)
-	current_scene.remove_child(camera_base)
-	current_scene.remove_child(ui)
-	
-	get_tree().root.remove_child(current_scene)
-	get_tree().root.add_child(_past_scene)
-	get_tree().current_scene = _past_scene
-	
-	_past_scene.add_child(player)
-	_past_scene.add_child(camera_base)
-	_past_scene.add_child(ui)
+	emit_signal("switching_past")
