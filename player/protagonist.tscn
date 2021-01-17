@@ -12,8 +12,8 @@
 [ext_resource path="res://player/movement_input.gd" type="Script" id=11]
 [ext_resource path="res://node_flag.gd" type="Script" id=12]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.285149, 1.17374, 0.655532 )
+[sub_resource type="CylinderShape" id=31]
+radius = 0.776694
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.25, 0.246374, -0.05 )
@@ -4431,7 +4431,7 @@ gravity_factor = 6.0
 
 [node name="CollisionBox" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185513, 1.14617, 0.00417018 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="ControllableCharacterJump" type="Node" parent="."]
 script = ExtResource( 7 )
@@ -4442,6 +4442,7 @@ deformation_factor = 0.5
 [node name="FaceMovement" type="Node" parent="."]
 script = ExtResource( 10 )
 use_true_movement = true
+threshold = 1.0
 
 [node name="MovementInput" type="Node" parent="."]
 script = ExtResource( 11 )
@@ -4623,7 +4624,7 @@ skin = SubResource( 5 )
 material/0 = null
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( -0.113773, -0.105966, -0.98784, -0.384145, 0.921656, -0.054623, 0.916235, 0.373259, -0.145566, -0.159217, 1.4935, 0.242449 )
+transform = Transform( 4.57027e-07, -1.15431e-06, -1, -5.55068e-07, 1, -1.08633e-06, 0.999999, 8.90344e-07, -7.26943e-08, -0.128292, 1.57395, 0.0137383 )
 bone_name = "neck"
 
 [node name="AttachmentBox" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]

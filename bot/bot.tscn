@@ -405,6 +405,7 @@ script = ExtResource( 5 )
 [node name="FaceMovement" type="Node" parent="."]
 script = ExtResource( 3 )
 use_true_movement = true
+threshold = 1.0
 
 [node name="EnemyFlag" type="Node" parent="."]
 script = ExtResource( 6 )
