@@ -8,28 +8,21 @@ export var use_true_movement := false						# If true, the parent will face the d
 export var enable_pitch_rotation := false					# If true, the parent will be able to turn up and down to face the movement_vector
 export(float, 0, 1) var interpolation_weight := 0.1			# If interpolation is not desired, set to 1
 export var threshold := 0.0									# Will only rotate if the movement_vector is faster than this
-export var enabled := true setget set_enabled				# If true, this node's process method will run
+export var enabled := true 									# If true, this node will automatically rotate the character (if not enabled, manual control is still possible)
 export var always_rotate := true							# If true, the character will always rotate to the movement_vector even if there was no movement (it will look at the last movement_vector)
 export var counter_rotate_target_path: NodePath				# If given, the given node will not be affected by the rotation of the parent
 															# This is mostly only used if the parent of this node is the character, and the camera is parented to the character
 															# This will allow the camera to not be rotated by this node
 
 var counter_rotate_target: Spatial							# The node whose rotation will not be changed by this node
+var input_vector: Vector3
 
 var _is_ready := false
-var _last_movement_vector: Vector3
+var last_input_vector: Vector3
 
 # The node which has a movement_vector (usually the character; modify this variable instead of movement_source_path if needed)
 onready var movement_source: Spatial = get_node(movement_source_path)
 onready var _last_origin := movement_source.global_transform.origin
-
-
-func set_enabled(value: bool) -> void:
-	enabled = value
-	if not _is_ready:
-		yield(self, "ready")
-	
-	set_process(value)
 
 
 func _ready():
@@ -39,34 +32,37 @@ func _ready():
 	_is_ready = true
 
 
+func reset_input_vectors() -> void:
+	input_vector = Vector3.ZERO
+	last_input_vector = Vector3.ZERO
+
+
 func _process(delta):
-	var tmp_vector: Vector3
+	if enabled:
+		if use_true_movement:
+			if delta == 0:
+				return
+			var new_origin := movement_source.global_transform.origin
+			input_vector = (new_origin - _last_origin) / delta
+			_last_origin = new_origin
+		
+		else:
+			input_vector = movement_source.movement_vector
+		
+		if not enable_pitch_rotation:
+			input_vector -= input_vector.project(get_parent().global_transform.basis.y)		# Flatten the vector
 	
-	if use_true_movement:
-		if delta == 0:
-			return
-		var new_origin := movement_source.global_transform.origin
-		tmp_vector = (new_origin - _last_origin) / delta
-		_last_origin = new_origin
-	
-	else:
-		tmp_vector = movement_source.movement_vector
-	
-	if not enable_pitch_rotation:
-		tmp_vector -= tmp_vector.project(get_parent().global_transform.basis.y)		# Flatten the vector
-	
-	var speed := tmp_vector.length()
+	var speed := input_vector.length()
 	if always_rotate:
 		if speed <= threshold:
-			tmp_vector = _last_movement_vector
+			input_vector = last_input_vector
 		
 		else:
 			# only update last movement vector if the new movement vector is nonzero
-			_last_movement_vector = tmp_vector
+			last_input_vector = input_vector
 	
 	if speed > threshold:
-		print(tmp_vector.length())
-		var transform: Transform = get_parent().global_transform.looking_at(get_parent().global_transform.origin + tmp_vector, Vector3.UP)
+		var transform: Transform = get_parent().global_transform.looking_at(get_parent().global_transform.origin + input_vector, Vector3.UP)
 		var original_basis: Basis
 		
 		if is_instance_valid(counter_rotate_target):
