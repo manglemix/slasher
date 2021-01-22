@@ -44,7 +44,7 @@ func _input(event):
 		var child: Control = get_child(0)
 		var tmp_vector: Vector2 = get_canvas_transform().affine_inverse().xform(event.position) - rect_global_position - child.get_global_transform().basis_xform(child.rect_size) / 2
 		child.rect_global_position = tmp_vector.clamped(max_distance) + rect_global_position
-		face_movement.input_vector = Vector3(- tmp_vector.x, 0, - tmp_vector.y)
+		face_movement.input_vector = get_viewport().get_camera().global_transform.basis.xform(Vector3(tmp_vector.x, 0, tmp_vector.y))
 
 
 func _unhandled_input(event):
