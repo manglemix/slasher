@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/bott.gltf-db7d70e5989b9681241b3834541c22bf.scn"
+path="res://.import/botV5.glb-1e6f761daff0353b3a24392f7016966e.scn"
 
 [deps]
 
-source_file="res://bot/bott.gltf"
-dest_files=[ "res://.import/bott.gltf-db7d70e5989b9681241b3834541c22bf.scn" ]
+source_file="res://bot/botV5.glb"
+dest_files=[ "res://.import/botV5.glb-1e6f761daff0353b3a24392f7016966e.scn" ]
 
 [params]
 
