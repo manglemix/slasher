@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://sounds/slashes/118792__lmbubec__1-knife-slash-a.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/slashes/35213__abyssmal__slashkut.wav" type="AudioStream" id=2]
@@ -116,6 +116,21 @@ bind/24/bone = -1
 bind/24/pose = Transform( -0.528206, -0.496758, 0.688647, 0.843657, -0.215183, 0.491875, -0.0961588, 0.84079, 0.532753, -0.0923624, -0.418769, -0.124775 )
 
 [sub_resource type="CubeMesh" id=6]
+
+[sub_resource type="SpatialMaterial" id=32]
+flags_use_point_size = true
+flags_world_triplanar = true
+flags_disable_ambient_light = true
+params_specular_mode = 4
+params_blend_mode = 1
+params_cull_mode = 2
+params_depth_draw_mode = 2
+params_billboard_mode = 2
+params_billboard_keep_scale = true
+
+[sub_resource type="PlaneMesh" id=31]
+material = SubResource( 32 )
+size = Vector2( 0.5, 0.5 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "T-Pose-loop"
@@ -4567,7 +4582,7 @@ bones/14/name = "right_hand"
 bones/14/parent = 13
 bones/14/rest = Transform( 1, 4.00469e-08, -1.60187e-07, -4.00468e-08, 1, 4.24101e-07, 1.60188e-07, -4.24101e-07, 1, 4.65661e-09, 0.501727, -8.94069e-08 )
 bones/14/enabled = true
-bones/14/bound_children = [  ]
+bones/14/bound_children = [ NodePath("BoneAttachment2") ]
 bones/15/name = "left_up_leg"
 bones/15/parent = 0
 bones/15/rest = Transform( -0.710227, 0.688269, 0.147854, -0.703877, -0.697729, -0.133152, 0.0115181, -0.198639, 0.980004, 0.0245433, -0.0610742, -0.122342 )
@@ -4639,6 +4654,27 @@ transform = Transform( 0.0999994, -1.15484e-07, 7.45058e-09, 1.21072e-08, 0.1, -
 visible = false
 mesh = SubResource( 6 )
 material/0 = null
+
+[node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
+transform = Transform( 0.728511, 0.390797, 0.562628, 0.679374, -0.517528, -0.520208, 0.0878807, 0.761212, -0.642521, -0.220361, 0.802135, 0.626251 )
+bone_name = "right_hand"
+
+[node name="CPUParticles" type="CPUParticles" parent="Armature/Skeleton/BoneAttachment2"]
+transform = Transform( 0.996199, 0, 0, 0, 0.65641, 0, 0, 0, 0.771048, 0.0335647, 0.290736, -0.245404 )
+amount = 7
+lifetime = 0.2
+explosiveness = 0.5
+randomness = 0.54
+lifetime_randomness = 0.24
+fract_delta = false
+local_coords = false
+mesh = SubResource( 31 )
+emission_shape = 1
+emission_sphere_radius = 0.2
+direction = Vector3( 0, 1, 0 )
+spread = 69.83
+gravity = Vector3( 0, 9, 0 )
+linear_accel = 13.8
 
 [node name="CharacterAnimator" type="AnimationPlayer" parent="."]
 anims/T-Pose-loop = SubResource( 7 )
