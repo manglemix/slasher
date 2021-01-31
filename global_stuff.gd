@@ -7,7 +7,7 @@ signal player_changed
 signal switching_past
 
 var player: Character setget set_character
-var camera_base: Spatial
+var camera_base: CameraBase
 var enemies: Array
 var ui: Node
 

@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://effects/basic_faller.gd"
 }, {
+"base": "Lerper",
+"class": "CameraBase",
+"language": "GDScript",
+"path": "res://medieval_level/camera_base_lerper.gd"
+}, {
 "base": "KinematicBody",
 "class": "Character",
 "language": "GDScript",
@@ -138,6 +143,7 @@ _global_script_class_icons={
 "AStarGoto": "",
 "AStarNavigation": "",
 "BasicFaller": "",
+"CameraBase": "",
 "Character": "",
 "CharacterAnimator": "",
 "CharacterJump": "",
