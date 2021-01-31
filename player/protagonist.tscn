@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://sounds/slashes/118792__lmbubec__1-knife-slash-a.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/slashes/35213__abyssmal__slashkut.wav" type="AudioStream" id=2]
@@ -492,7 +492,6 @@ tracks/24/keys = PoolRealArray( 0, 1, 0.0136285, -0.110595, 0.0140324, 0.0429208
 
 [sub_resource type="Animation" id=11]
 length = 2.63333
-loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:head_top_end")
 tracks/0/interp = 1
@@ -4455,6 +4454,17 @@ tracks/24/imported = true
 tracks/24/enabled = true
 tracks/24/keys = PoolRealArray( 0, 1, 0.0258536, -0.255554, 0.0113761, -0.00641739, 0.040886, -0.128195, 0.990885, 1, 1, 1, 0.0666667, 1, 0.0263802, -0.255787, 0.0111904, 0.0411928, -0.078151, -0.0877461, 0.992218, 1, 1, 1, 0.133333, 1, 0.027088, -0.2562, 0.0109444, 0.141917, -0.306722, 0.00897863, 0.941116, 1, 1, 1, 0.2, 1, 0.0282986, -0.256661, 0.0107459, 0.203568, -0.500641, 0.0714689, 0.838338, 1, 1, 1, 0.266667, 1, 0.0304334, -0.25701, 0.0104777, 0.212335, -0.657225, 0.100143, 0.716199, 1, 1, 1, 0.333333, 1, 0.0322977, -0.257132, 0.00987825, 0.208396, -0.74008, 0.0729311, 0.635243, 1, 1, 1, 0.4, 1, 0.0332397, -0.257016, 0.00942037, 0.193999, -0.774641, 0.0791308, 0.596686, 1, 1, 1, 0.466667, 1, 0.0338484, -0.256971, 0.00911626, 0.203141, -0.80471, 0.0725466, 0.553093, 1, 1, 1, 0.533333, 1, 0.0342204, -0.256695, 0.00900684, 0.226574, -0.81206, 0.0369755, 0.536522, 1, 1, 1, 0.6, 1, 0.0343028, -0.256449, 0.00909065, 0.256467, -0.810341, -0.000274731, 0.526852, 1, 1, 1, 0.666667, 1, 0.0338436, -0.255913, 0.00956297, -0.283195, 0.83516, 0.0226844, -0.470949, 1, 1, 1, 0.733333, 1, 0.0332587, -0.255397, 0.0100576, -0.26676, 0.896254, 0.0193436, -0.353828, 1, 1, 1, 0.8, 1, 0.0328105, -0.255324, 0.010454, -0.236353, 0.947864, 0.0334055, -0.211127, 1, 1, 1, 0.866667, 1, 0.0319669, -0.255018, 0.010759, -0.212537, 0.976003, 0.0225921, -0.0416658, 1, 1, 1 )
 
+[sub_resource type="GDScript" id=33]
+script/source = "extends Damageable
+
+
+func _ready():
+	yield(self, \"death\")
+	$\"../CharacterAnimator\".override_play(\"death1-loop\")
+	yield($\"../CharacterAnimator\", \"animation_finished\")
+	get_tree().change_scene(\"res://medieval_level/testing.tscn\")
+"
+
 [node name="Protagonist" type="KinematicBody"]
 script = ExtResource( 8 )
 gravity_factor = 6.0
@@ -4530,7 +4540,7 @@ bones/4/name = "neck"
 bones/4/parent = 3
 bones/4/rest = Transform( 0.961228, -0.27414, 0.0297892, 0.275057, 0.960863, -0.0329413, -0.0195928, 0.0398579, 0.999013, 2.19757e-07, 0.161547, 6.91478e-09 )
 bones/4/enabled = true
-bones/4/bound_children = [  ]
+bones/4/bound_children = [ NodePath("BoneAttachment") ]
 bones/5/name = "head"
 bones/5/parent = 4
 bones/5/rest = Transform( 0.960878, -0.250617, 0.117916, 0.241146, 0.966406, 0.0889314, -0.136242, -0.0570174, 0.989033, 0.058065, 0.0856134, 1.20381e-07 )
@@ -4580,7 +4590,7 @@ bones/14/name = "right_hand"
 bones/14/parent = 13
 bones/14/rest = Transform( 1, 4.00469e-08, -1.60187e-07, -4.00468e-08, 1, 4.24101e-07, 1.60188e-07, -4.24101e-07, 1, 4.65661e-09, 0.501727, -8.94069e-08 )
 bones/14/enabled = true
-bones/14/bound_children = [  ]
+bones/14/bound_children = [ NodePath("BoneAttachment2") ]
 bones/15/name = "left_up_leg"
 bones/15/parent = 0
 bones/15/rest = Transform( -0.710227, 0.688269, 0.147854, -0.703877, -0.697729, -0.133152, 0.0115181, -0.198639, 0.980004, 0.0245433, -0.0610742, -0.122342 )
@@ -4684,10 +4694,10 @@ drag_coefficient = 0.28
 pinned_points = [ 5, 9 ]
 attachments/0/point_index = 5
 attachments/0/spatial_attachment_path = NodePath("../Armature/Skeleton/BoneAttachment/AttachmentBox2")
-attachments/0/offset = Vector3( 10.8509, -10.807, 3.11971 )
+attachments/0/offset = Vector3( 10.7755, -10.6689, 3.21459 )
 attachments/1/point_index = 9
 attachments/1/spatial_attachment_path = NodePath("../Armature/Skeleton/BoneAttachment/AttachmentBox")
-attachments/1/offset = Vector3( -0.59104, -16.0353, 3.53527 )
+attachments/1/offset = Vector3( -0.421935, -16.3809, 3.84181 )
 
 [node name="CharacterAnimator" type="AnimationPlayer" parent="."]
 playback_process_mode = 2
@@ -4724,3 +4734,6 @@ anims/turn-loop = SubResource( 32 )
 [node name="NodeFlag" type="Node" parent="."]
 script = ExtResource( 12 )
 property_name = "player"
+
+[node name="Damageable" type="Node" parent="."]
+script = SubResource( 33 )

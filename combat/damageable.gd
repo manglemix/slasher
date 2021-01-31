@@ -1,73 +1,49 @@
+# Adds health functionality to the parent
 class_name Damageable
 extends Node
 
 
 signal death
+signal healed(value)
+signal damaged(value)
 
-export var health := 2.0
-export var min_health := 1.0
-export var armour := 1.0
-export var texture_source_path: NodePath = "../AnimatedSprite"
-export var slashed_speed := 450.0
-export var hit_anim := "hit"
-export var character_movement_path: NodePath
-
-var character_movement: CharacterMovement
-
-onready var texture_source: Node = get_node(texture_source_path)
+export var max_health := 3.0 setget set_max_health
+export var health := 3.0 setget set_health
+export var invincible := false						# if true, won't take damage
+export var undying := false setget set_undying		# if true, won't die when health drops below 0. If health was below 0 and undying is set to false, death will be emitted
+export var unhealing := false						# if true, won't be able to heal
 
 
-func _ready():
-	if not character_movement_path.is_empty():
-		character_movement = get_node(character_movement_path)
+func set_max_health(value: float) -> void:
+	max_health = value
+	if health > max_health:
+		health = max_health
 
 
-func damage(hit_points: float) -> void:
-	hit_points /= armour
+func set_health(value: float) -> void:
+	if value < health:
+		health = value
+		emit_signal("damaged", health - value)
+		
+		if invincible:
+			return
 	
-	if hit_points >= health:
-		slash()
+	elif value > health:
+		health = value
+		emit_signal("healed", value - health)
+		
+		if unhealing:
+			return
+	
+	if health > max_health:
+		health = max_health
+	
+	elif health <= 0 and not undying:
 		emit_signal("death")
-		get_parent().queue_free()
-	
-	else:
-		if texture_source.has_method("override_play"):
-			texture_source.override_play(hit_anim)
-		
-		health = clamp(health - hit_points / armour, min_health, INF)
-		
-		if is_instance_valid(character_movement) and texture_source.has_method("override_play"):
-			character_movement.set_process(false)
-			character_movement.character.movement_vector = Vector3.ZERO
-			yield(texture_source, "animation_finished")
-			character_movement.set_process(true)
 
 
-func slash() -> void:
-	var texture: Texture
-	var origin: Vector2
-	var full_size: Vector2
+func set_undying(value: bool) -> void:
+	undying = value
 	
-	if texture_source is Sprite:
-		texture = texture_source.texture
-		full_size = texture.get_size()
-		origin = Vector2(0.5, 0.5)
-	
-	elif texture_source is AnimatedSprite:
-		texture = texture_source.frames.get_frame(texture_source.animation, texture_source.frame)
-		full_size = texture.region.size
-		var grid: Vector2 = texture.atlas.get_size()
-		grid.x /= full_size.x
-		grid.y /= full_size.y
-		origin = Vector2(
-			(texture_source.frame % int(grid.x)) / grid.x + 1.0 / 2 / grid.x,
-			floor(texture_source.frame / grid.x) / grid.y + 1.0 / 2 / grid.y
-		)
-	
-	else:
-		push_error(str(texture_source) + " is an unrecognised texture source")
-	
-	var slashed := Slashed.new(texture, tan(deg2rad(rand_range(- 89.99, 89.99))) * full_size.aspect(), origin)
-	slashed.parent_children_to_fallers(slashed_speed)
-	get_tree().current_scene.add_child(slashed)
-	slashed.global_transform = texture_source.global_transform
+	if not value and health <= 0:
+		emit_signal("death")

@@ -25,8 +25,8 @@ func set_attack(value: bool) -> void:
 			var damage_points: float = lerp(min_damage, max_damage, _current_charge / max_charge_time)
 			
 			for body in get_overlapping_bodies():
-				if body.has_node("Damageable"):
-					body.get_node("Damageable").damage(damage_points)
+				if body != get_parent() and body.has_node("Damageable"):
+					body.get_node("Damageable").health -= damage_points
 			
 			emit_signal("attacked")
 			yield(character_animator, "animation_finished")
