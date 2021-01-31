@@ -2094,6 +2094,32 @@ tracks/24/loop_wrap = true
 tracks/24/imported = true
 tracks/24/enabled = false
 tracks/24/keys = PoolRealArray( 0, 1, 0.0277668, -0.276688, 0.0107518, 0.0429207, -0.331159, -0.0411123, 0.941701, 1, 1, 1, 0.0666667, 1, 0.0276946, -0.276685, 0.0107363, 0.0564688, -0.335099, -0.0426775, 0.939521, 1, 1, 1, 0.133333, 1, 0.0277242, -0.276685, 0.0106035, 0.0823125, -0.341779, -0.0468002, 0.934998, 1, 1, 1, 0.2, 1, 0.0280021, -0.276762, 0.0103692, 0.099933, -0.357787, -0.0504996, 0.927066, 1, 1, 1, 0.266667, 1, 0.0284957, -0.276776, 0.0101822, 0.116702, -0.383561, -0.0572671, 0.914321, 1, 1, 1, 0.333333, 1, 0.0289994, -0.276699, 0.0100572, 0.126754, -0.386624, -0.0805923, 0.909923, 1, 1, 1, 0.4, 1, 0.0295339, -0.276634, 0.00981627, 0.107885, -0.338738, -0.0968558, 0.929643, 1, 1, 1, 0.466667, 1, 0.0302948, -0.276602, 0.00953114, 0.0413076, -0.240406, -0.100619, 0.964559, 1, 1, 1, 0.533333, 1, 0.031131, -0.276935, 0.00936475, -0.0107009, -0.045517, -0.0842524, 0.995347, 1, 1, 1, 0.6, 1, 0.0316905, -0.277398, 0.00928719, 0.00285289, 0.118397, -0.0732869, 0.990254, 1, 1, 1, 0.666667, 1, 0.0321989, -0.277547, 0.00922418, 3.14479e-05, 0.225655, -0.0986284, 0.969202, 1, 1, 1, 0.733333, 1, 0.0325486, -0.277515, 0.00921521, -0.0172844, 0.277618, -0.146496, 0.949299, 1, 1, 1, 0.8, 1, 0.0327486, -0.277436, 0.00926298, -0.037679, 0.294769, -0.203383, 0.932913, 1, 1, 1, 0.866667, 1, 0.0328953, -0.277353, 0.00930585, -0.058458, 0.300436, -0.254071, 0.91748, 1, 1, 1, 0.933333, 1, 0.0327937, -0.277294, 0.00931664, -0.0765656, 0.26645, -0.265999, 0.923248, 1, 1, 1, 1, 1, 0.0325478, -0.27727, 0.00931232, -0.0888532, 0.206337, -0.258344, 0.939568, 1, 1, 1, 1.06667, 1, 0.0321329, -0.277322, 0.00926757, -0.0852279, 0.0961363, -0.226401, 0.965524, 1, 1, 1, 1.13333, 1, 0.0316063, -0.277442, 0.00925271, -0.083109, -0.0825877, -0.152976, 0.98126, 1, 1, 1, 1.2, 1, 0.030887, -0.277258, 0.00947602, -0.0455289, -0.200302, -0.103025, 0.973238, 1, 1, 1, 1.26667, 1, 0.0300695, -0.276916, 0.00976616, -0.00666855, -0.248974, -0.0928357, 0.964027, 1, 1, 1, 1.33333, 1, 0.0292296, -0.276622, 0.0101045, 0.0271152, -0.283906, -0.082636, 0.9549, 1, 1, 1, 1.4, 1, 0.0286131, -0.276713, 0.0103692, 0.0387985, -0.311922, -0.0677187, 0.946897, 1, 1, 1, 1.46667, 1, 0.028188, -0.276734, 0.010562, 0.0399996, -0.322627, -0.0546287, 0.944102, 1, 1, 1, 1.53333, 1, 0.0277668, -0.276688, 0.0107518, 0.0429208, -0.331159, -0.0411124, 0.941701, 1, 1, 1 )
+tracks/25/type = "value"
+tracks/25/path = NodePath("ControllableAttack:attack")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/26/type = "audio"
+tracks/26/path = NodePath("ControllableAttack/Slash1")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 2 )
+} ],
+"times": PoolRealArray( 0.6 )
+}
 
 [sub_resource type="Animation" id=20]
 length = 0.866667
@@ -4462,9 +4488,6 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 9 )
-anim_name = "slash-loop"
-attack_delay = 0.7
-audio_paths = [ NodePath("Slash1"), NodePath("Slash2") ]
 
 [node name="CollisionShape2D" type="CollisionShape" parent="ControllableAttack"]
 transform = Transform( 1.00158, 0, 0, 0, 1.00158, 0, 0, 0, 1.00158, 1.44832, 0.864587, 3.92669e-08 )
@@ -4615,7 +4638,7 @@ skin = SubResource( 5 )
 material/0 = null
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.0871703, 0.105234, -0.990619, -0.421281, 0.905005, 0.0590681, 0.902731, 0.41218, 0.123222, -0.010839, 1.23721, 0.29252 )
+transform = Transform( 0.0391137, 0.0916511, -0.995023, -0.515553, 0.85486, 0.0584747, 0.855964, 0.5107, 0.0806874, -0.00232003, 1.21777, 0.30686 )
 bone_name = "neck"
 
 [node name="AttachmentBox" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -4631,7 +4654,7 @@ mesh = SubResource( 6 )
 material/0 = null
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.60958, -0.192389, 0.769026, -0.206187, -0.975194, -0.0805283, 0.765441, -0.109475, -0.634126, -0.441722, 0.468833, -0.102659 )
+transform = Transform( 0.551131, -0.290439, 0.782241, -0.408274, -0.911448, -0.0507611, 0.727714, -0.291392, -0.620905, -0.472038, 0.628155, -0.247424 )
 bone_name = "right_hand"
 
 [node name="CPUParticles" type="CPUParticles" parent="Armature/Skeleton/BoneAttachment2"]
@@ -4661,10 +4684,10 @@ drag_coefficient = 0.28
 pinned_points = [ 5, 9 ]
 attachments/0/point_index = 5
 attachments/0/spatial_attachment_path = NodePath("../Armature/Skeleton/BoneAttachment/AttachmentBox2")
-attachments/0/offset = Vector3( 11.2522, -10.8205, 3.66251 )
+attachments/0/offset = Vector3( 10.8509, -10.807, 3.11971 )
 attachments/1/point_index = 9
 attachments/1/spatial_attachment_path = NodePath("../Armature/Skeleton/BoneAttachment/AttachmentBox")
-attachments/1/offset = Vector3( 1.08781, -16.4565, 1.86118 )
+attachments/1/offset = Vector3( -0.59104, -16.0353, 3.53527 )
 
 [node name="CharacterAnimator" type="AnimationPlayer" parent="."]
 playback_process_mode = 2
