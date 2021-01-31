@@ -4464,6 +4464,7 @@ collision_mask = 4
 script = ExtResource( 9 )
 anim_name = "slash-loop"
 attack_delay = 0.7
+audio_paths = [ NodePath("Slash1"), NodePath("Slash2") ]
 
 [node name="CollisionShape2D" type="CollisionShape" parent="ControllableAttack"]
 transform = Transform( 1.00158, 0, 0, 0, 1.00158, 0, 0, 0, 1.00158, 1.44832, 0.864587, 3.92669e-08 )
