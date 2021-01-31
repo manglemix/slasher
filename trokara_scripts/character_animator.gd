@@ -5,26 +5,30 @@ extends AnimationPlayer
 export var character_jump_path: NodePath
 export var blending := 0.2
 export var threshold := 1.0
+export var walk_anim := "run-loop"
+export var idle_anim := "idle-loop"
 
 var overriding := false
+var character_jump: CharacterJump
 
 var _override_priority: int
 
 onready var character: Character = get_parent()
-onready var character_jump: CharacterJump = get_node(character_jump_path)
 onready var _last_origin := character.global_transform.origin
 
 
 func _ready():
-	# warning-ignore:return_value_discarded
-	character_jump.connect("jumped", self, "play_jump_anim")
+	if not character_jump_path.is_empty():
+		character_jump = get_node(character_jump_path)
+		# warning-ignore:return_value_discarded
+		character_jump.connect("jumped", self, "play_jump_anim")
 
 
 func override_play(anim: String, override_priority:=0) -> void:
 	if override_priority >= _override_priority:
 		overriding = true
 		_override_priority = override_priority
-		play("idle-loop")
+		play(idle_anim)
 		play(anim, blending)
 		
 		yield(self, "animation_finished")
@@ -48,12 +52,15 @@ func _process(delta):
 		
 		if velocity.length() >= threshold:
 			if not overriding:
-				play("run-loop", blending)
+				play(walk_anim, blending)
 			
-			get_child(0).play("run-loop", blending)
+			get_child(0).play(walk_anim, blending)
 		
 		else:
 			if not overriding:
-				play("idle-loop", blending)
+				play(idle_anim, blending)
 			
-			get_child(0).play("idle-loop", blending)
+			get_child(0).play(idle_anim, blending)
+	
+	get_child(0).advance(delta)
+	advance(delta)
