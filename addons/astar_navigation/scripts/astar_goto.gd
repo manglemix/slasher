@@ -5,7 +5,6 @@ extends Node
 signal targeted
 signal untargeted
 
-export var navigation_path: NodePath = "../../Navigation"
 export var speed := 5.0
 export var simplify_distance := 0.1
 export var stop_on_arrival := false
@@ -15,7 +14,7 @@ var override_target: Node setget set_override_target
 var id_path: PoolIntArray
 var path
 
-onready var navigation: AStarNavigation = get_node(navigation_path)
+onready var navigation: AStarNavigation = GlobalStuff.yield_and_get_group("Navigation")[0]
 onready var character := get_parent()
 
 

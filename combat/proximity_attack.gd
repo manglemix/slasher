@@ -9,10 +9,7 @@ var target: Node
 
 func _ready():
 	if target_path == NodePath("Player"):
-		if not is_instance_valid(GlobalStuff.player):
-			yield(GlobalStuff, "player_changed")
-		
-		target = GlobalStuff.player
+		target = GlobalStuff.yield_and_get_group("Player")[0]
 	
 	else:
 		target = get_node(target_path)

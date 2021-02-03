@@ -3,18 +3,18 @@ extends Node
 
 const packed_future := preload("res://future_level/future.tscn")
 
-signal player_changed
 signal switching_past
 
-var player: Character setget set_character
-var camera_base: CameraBase
-var enemies: Array
-var ui: Node
 
-
-func set_character(node: Character) -> void:
-	player = node
-	emit_signal("player_changed")
+func yield_and_get_group(group: String) -> Array:
+	# this function allows a node to try and get the nodes in a group
+	# it will wait until the group exists
+	var tree := get_tree()
+	
+	while not tree.has_group(group):
+		yield(tree, "node_added")
+	
+	return tree.get_nodes_in_group(group)
 
 
 func _input(event):
@@ -34,6 +34,10 @@ func trigger_event(name: String, pressed: bool, strength:=1.0) -> InputEventActi
 func switch_future() -> void:
 	var past_scene := get_tree().current_scene
 	var old_children := []
+
+	var player: Character = yield_and_get_group("Player")[0]
+	var camera_base: CameraBase = yield_and_get_group("CameraBase")[0]
+	var ui: Node = yield_and_get_group("UI")[0]
 	
 	for child in past_scene.get_children():
 		if child != player and child != camera_base and child != ui:

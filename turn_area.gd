@@ -5,6 +5,9 @@ extends Area
 export var glide_time := 0.3
 export var new_rotation: float
 
+onready var player: Character = GlobalStuff.yield_and_get_group("Player")[0]
+onready var camera_base: Spatial = GlobalStuff.yield_and_get_group("CameraBase")[0]
+
 
 func _ready():
 	# warning-ignore-all:return_value_discarded
@@ -14,10 +17,10 @@ func _ready():
 
 
 func _handle_body_entered(body: Node) -> void:
-	if body == GlobalStuff.player:
-		GlobalStuff.camera_base.target_orientation = deg2rad(new_rotation)
+	if body == player:
+		camera_base.target_orientation = deg2rad(new_rotation)
 
 
 func _handle_body_exited(body: Node) -> void:
-	if body == GlobalStuff.player and GlobalStuff.camera_base.target_orientation == deg2rad(new_rotation):
-		GlobalStuff.camera_base.target_orientation = 0
+	if body == player and camera_base.target_orientation == deg2rad(new_rotation):
+		camera_base.target_orientation = 0

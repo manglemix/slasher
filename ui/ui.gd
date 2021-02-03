@@ -10,7 +10,3 @@ onready var attack := get_node(attack_path)
 onready var joystick := get_node(joystick_path)
 onready var jump := get_node(jump_path)
 onready var turn := get_node(turn_path)
-
-
-func _ready():
-	GlobalStuff.ui = self

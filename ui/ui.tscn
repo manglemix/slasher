@@ -15,7 +15,9 @@
 
 [sub_resource type="CanvasItemMaterial" id=3]
 
-[node name="UI" type="CanvasLayer"]
+[node name="UI" type="CanvasLayer" groups=[
+"UI",
+]]
 script = ExtResource( 5 )
 
 [node name="AttackBase" type="TextureRect" parent="."]

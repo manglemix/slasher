@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://sounds/slashes/118792__lmbubec__1-knife-slash-a.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/slashes/35213__abyssmal__slashkut.wav" type="AudioStream" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://player/controllable_attack.gd" type="Script" id=9]
 [ext_resource path="res://trokara_scripts/face_movement.gd" type="Script" id=10]
 [ext_resource path="res://player/movement_input.gd" type="Script" id=11]
-[ext_resource path="res://node_flag.gd" type="Script" id=12]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.776694
@@ -670,7 +669,6 @@ tracks/24/keys = PoolRealArray( 0, 1, 0, 0, 0, -6.51926e-09, 0, 0, 1, 1, 1, 1, 0
 
 [sub_resource type="Animation" id=12]
 length = 0.733333
-loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:head_top_end")
 tracks/0/interp = 1
@@ -2093,31 +2091,33 @@ tracks/24/loop_wrap = true
 tracks/24/imported = true
 tracks/24/enabled = false
 tracks/24/keys = PoolRealArray( 0, 1, 0.0277668, -0.276688, 0.0107518, 0.0429207, -0.331159, -0.0411123, 0.941701, 1, 1, 1, 0.0666667, 1, 0.0276946, -0.276685, 0.0107363, 0.0564688, -0.335099, -0.0426775, 0.939521, 1, 1, 1, 0.133333, 1, 0.0277242, -0.276685, 0.0106035, 0.0823125, -0.341779, -0.0468002, 0.934998, 1, 1, 1, 0.2, 1, 0.0280021, -0.276762, 0.0103692, 0.099933, -0.357787, -0.0504996, 0.927066, 1, 1, 1, 0.266667, 1, 0.0284957, -0.276776, 0.0101822, 0.116702, -0.383561, -0.0572671, 0.914321, 1, 1, 1, 0.333333, 1, 0.0289994, -0.276699, 0.0100572, 0.126754, -0.386624, -0.0805923, 0.909923, 1, 1, 1, 0.4, 1, 0.0295339, -0.276634, 0.00981627, 0.107885, -0.338738, -0.0968558, 0.929643, 1, 1, 1, 0.466667, 1, 0.0302948, -0.276602, 0.00953114, 0.0413076, -0.240406, -0.100619, 0.964559, 1, 1, 1, 0.533333, 1, 0.031131, -0.276935, 0.00936475, -0.0107009, -0.045517, -0.0842524, 0.995347, 1, 1, 1, 0.6, 1, 0.0316905, -0.277398, 0.00928719, 0.00285289, 0.118397, -0.0732869, 0.990254, 1, 1, 1, 0.666667, 1, 0.0321989, -0.277547, 0.00922418, 3.14479e-05, 0.225655, -0.0986284, 0.969202, 1, 1, 1, 0.733333, 1, 0.0325486, -0.277515, 0.00921521, -0.0172844, 0.277618, -0.146496, 0.949299, 1, 1, 1, 0.8, 1, 0.0327486, -0.277436, 0.00926298, -0.037679, 0.294769, -0.203383, 0.932913, 1, 1, 1, 0.866667, 1, 0.0328953, -0.277353, 0.00930585, -0.058458, 0.300436, -0.254071, 0.91748, 1, 1, 1, 0.933333, 1, 0.0327937, -0.277294, 0.00931664, -0.0765656, 0.26645, -0.265999, 0.923248, 1, 1, 1, 1, 1, 0.0325478, -0.27727, 0.00931232, -0.0888532, 0.206337, -0.258344, 0.939568, 1, 1, 1, 1.06667, 1, 0.0321329, -0.277322, 0.00926757, -0.0852279, 0.0961363, -0.226401, 0.965524, 1, 1, 1, 1.13333, 1, 0.0316063, -0.277442, 0.00925271, -0.083109, -0.0825877, -0.152976, 0.98126, 1, 1, 1, 1.2, 1, 0.030887, -0.277258, 0.00947602, -0.0455289, -0.200302, -0.103025, 0.973238, 1, 1, 1, 1.26667, 1, 0.0300695, -0.276916, 0.00976616, -0.00666855, -0.248974, -0.0928357, 0.964027, 1, 1, 1, 1.33333, 1, 0.0292296, -0.276622, 0.0101045, 0.0271152, -0.283906, -0.082636, 0.9549, 1, 1, 1, 1.4, 1, 0.0286131, -0.276713, 0.0103692, 0.0387985, -0.311922, -0.0677187, 0.946897, 1, 1, 1, 1.46667, 1, 0.028188, -0.276734, 0.010562, 0.0399996, -0.322627, -0.0546287, 0.944102, 1, 1, 1, 1.53333, 1, 0.0277668, -0.276688, 0.0107518, 0.0429208, -0.331159, -0.0411124, 0.941701, 1, 1, 1 )
-tracks/25/type = "value"
-tracks/25/path = NodePath("ControllableAttack:attack")
+tracks/25/type = "audio"
+tracks/25/path = NodePath("ControllableAttack/Slash1")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/imported = false
 tracks/25/enabled = true
 tracks/25/keys = {
-"times": PoolRealArray( 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/26/type = "audio"
-tracks/26/path = NodePath("ControllableAttack/Slash1")
-tracks/26/interp = 1
-tracks/26/loop_wrap = true
-tracks/26/imported = false
-tracks/26/enabled = true
-tracks/26/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
 "stream": ExtResource( 2 )
 } ],
 "times": PoolRealArray( 0.6 )
+}
+tracks/26/type = "method"
+tracks/26/path = NodePath("ControllableAttack")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack"
+} ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -4463,11 +4463,14 @@ func _ready():
 	$\"../CharacterAnimator\".override_play(\"death1-loop\")
 	get_parent().movement_vector *= 0
 	$\"../MovementInput\".queue_free()
+	invincible = true
 	yield($\"../CharacterAnimator\", \"animation_finished\")
 	get_tree().change_scene(\"res://medieval_level/testing.tscn\")
 "
 
-[node name="Protagonist" type="KinematicBody"]
+[node name="Protagonist" type="KinematicBody" groups=[
+"Player",
+]]
 script = ExtResource( 8 )
 gravity_factor = 6.0
 
@@ -4542,7 +4545,7 @@ bones/4/name = "neck"
 bones/4/parent = 3
 bones/4/rest = Transform( 0.961228, -0.27414, 0.0297892, 0.275057, 0.960863, -0.0329413, -0.0195928, 0.0398579, 0.999013, 2.19757e-07, 0.161547, 6.91478e-09 )
 bones/4/enabled = true
-bones/4/bound_children = [ NodePath("BoneAttachment") ]
+bones/4/bound_children = [  ]
 bones/5/name = "head"
 bones/5/parent = 4
 bones/5/rest = Transform( 0.960878, -0.250617, 0.117916, 0.241146, 0.966406, 0.0889314, -0.136242, -0.0570174, 0.989033, 0.058065, 0.0856134, 1.20381e-07 )
@@ -4592,7 +4595,7 @@ bones/14/name = "right_hand"
 bones/14/parent = 13
 bones/14/rest = Transform( 1, 4.00469e-08, -1.60187e-07, -4.00468e-08, 1, 4.24101e-07, 1.60188e-07, -4.24101e-07, 1, 4.65661e-09, 0.501727, -8.94069e-08 )
 bones/14/enabled = true
-bones/14/bound_children = [ NodePath("BoneAttachment2") ]
+bones/14/bound_children = [  ]
 bones/15/name = "left_up_leg"
 bones/15/parent = 0
 bones/15/rest = Transform( -0.710227, 0.688269, 0.147854, -0.703877, -0.697729, -0.133152, 0.0115181, -0.198639, 0.980004, 0.0245433, -0.0610742, -0.122342 )
@@ -4650,7 +4653,7 @@ skin = SubResource( 5 )
 material/0 = null
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.0391137, 0.0916511, -0.995023, -0.515553, 0.85486, 0.0584747, 0.855964, 0.5107, 0.0806874, -0.00232003, 1.21777, 0.30686 )
+transform = Transform( 0.272988, 0.240505, -0.931469, -0.264223, 0.949754, 0.167789, 0.92502, 0.200311, 0.322818, 0.0103895, 1.52838, 0.12359 )
 bone_name = "neck"
 
 [node name="AttachmentBox" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -4666,7 +4669,7 @@ mesh = SubResource( 6 )
 material/0 = null
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.551131, -0.290439, 0.782241, -0.408274, -0.911448, -0.0507611, 0.727714, -0.291392, -0.620905, -0.472038, 0.628155, -0.247424 )
+transform = Transform( 0.106392, 0.622336, 0.775487, 0.945661, -0.304333, 0.114491, 0.307259, 0.721166, -0.620896, 0.228199, 1.08489, 0.879332 )
 bone_name = "right_hand"
 
 [node name="CPUParticles" type="CPUParticles" parent="Armature/Skeleton/BoneAttachment2"]
@@ -4696,10 +4699,10 @@ drag_coefficient = 0.28
 pinned_points = [ 5, 9 ]
 attachments/0/point_index = 5
 attachments/0/spatial_attachment_path = NodePath("../Armature/Skeleton/BoneAttachment/AttachmentBox2")
-attachments/0/offset = Vector3( 10.7755, -10.6689, 3.21459 )
+attachments/0/offset = Vector3( 12.8941, -13.2947, 3.16713 )
 attachments/1/point_index = 9
 attachments/1/spatial_attachment_path = NodePath("../Armature/Skeleton/BoneAttachment/AttachmentBox")
-attachments/1/offset = Vector3( -0.421935, -16.3809, 3.84181 )
+attachments/1/offset = Vector3( 1.32379, -17.472, 2.57592 )
 
 [node name="CharacterAnimator" type="AnimationPlayer" parent="."]
 playback_process_mode = 2
@@ -4718,6 +4721,7 @@ anims/slash-loop = SubResource( 19 )
 anims/turn-loop = SubResource( 20 )
 script = ExtResource( 6 )
 character_jump_path = NodePath("../ControllableCharacterJump")
+damageable_path = NodePath("../Damageable")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterAnimator"]
 playback_process_mode = 2
@@ -4734,10 +4738,6 @@ anims/jump4-loop = SubResource( 29 )
 anims/run-loop = SubResource( 30 )
 anims/slash-loop = SubResource( 31 )
 anims/turn-loop = SubResource( 32 )
-
-[node name="NodeFlag" type="Node" parent="."]
-script = ExtResource( 12 )
-property_name = "player"
 
 [node name="Damageable" type="Node" parent="."]
 script = SubResource( 33 )

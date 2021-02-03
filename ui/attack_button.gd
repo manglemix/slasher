@@ -17,9 +17,7 @@ func _ready():
 	set_process(false)
 	hide()
 	
-	if GlobalStuff.player == null:
-		yield(GlobalStuff, "player_changed")
-	player = GlobalStuff.player
+	player = GlobalStuff.yield_and_get_group("Player")[0]
 	face_movement = player.get_node("FaceMovement")
 	player_attack = player.get_node("ControllableAttack")
 
